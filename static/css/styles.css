@@ -6,3 +6,28 @@ body{
 nav .nav-link:hover{
     color: orange !important;
 }
+
+
+
+
+/* ------------------------------------workout.html styling ------------------------------------------ */
+.col form div {
+    display: flex;
+}
+
+.col form div input {
+    flex: 1 1 auto;
+    max-width: 100px;
+}
+
+.col form div span,
+.col form div label,
+.col form div input {
+    margin-right: 5px; 
+}
+
+.col form div {
+    display: flex;
+    margin-bottom: 3px; 
+}
+/* ------------------------------------workout.html styling ------------------------------------------ */
