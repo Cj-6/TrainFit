@@ -13,3 +13,11 @@ def nutrition():
 @app.get('/workout')
 def workout():
     return render_template('workout.html')
+
+@app.get('/profile')
+def profile():
+    return render_template('profile.html')
+
+@app.get('/signin')
+def signin():
+    return render_template('signin.html')
