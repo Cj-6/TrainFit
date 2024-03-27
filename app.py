@@ -11,5 +11,5 @@ def nutrition():
     return render_template('nutrition.html')
 
 @app.get('/workout')
-def nutrition():
+def workout():
     return render_template('workout.html')
