@@ -23,7 +23,7 @@ def profile():
 
 @app.get('/signin')
 def signin():
-    return render_template('signin.html', active_page='signin'))
+    return render_template('signin.html', active_page='signin')
 
 @app.route('/add_exercise', methods=['POST'])
 def add_exercise():

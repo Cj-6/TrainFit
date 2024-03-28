@@ -69,6 +69,13 @@ body{
     
 }
 
+.btn:hover{
+    color: orange !important;
+    opacity: 100% !important;
+}
+
+
+
 .container{
     max-width: 60%;
 }
