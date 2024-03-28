@@ -1,19 +1,35 @@
 /* Body */
 
-body{
-    background-color: rgb(34, 34, 34);
+body {
+    background-color: #1d1e1e;
     color: white;
+}
+
+.navbar-brand {
+    margin-bottom: 0;
 }
 
 /* Nav */
 .navbar-nav .nav-item.active .nav-link {
-    color: orange;
+    color: #FF7B00;
+}
+
+.navbar-nav .nav-item:first-child .nav-link {
+    margin-right: 10px;
+}
+
+.navbar-nav .nav-item .nav-link {
+    border-radius: 5px;
+}
+
+.navbar {
+    background-color: #2e2f32;
 }
 
 /* Titles */
 .bold-orange-title {
     font-weight: bold;
-    color: rgb(255, 123, 0);
+    color: #FF7B00;
 }
 
 /* Text */
@@ -25,17 +41,13 @@ body{
 }
 
 /* Buttons */
-.custom-btn {
-    background-color: #3b4046; 
-}
-
 .custom-btn:hover,
 .custom-btn:focus {
     background-color: rgb(255, 123, 0);
 }
 
 .custom-btn:active {
-    background-color: rgb(207, 114, 1); 
+    background-color: rgb(207, 114, 1);
 }
 
 
@@ -54,22 +66,23 @@ body{
 .col form div span,
 .col form div label,
 .col form div input {
-    margin-right: 5px; 
+    margin-right: 5px;
 }
 
 .col form div {
     display: flex;
-    margin-bottom: 3px; 
+    margin-bottom: 3px;
 }
 
-.btn{
-    color: orange;
+.btn {
+    color: #FF7B00;
     opacity: 50%;
     font-size: 30px;
-    
+
 }
 
-.container{
+.container {
     max-width: 60%;
 }
+
 /* ------------------------------------workout.html styling ------------------------------------------ */
