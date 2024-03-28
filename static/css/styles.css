@@ -30,4 +30,15 @@ nav .nav-link:hover{
     display: flex;
     margin-bottom: 3px; 
 }
+
+.btn{
+    color: orange;
+    opacity: 50%;
+    font-size: 30px;
+    
+}
+
+.container{
+    max-width: 60%;
+}
 /* ------------------------------------workout.html styling ------------------------------------------ */
