@@ -1,5 +1,71 @@
-{% extends "layout.html" %}
-
+{% extends "_layout.html" %}
 {% block content %}
-    <h1>Nutrition Page</h1>
+<h1 class="page-title">Nutrition Page</h1>
+<div class="parent-container">
+
+    <div class="container graph-container">
+        <!-- graphs here -->
+    </div>
+
+    <div class="container info-container">
+        <h2 class="info-container-title">Breakfast</h2>
+        <hr>
+        <!-- items will be dynamically added here -->
+        <button class="btn add-food-btn">Add Food</button>
+    </div>
+
+    <div class="container info-container">
+        <h2 class="info-container-title">Lunch</h2>
+        <hr>
+        <!-- items will be dynamically added here -->
+        <div class="food-item">
+            <div class="row">
+                <div class="col-6 text-left">
+                    <h4 id="food-name">Food Name</h4>
+                    <p id="servings">Servings: 1</p>
+                </div>
+                <div class="col-6 text-right">
+                    <p id="calories">Calories: 200</p>
+                </div>
+            </div>
+        </div>
+        <div class="food-item">
+            <div class="row">
+                <div class="col-6 text-left">
+                    <h4 id="food-name">Food Name #2</h4>
+                    <p id="servings">Servings: 2</p>
+                </div>
+                <div class="col-6 text-right">
+                    <p id="calories">Calories: 350</p>
+                </div>
+            </div>
+        </div>
+        <button class="btn add-food-btn">Add Food</button>
+    </div>
+
+    <div class="container info-container">
+        <h2 class="info-container-title">Dinner</h2>
+        <hr>
+        <!-- Food items will be dynamically added here -->
+        <div class="food-item">
+            <div class="row">
+                <div class="col-6 text-left">
+                    <h4 id="food-name">Food Name</h4>
+                    <p id="servings">Servings: .5</p>
+                </div>
+                <div class="col-6 text-right">
+                    <p id="calories">Calories: 340</p>
+                </div>
+            </div>
+        </div>
+        <button class="btn add-food-btn">Add Food</button>
+    </div>
+
+    <div class="container info-container">
+        <h2 class="info-container-title">Snack</h2>
+        <hr>
+        <!-- Food items will be dynamically added here -->
+        <button class="btn add-food-btn">Add Food</button>
+    </div>
+</div>
 {% endblock %}

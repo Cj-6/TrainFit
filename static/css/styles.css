@@ -3,6 +3,13 @@
 body {
     background-color: #1d1e1e;
     color: white;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.page-title {
+    margin: 20px;
 }
 
 .navbar-brand {
@@ -23,7 +30,7 @@ body {
 }
 
 .navbar {
-    background-color: #2e2f32;
+    background-color: #2e2e2f;
 }
 
 /* Titles */
@@ -51,9 +58,17 @@ body {
 }
 
 
+footer {
+    width: 100%;
+    padding: 20px;
+    background-color: #242425;
+    color: #fff;
+    margin-top: auto;
+}
 
 
-/* ------------------------------------workout.html styling ------------------------------------------ */
+
+/* -------------------------workout.html styling ------------------------- */
 .col form div {
     display: flex;
 }
@@ -81,13 +96,55 @@ body {
 
 }
 
-.btn:hover{
-    color: orange !important;
+.btn:hover {
+    color: #FF7B00 !important;
     opacity: 100% !important;
 }
 
 .container {
-max-width: 60%;
+    max-width: 60%;
 }
 
-/* ------------------------------------workout.html styling ------------------------------------------ */
+/* -------------------------workout.html styling ------------------------- */
+
+/* -------------------------nutrition.html styling ------------------------- */
+.parent-container {
+    justify-content: center;
+    background-color: #242425;
+    margin: 20px auto;
+    padding: 20px;
+    width: fit-content;
+}
+
+.info-container {
+    background-color: #2e2e2f;
+    margin: 30px auto 0;
+    min-width: 1000px;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    white-space: nowrap;
+}
+
+.container hr {
+    border-width: 2px;
+}
+
+.info-container-title {
+    padding: 10px 0 0 0;
+    /* Adjust this value as needed */
+}
+
+#servings,
+#calories {
+    color: #aaa;
+}
+
+hr {
+    border-color: #39393b;
+}
+
+.add-food-btn {
+    padding: 0;
+}
+
+/* --------------------------nutrition.html styling ------------------------- */
