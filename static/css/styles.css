@@ -150,7 +150,9 @@ hr {
 }
 
 .add-food-btn {
+    font-size: 22px;
     padding: 0;
+    margin-bottom: 10px;
 }
 
 /* --------------------------nutrition.html styling ------------------------- */
