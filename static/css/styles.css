@@ -48,9 +48,14 @@ body {
 }
 
 /* Buttons */
+.custom-btn{
+    background-color: #FF7B00;
+    color: white !important;
+    opacity: 80% !important;
+}
 .custom-btn:hover,
 .custom-btn:focus {
-    background-color: rgb(255, 123, 0);
+    background-color: rgb(68, 67, 67);
 }
 
 .custom-btn:active {
@@ -63,6 +68,7 @@ footer {
     padding: 20px;
     background-color: #242425;
     color: #fff;
+    text-align: center;
     margin-top: auto;
 }
 
@@ -97,8 +103,8 @@ footer {
 }
 
 .btn:hover {
-    color: #FF7B00 !important;
-    opacity: 100% !important;
+    color: #FF7B00;
+    opacity: 100%;
 }
 
 .container {
