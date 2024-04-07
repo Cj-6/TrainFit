@@ -39,6 +39,11 @@ body {
     color: #FF7B00;
 }
 
+.bold-orange-title-2{
+    font-weight: bold;
+    color: #ffffff;
+}
+
 /* Text */
 .description {
     max-width: 700px;
@@ -51,7 +56,7 @@ body {
 .custom-btn{
     background-color: #FF7B00;
     color: white !important;
-    opacity: 80% !important;
+    opacity: 100% !important;
 }
 .custom-btn:hover,
 .custom-btn:focus {
@@ -150,7 +155,9 @@ hr {
 }
 
 .add-food-btn {
+    font-size: 22px;
     padding: 0;
+    margin-bottom: 10px;
 }
 
 /* --------------------------nutrition.html styling ------------------------- */
