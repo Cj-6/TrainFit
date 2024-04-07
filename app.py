@@ -1,4 +1,4 @@
-from flask import Flask, render_template, session, redirect, url_for
+from flask import Flask, render_template, session, redirect, url_for, request
 
 app = Flask(__name__)
 app.secret_key = 'bigsecretvibes'
@@ -8,9 +8,24 @@ def index():
     session['num_exercises'] = 3
     return render_template('index.html', active_page='home')
 
+
+
 @app.get('/nutrition')
 def nutrition():
     return render_template('nutrition.html', active_page='nutrition')
+
+
+@app.get('/addFood')
+def add_food():
+    return render_template('addFood.html', active_page='nutrition')
+
+@app.post('/nutrition')
+def save_food():
+    # Get the food and relevant info for the food item
+    #check to see if you can just get an id or something so that it only passes the id to the session
+    return render_template('nutrition.html', active_page='nutrition')
+
+
 
 @app.get('/workout')
 def workout():
