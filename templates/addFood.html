@@ -1,0 +1,73 @@
+{% extends "_layout.html" %}
+{% block content %}
+<div class="search-bar-container">
+    <input type="text" class="search-bar" placeholder="Search for your food">
+    <button type="submit" class="btn">Search</button>
+</div>
+<div class="parent-container">
+    <div class="top-container">
+        <div class="nutrition-label">
+            <h4>Nutrition Values</h4>
+            <div class="nutrition-facts">
+                <div class="serving-size">
+                    <span class="nutrition-label">Servings: </span>
+                    <span class="nutrition-value">1.25</span>
+                </div>
+                <div class="nutrition-item">
+                    <span class="nutrition-label">Calories:</span>
+                    <span class="nutrition-value">520</span>
+                </div>
+                <div class="nutrition-item">
+                    <span class="nutrition-label">Total Fat:</span>
+                    <span class="nutrition-value">3</span>
+                </div>
+                <div class="nutrition-item">
+                    <span class="nutrition-label">Saturated Fat:</span>
+                    <span class="nutrition-value">1</span>
+                </div>
+                <div class="nutrition-item">
+                    <span class="nutrition-label">Trans Fat:</span>
+                    <span class="nutrition-value">2</span>
+                </div>
+                <div class="nutrition-item">
+                    <span class="nutrition-label">Cholesterol:</span>
+                    <span class="nutrition-value">13</span>
+                </div>
+                <div class="nutrition-item">
+                    <span class="nutrition-label">Sodium:</span>
+                    <span class="nutrition-value">120</span>
+                </div>
+                <div class="nutrition-item">
+                    <span class="nutrition-label">Total Carbohydrates:</span>
+                    <span class="nutrition-value">33</span>
+                </div>
+                <div class="nutrition-item">
+                    <span class="nutrition-label">Sugars:</span>
+                    <span class="nutrition-value">35</span>
+                </div>
+                <div class="nutrition-item">
+                    <span class="nutrition-label">Protein:</span>
+                    <span class="nutrition-value">20</span>
+                </div>
+            </div>
+        </div>
+        <div class="servings-box">
+            <label for="servings">Servings:</label>
+            <select id="servings">
+                <option value="1">1</option>
+                <option value="1.25">1 1/4</option>
+                <option value="1.5">1 1/2</option>
+                <option value="1.75">1 1/75</option>
+                <option value="2">2</option>
+            </select>
+        </div>
+    </div>
+    <div class="bottom-container">
+        <!-- Space for graph -->
+    </div>
+    <!-- This is the form so that the food item is saved and sent to the nutrition page to be shown -->
+    <form action="/nutrition" method="post">
+        <button type="submit" class="btn">Submit</button>
+    </form>
+</div>
+{% endblock %}
