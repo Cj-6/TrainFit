@@ -1,9 +1,10 @@
 {% extends "_layout.html" %}
 {% block content %}
 <div class="search-bar-container">
-    <input type="text" class="search-bar" placeholder="Search for your food">
-    <button type="submit" class="btn">Search</button>
+    <input type="text" name="q" class="search-bar" hx-get="/search" hx-trigger="keyup changed delay:50ms"
+        hx-target="#results" placeholder="Search for your food">
 </div>
+<div id="results"></div>
 <div class="parent-container">
     <div class="top-container">
         <div class="nutrition-label">
@@ -60,14 +61,17 @@
                 <option value="1.75">1 1/75</option>
                 <option value="2">2</option>
             </select>
+            <form action="/myFoods" method="get">
+                <button type="submit" class="btn my-foods-btn">My Foods</button>
+            </form>
+            <form action="/nutrition" method="post">
+                <button type="submit" class="btn submit-btn">Submit</button>
+            </form>
         </div>
+        <div class="bottom-container">
+            <!-- Space for graph -->
+        </div>
+
     </div>
-    <div class="bottom-container">
-        <!-- Space for graph -->
-    </div>
-    <!-- This is the form so that the food item is saved and sent to the nutrition page to be shown -->
-    <form action="/nutrition" method="post">
-        <button type="submit" class="btn">Submit</button>
-    </form>
 </div>
 {% endblock %}
