@@ -11,7 +11,7 @@
         <h2 class="info-container-title">Breakfast</h2>
         <hr>
         <!-- items will be dynamically added here -->
-        <button class="btn add-food-btn">Add Food</button>
+        <a href="/addFood" class="btn add-food-btn">Add Food</a>
     </div>
 
     <div class="container info-container">
@@ -40,7 +40,9 @@
                 </div>
             </div>
         </div>
-        <button class="btn add-food-btn">Add Food</button>
+        <form action="/addFood" method="post">
+            <button type="button" class="btn add-food-btn">Add Food</button>
+        </form>
     </div>
 
     <div class="container info-container">
@@ -58,14 +60,18 @@
                 </div>
             </div>
         </div>
-        <button class="btn add-food-btn">Add Food</button>
+        <form action="/addFood" method="post">
+            <button type="button" class="btn add-food-btn">Add Food</button>
+        </form>
     </div>
 
     <div class="container info-container">
         <h2 class="info-container-title">Snack</h2>
         <hr>
         <!-- Food items will be dynamically added here -->
-        <button class="btn add-food-btn">Add Food</button>
+        <form action="/addFood" method="post">
+            <button type="button" class="btn add-food-btn">Add Food</button>
+        </form>
     </div>
 </div>
 {% endblock %}
