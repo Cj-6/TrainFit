@@ -1,0 +1,19 @@
+{% for food_name, food_info in results.items() %}
+<div class="search-results-container">
+    <div class="food-info-container">
+        <div class="food-info">
+            <div class="food-name">{{ food_name }}</div>
+            <div class="food-calories">{{ food_info.calories }} cal</div>
+        </div>
+    </div>
+    {% if current_page == 'addFood' %}
+    <button class="btn" type="submit">
+        <i class="bi bi-plus-circle-fill"></i>
+    </button>
+    {% elif current_page == 'myFoods' %}
+
+    <button class="btn" type="button">Edit</button>
+    <button class="btn" type="button">Delete</button>
+    {% endif %}
+</div>
+{% endfor %}
