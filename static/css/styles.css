@@ -157,3 +157,78 @@ hr {
 
 /* --------------------------sigin.html styling ----------------------------- */
 
+.signin-container {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.signin-card {
+    background-color: #2e2e2f;
+    color: white;
+}
+
+.signin-card-header {
+    background-color: #FF7B00;
+}
+
+.signin-form-label {
+    color: white;
+}
+
+.signin-form-control {
+    background-color: #39393b;
+    color: white;
+}
+
+.signin-btn {
+    background-color: #FF7B00;
+    border-color: #FF7B00;
+    color: white;
+}
+
+.signin-btn:hover,
+.signin-btn:focus {
+    background-color: #d95c00;
+    border-color: #d95c00;
+}
+
+/* --------------------------sigin.html styling ----------------------------- */
+
+/* --------------------------profile.html styling ----------------------------- */
+
+.profile-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.profile-card {
+    background-color: #2e2e2f;
+    color: white;
+}
+
+.profile-card-header {
+    background-color: #FF7B00;
+}
+
+.profile-card-title {
+    color: #FF7B00;
+}
+
+.profile-card-text {
+    color: white;
+}
+
+.profile-btn {
+    background-color: #FF7B00;
+    border-color: #FF7B00;
+    color: white;
+}
+
+.profile-btn:hover,
+.profile-btn:focus {
+    background-color: #d95c00;
+    border-color: #d95c00;
+}
+
+/* --------------------------profile.html styling ----------------------------- */
+

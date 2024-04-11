@@ -30,3 +30,7 @@ def add_exercise():
     session['num_exercises'] = session.get('num_exercises', 3) + 1
     return redirect(url_for('workout'))
 
+@app.get('/signup_form')
+def signup_form():
+    return render_template('signup.html')
+
