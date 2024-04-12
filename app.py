@@ -118,3 +118,29 @@ def add_exercise():
     return render_template('addWorkout.html')
 
 print('test')
+
+@app.get('/search')
+def search():
+    q = request.args.get('q')
+    results = {}
+
+    if q:
+        for food_name, food_info in food_dict.items():
+            if q.lower() in food_name.lower():
+                results[food_name] = food_info
+
+    # gets the current page based on the referrer URL
+    referrer = request.referrer
+    if 'addFood' in referrer:
+        current_page = 'addFood'
+    elif 'myFoods' in referrer:
+        current_page = 'myFoods'
+    else:
+        current_page = ''
+
+    return render_template("searchResults.html", results=results, current_page=current_page)
+
+
+@app.get('/myFoods')
+def show_my_foods():
+    return render_template('myFoods.html')
