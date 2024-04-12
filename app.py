@@ -117,3 +117,4 @@ def signin():
 def add_exercise():
     return render_template('addWorkout.html')
 
+print('test')
