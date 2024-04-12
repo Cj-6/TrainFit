@@ -5,17 +5,20 @@
     <form action="/workout" method="post">
 
     <div class="container info-container workout-title-container">
+        
         <h3 class="workout-name">
             <input class="addInput" type="text" name="workout-name" required placeholder="Workout Title">
         </h3>
     </div>
 
     <div class="workout-container">
-    <div class="container info-container">
-        <h2 class="info-container-title">
-            <input class="addInput exercise" type="text" name="exerciseName" required placeholder="Exercise Name">
-        </h2>
-        <hr>
+        
+        <div class="container info-container">
+            
+            <h2 class="info-container-title">
+                <input class="addInput exercise" type="text" name="exerciseName" required placeholder="Exercise Name">
+            </h2>
+            <hr>
       
         <div>
             <span>Set 1:
@@ -25,6 +28,8 @@
                 <input class="addInput set" type="number" name="set-1-reps" required placeholder="Repetitions">Reps</span>
             <span>
                 <input class="addInput set" type="number" name="set-1-rpe" required placeholder="Rate Of Percieved Exertion">RPE</span>
+
+                <span><button class="w-minus"></span><i class="bi bi-dash-circle-dotted"></i></button></span>
         </div>
 
         <div>
@@ -35,6 +40,8 @@
                 <input class="addInput set" type="number" name="set-2-reps" required placeholder="Repetitions">Reps</span>
             <span>
                 <input class="addInput set" type="number" name="set-2-rpe" required placeholder="Rate Of Percieved Exertion">RPE</span>
+
+                <span><button class="w-minus"><i class="bi bi-dash-circle-dotted"></i></button></span>
         </div>
 
         <div>
@@ -45,19 +52,35 @@
                 <input class="addInput set" type="number" name="set-3-reps" required placeholder="Repetitions">Reps</span>
             <span>
                 <input class="addInput set" type="number" name="set-3-rpe" required placeholder="Rate Of Percieved Exertion">RPE</span>
+
+                <span><button class="w-minus"><i class="bi bi-dash-circle-dotted"></i></button></span>
         </div>
+
+        
+        <div>
+            <span class="preview-set">Set 4:
+                <input class="addInput set" type="number" name="set-4-weight" required placeholder="Weight" disabled>LBS
+            </span>
+            <span class="preview-set">
+                <input class="addInput set" type="number" name="set-4-reps" required placeholder="Repetitions" disabled>Reps</span>
+            <span class="preview-set">
+                <input class="addInput set" type="number" name="set-4-rpe" required placeholder="Rate Of Percieved Exertion" disabled>RPE</span>
+
+                <span><button class="w-minus"><i class="bi bi-plus-circle-dotted"></i></button></span>
+
+        </div>
+
 
     </div>
 
 </div>
 
-<form method="GET" action="/addExercise">
     <div class="d-flex justify-content-center align-items-center">
         <button class="btn" type="submit">
             <i class="bi bi-plus-circle-fill"></i>
         </button>
     </div>
-</form>
+
 
 
 </div>

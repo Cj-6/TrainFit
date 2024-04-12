@@ -145,4 +145,3 @@ def search():
 def show_my_foods():
     return render_template('myFoods.html')
 
-# test

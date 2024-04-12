@@ -81,9 +81,13 @@ footer {
 
 
 /* -------------------------workout.html styling ------------------------- */
+.parent-container.addworkout-btn{
+   min-width: 0 !important;
+   min-height: 0 !important;
+   height: 10vh !important;
+}
 .addworkout-btn{
     width: 41.5vw !important;
-    
 }
 .workout-name{
     display: flex;
@@ -154,6 +158,30 @@ footer {
     margin-top: 5vh !important;
     margin-bottom: 2px !important;
 }
+
+.preview-set{
+    opacity: 0.2;
+    
+}
+
+.w-minus{
+    background-color: #2e2e2f;
+    border: none;
+}
+
+.bi-dash-circle-dotted{
+    color: #FF7B00;
+}
+
+.bi-plus-circle-dotted{
+    color: #FF7B00;
+}
+
+.preview-set span:last-child{
+    opacity: 1 !important;
+}
+
+
 /* -------------------------workout.html styling ------------------------- */
 
 /* -------------------------nutrition.html styling ------------------------- */
