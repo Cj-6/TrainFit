@@ -113,11 +113,6 @@ def profile():
 def signin():
     return render_template('signin.html', active_page='signin')
 
-@app.post('/add_exercise')
-def add_exercise():
-    session['num_exercises'] = session.get('num_exercises', 3) + 1
-    return redirect(url_for('workout'))
-
 
 @app.get('/search')
 def search():
