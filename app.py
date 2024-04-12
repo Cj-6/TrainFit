@@ -113,8 +113,7 @@ def profile():
 def signin():
     return render_template('signin.html', active_page='signin')
 
-@app.route('/add_exercise', methods=['POST'])
+@app.get('/addWorkout')
 def add_exercise():
-    session['num_exercises'] = session.get('num_exercises', 3) + 1
-    return redirect(url_for('workout'))
+    return render_template('addWorkout.html')
 
