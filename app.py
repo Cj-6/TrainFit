@@ -1,4 +1,4 @@
-from flask import Flask, render_template, session, redirect, url_for, request, jsonify
+from flask import Flask, render_template, session, redirect, url_for, request
 
 app = Flask(__name__)
 app.secret_key = 'bigsecretvibes'
@@ -113,39 +113,8 @@ def profile():
 def signin():
     return render_template('signin.html', active_page='signin')
 
-
-@app.get('/addWorkout')
-def add_workout():
-    return render_template('addWorkout.html', active_page = 'workout')
-
-@app.get('/addExercise')
+@app.route('/add_exercise', methods=['POST'])
 def add_exercise():
-    return render_template('addWorkout.html', active_page= 'workout')
+    session['num_exercises'] = session.get('num_exercises', 3) + 1
+    return redirect(url_for('workout'))
 
-
-
-@app.get('/search')
-def search():
-    q = request.args.get('q')
-    results = {}
-
-    if q:
-        for food_name, food_info in food_dict.items():
-            if q.lower() in food_name.lower():
-                results[food_name] = food_info
-
-    # gets the current page based on the referrer URL
-    referrer = request.referrer
-    if 'addFood' in referrer:
-        current_page = 'addFood'
-    elif 'myFoods' in referrer:
-        current_page = 'myFoods'
-    else:
-        current_page = ''
-
-    return render_template("searchResults.html", results=results, current_page=current_page)
-
-
-@app.get('/myFoods')
-def show_my_foods():
-    return render_template('myFoods.html')
