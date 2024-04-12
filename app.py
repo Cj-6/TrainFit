@@ -144,3 +144,5 @@ def search():
 @app.get('/myFoods')
 def show_my_foods():
     return render_template('myFoods.html')
+
+# test
