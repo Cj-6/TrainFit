@@ -227,17 +227,20 @@ hr {
     outline: none;
     color: #fff;
     border-radius: 4px;
-    /* Adjust the value as needed */
 }
 
 .servings-box {
-    margin-left: 140px;
-    /* Adjust this value as needed */
+    padding: 0 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
 }
+
 
 label[for="servings"] {
     font-size: 20px;
-    /* Adjust this value as needed */
 }
 
 #servings {
@@ -250,6 +253,8 @@ label[for="servings"] {
 .parent-container {
     display: flex;
     flex-direction: column;
+    min-width: 500px;
+    min-height: 600px;
 }
 
 .top-container {
@@ -270,6 +275,13 @@ label[for="servings"] {
 .search-bar {
     flex-grow: 1;
     margin-right: 10px;
+    background-color: #2e2e2f;
+    border: none;
+    outline: none;
+    color: #fff;
+    height: 50px;
+    font-size: 24px;
+
 }
 
 .parent-container {
@@ -328,6 +340,55 @@ label[for="servings"] {
     font-weight: bold;
 }
 
+.search-results-container {
+    background-color: #2e2e2f;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px;
+    margin: 5px auto;
+    border-radius: 4px;
+    width: 400px;
+    min-width: 40%;
+
+}
+
+.food-name {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.food-calories {
+    font-size: 20px;
+    color: #aaa;
+}
+
+.food-nutrition {
+    font-size: 18px;
+}
+
+.food-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.food-info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.my-foods-btn {
+    margin-top: 20px;
+    /* Adjust this value as needed */
+}
+
+.submit-btn {
+    margin-top: 60px;
+    bottom: 0;
+}
 
 /* --------------------------addFood.html styling ------------------------- */
 

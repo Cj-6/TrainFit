@@ -1,0 +1,10 @@
+{% extends "_layout.html" %}
+{% block content %}
+<div class="search-bar-container">
+    
+    <input type="text" name="q" class="search-bar" hx-get="/search" hx-trigger="keyup changed delay:50ms"
+        hx-target="#results" placeholder="Search for your food">
+</div>
+<div id="results" class="parent-container"></div>
+</div>
+{% endblock %}
