@@ -165,22 +165,7 @@ footer {
     
 }
 
-.w-minus{
-    background-color: #2e2e2f;
-    border: none;
-}
 
-.bi-dash-circle-dotted{
-    color: #FF7B00;
-}
-
-.bi-plus-circle-dotted{
-    color: #FF7B00;
-}
-
-.preview-set span:last-child{
-    opacity: 1 !important;
-}
 
 
 
@@ -206,6 +191,35 @@ footer {
     cursor: pointer;
 }
 
+.addInput.set:last-child{
+    vertical-align: middle;
+
+}
+
+.w-minus{
+    background-color: #2e2e2f;
+    border: none;
+}
+
+.w-plus{
+    background-color: #2e2e2f;
+    border: none; 
+}
+.bi-dash-circle-dotted{
+    color: #FF7B00;
+}
+
+.bi-plus-circle-dotted{
+    color: #FF7B00;
+}
+
+.preview-set span:last-child{
+    opacity: 1 !important;
+}
+
+.set-container .w-minus{
+    display: none;
+}
 
 
 
