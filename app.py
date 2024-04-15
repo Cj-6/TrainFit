@@ -1,4 +1,4 @@
-from flask import Flask, render_template, session, redirect, url_for, request, jsonify
+from flask import Flask, render_template, session, redirect, url_for, request
 
 app = Flask(__name__)
 app.secret_key = 'bigsecretvibes'
@@ -102,7 +102,7 @@ def save_food():
 
 @app.get('/workout')
 def workout():
-    return render_template('workout.html', num_exercises=session.get('num_exercises', 3), active_page='workout')
+    return render_template('workout.html', active_page = 'workout')
 
 
 @app.get('/profile')
@@ -113,11 +113,11 @@ def profile():
 def signin():
     return render_template('signin.html', active_page='signin')
 
-@app.post('/add_exercise')
+@app.get('/addWorkout')
 def add_exercise():
-    session['num_exercises'] = session.get('num_exercises', 3) + 1
-    return redirect(url_for('workout'))
+    return render_template('addWorkout.html')
 
+print('test')
 
 @app.get('/search')
 def search():
@@ -144,3 +144,5 @@ def search():
 @app.get('/myFoods')
 def show_my_foods():
     return render_template('myFoods.html')
+
+# test

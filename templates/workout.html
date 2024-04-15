@@ -1,67 +1,59 @@
 {% extends "_layout.html" %}
 
 {% block content %}
-<h1>Workout Page</h1>
-<div class="container text-center">
-    <div class="row">
-        <div class="col">
-            <h3>Tuesday Chest Day 3/21/23</h3>
+
+
+<div class="parent-container addworkout-btn">
+
+<form method="GET" action="/addWorkout">
+    <div class="d-flex justify-content-center align-items-center">
+        <button class="btn" type="submit">
+            <i class="bi bi-plus-circle-fill"></i>
+        </button>
+    </div>
+</form>
+
+</div>
+
+<div class="parent-container">
+
+    <div class="container info-container workout-title-container">
+        <h3 class="workout-name">Workout Name</h3>
+    </div>
+        
+    <div class="container info-container">
+        <h2 class="info-container-title">Exercise 1</h2>
+        <hr>
+        <!-- items will be dynamically added here -->
+        <div>
+            <span>Set 1:</span>
+            <span>225 Lbs /</span>
+            <span>9 Reps /</span>
+            <span>RPE 10 </span>
+            <span></span>
         </div>
+        <div>Set 2</div>
+        <div>Set 3</div>
     </div>
 
-    <div class="row bg-secondary border border-secondary rounded">
-
-        {% for i in range(num_exercises) %}
-        <div class="col border border-secondary rounded-3">
-            <h3>Exercise {{ i + 1 }}</h3>
-            <form action="">
-                <div>
-                    <span>Set 1:</span>
-                    <label for="">Reps</label>
-                    <input type="number" id="set1_reps" name="set1_reps">
-                    <label for="">Weight</label>
-                    <input type="number" id="set1_weight" name="set1_weight">
-                </div>
-
-                <div>
-                    <span>Set 2:</span>
-                    <label for="">Reps</label>
-                    <input type="number" id="set2_reps" name="set2_reps">
-                    <label for="">Weight</label>
-                    <input type="number" id="set2_weight" name="set2_weight">
-                </div>
-
-                <div>
-                    <span>Set 3:</span>
-                    <label for="">Reps</label>
-                    <input type="number" id="set3_reps" name="set3_reps">
-                    <label for="">Weight</label>
-                    <input type="number" id="set3_weight" name="set3_weight">
-                </div>
-
-                <div>
-                    <span>Set 4:</span>
-                    <label for="">Reps</label>
-                    <input type="number" id="set4_reps" name="set4_reps">
-                    <label for="">Weight</label>
-                    <input type="number" id="set4_weight" name="set4_weight">
-                </div>
-
-
-            </form>
-        </div>
-        {% endfor %}
-
+    <div class="container info-container">
+    <h2 class="info-container-title">Exercise 2</h2>
+    <hr>
+    <!-- items will be dynamically added here -->
+    <div>
+        <span>Set 1:</span>
+        <span>225 Lbs /</span>
+        <span>9 Reps /</span>
+        <span>RPE 10 </span>
+        <span></span>
     </div>
-    <form method="POST" action="/add_exercise">
-        <div class="d-flex justify-content-center align-items-center">
-            <button class="btn" type="submit">
-                <i class="bi bi-plus-circle-fill"></i>
-            </button>
-        </div>
-    </form>
+    <div>Set 2</div>
+    <div>Set 3</div>
 </div>
 </div>
+
+
+
 
 
 
