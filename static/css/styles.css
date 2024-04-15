@@ -125,6 +125,7 @@ footer {
 .btn:hover {
     color: #FF7B00;
     opacity: 100%;
+    cursor: pointer;
 }
 
 .container {
@@ -182,7 +183,48 @@ footer {
 }
 
 
+
 /* -------------------------workout.html styling ------------------------- */
+
+/* -------------------------------------addWorkout.html styling------------------------------------------------- */
+.exercise-title{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bi.bi-x-square-fill{
+    font-size: xx-large;
+    color: #FF7B00;
+    opacity: 50%;
+    cursor: pointer;
+}
+
+.bi.bi-x-square-fill:hover{
+    opacity: 100%;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* -------------------------------------addWorkout.html styling------------------------------------------------- */
+
 
 /* -------------------------nutrition.html styling ------------------------- */
 .parent-container {
