@@ -88,9 +88,9 @@ def nutrition():
     return render_template('nutrition.html', active_page='nutrition')
 
 
-@app.get('/addFood')
-def add_food():
-    return render_template('addFood.html', current_page='addFood', active_page='nutrition', results={})
+@app.get('/foodInfo')
+def food_info():
+    return render_template('foodInfo.html', current_page='foodInfo', active_page='nutrition', results={})
 
 @app.post('/nutrition')
 def save_food():
@@ -117,7 +117,7 @@ def signin():
 def add_exercise():
     return render_template('addWorkout.html', active_page='workout')
 
-print('test')
+
 
 @app.get('/search')
 def search():
@@ -131,8 +131,8 @@ def search():
 
     # gets the current page based on the referrer URL
     referrer = request.referrer
-    if 'addFood' in referrer:
-        current_page = 'addFood'
+    if 'foodInfo' in referrer:
+        current_page = 'foodInfo'
     elif 'myFoods' in referrer:
         current_page = 'myFoods'
     else:
@@ -141,7 +141,12 @@ def search():
     return render_template("searchResults.html", results=results, current_page=current_page)
 
 
+
 @app.get('/myFoods')
 def show_my_foods():
     return render_template('myFoods.html')
+
+@app.get('/createFood')
+def create_food():
+    return render_template('createFood.html')
 

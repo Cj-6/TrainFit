@@ -1,0 +1,22 @@
+{% extends "_layout.html" %}
+{% block content %}
+<h1 class="page-title">Add New Food</h1>
+<div class="parent-container">
+    <div class="container info-container">
+        <form action="/addNewFood" method="post">
+            <label for="food-name">Food Name:</label>
+            <input type="text" id="food-name" name="food-name" required>
+
+            <label for="calories">Calories:</label>
+            <input type="number" id="calories" name="calories" required>
+
+            <label for="total-fat">Total Fat:</label>
+            <input type="number" id="total-fat" name="total-fat" required>
+
+            <!-- Add more fields as needed -->
+
+            <button type="submit" class="btn submit-btn">Submit</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

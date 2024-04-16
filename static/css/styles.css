@@ -81,20 +81,23 @@ footer {
 
 
 /* -------------------------workout.html styling ------------------------- */
-.parent-container.addworkout-btn{
-   min-width: 0 !important;
-   min-height: 0 !important;
-   height: 10vh !important;
+.parent-container.addworkout-btn {
+    min-width: 0 !important;
+    min-height: 0 !important;
+    height: 10vh !important;
 }
-.addworkout-btn{
+
+.addworkout-btn {
     width: 41.5vw !important;
 }
-.workout-name{
+
+.workout-name {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 5vh;
 }
+
 .col form div {
     display: flex;
 }
@@ -132,37 +135,36 @@ footer {
     max-width: 60%;
 }
 
-.addInput{
-    background-color:  #575757;
+.addInput {
+    background-color: #575757;
     border: 2px solid rgb(51, 51, 51)
-     
 }
 
-.addInput::placeholder{
+.addInput::placeholder {
     color: white;
     font-style: italic;
     opacity: 0.3;
 }
 
-.exercise{
+.exercise {
     width: 10vw;
     height: 3vh;
 }
 
-.workout-submit-button-container{
+.workout-submit-button-container {
     display: flex;
     justify-content: center;
     margin-top: 0;
 }
 
-.addworkout{
+.addworkout {
     margin-top: 5vh !important;
     margin-bottom: 2px !important;
 }
 
-.preview-set{
+.preview-set {
     opacity: 0.2;
-    
+
 }
 
 
@@ -172,52 +174,53 @@ footer {
 /* -------------------------workout.html styling ------------------------- */
 
 /* -------------------------------------addWorkout.html styling------------------------------------------------- */
-.exercise-title{
+.exercise-title {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
 }
 
-.bi.bi-x-square-fill{
+.bi.bi-x-square-fill {
     font-size: xx-large;
     color: #FF7B00;
     opacity: 50%;
     cursor: pointer;
 }
 
-.bi.bi-x-square-fill:hover{
+.bi.bi-x-square-fill:hover {
     opacity: 100%;
     cursor: pointer;
 }
 
-.addInput.set:last-child{
+.addInput.set:last-child {
     vertical-align: middle;
 
 }
 
-.w-minus{
+.w-minus {
     background-color: #2e2e2f;
     border: none;
 }
 
-.w-plus{
+.w-plus {
     background-color: #2e2e2f;
-    border: none; 
+    border: none;
 }
-.bi-dash-circle-dotted{
+
+.bi-dash-circle-dotted {
     color: #FF7B00;
 }
 
-.bi-plus-circle-dotted{
+.bi-plus-circle-dotted {
     color: #FF7B00;
 }
 
-.preview-set span:last-child{
+.preview-set span:last-child {
     opacity: 1 !important;
 }
 
-.set-container .w-minus{
+.set-container .w-minus {
     display: none;
 }
 
@@ -293,11 +296,10 @@ hr {
 /* -------------------------search-bar-container styling ------------------------- */
 .search-bar-container {
     width: 50%;
-    margin: 20px auto;
+    margin: 10px auto;
     display: flex;
     justify-content: center;
-    margin-top: 30px;
-    margin-bottom: 30px;
+
 
 }
 
@@ -358,14 +360,15 @@ label[for="servings"] {
 
 .search-bar {
     flex-grow: 1;
-    margin-right: 10px;
+    margin: 10px;
+    padding: 20px;
     background-color: #2e2e2f;
     border: none;
     outline: none;
     color: #fff;
     height: 50px;
     font-size: 24px;
-
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.09);
 }
 
 .parent-container {
@@ -473,6 +476,44 @@ label[for="servings"] {
     margin-top: 60px;
     bottom: 0;
 }
+
+
+
+.page-title {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.page-description {
+    margin: 0px 20px;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    width: 1000px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+
+    gap: 30px;
+}
+
+
+/* Style for the submit button */
+.submit-btn {
+    margin: 0 auto;
+}
+
+/* Style for the inputs */
+input {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    /* Adjust as needed */
+}
+
+
+
 
 /* --------------------------addFood.html styling ------------------------- */
 
