@@ -81,9 +81,13 @@ footer {
 
 
 /* -------------------------workout.html styling ------------------------- */
+.parent-container.addworkout-btn{
+   min-width: 0 !important;
+   min-height: 0 !important;
+   height: 10vh !important;
+}
 .addworkout-btn{
     width: 41.5vw !important;
-    
 }
 .workout-name{
     display: flex;
@@ -121,6 +125,7 @@ footer {
 .btn:hover {
     color: #FF7B00;
     opacity: 100%;
+    cursor: pointer;
 }
 
 .container {
@@ -154,7 +159,86 @@ footer {
     margin-top: 5vh !important;
     margin-bottom: 2px !important;
 }
+
+.preview-set{
+    opacity: 0.2;
+    
+}
+
+
+
+
+
 /* -------------------------workout.html styling ------------------------- */
+
+/* -------------------------------------addWorkout.html styling------------------------------------------------- */
+.exercise-title{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bi.bi-x-square-fill{
+    font-size: xx-large;
+    color: #FF7B00;
+    opacity: 50%;
+    cursor: pointer;
+}
+
+.bi.bi-x-square-fill:hover{
+    opacity: 100%;
+    cursor: pointer;
+}
+
+.addInput.set:last-child{
+    vertical-align: middle;
+
+}
+
+.w-minus{
+    background-color: #2e2e2f;
+    border: none;
+}
+
+.w-plus{
+    background-color: #2e2e2f;
+    border: none; 
+}
+.bi-dash-circle-dotted{
+    color: #FF7B00;
+}
+
+.bi-plus-circle-dotted{
+    color: #FF7B00;
+}
+
+.preview-set span:last-child{
+    opacity: 1 !important;
+}
+
+.set-container .w-minus{
+    display: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* -------------------------------------addWorkout.html styling------------------------------------------------- */
+
 
 /* -------------------------nutrition.html styling ------------------------- */
 .parent-container {

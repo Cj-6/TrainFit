@@ -115,7 +115,7 @@ def signin():
 
 @app.get('/addWorkout')
 def add_exercise():
-    return render_template('addWorkout.html')
+    return render_template('addWorkout.html', active_page='workout')
 
 print('test')
 
@@ -145,4 +145,3 @@ def search():
 def show_my_foods():
     return render_template('myFoods.html')
 
-# test
