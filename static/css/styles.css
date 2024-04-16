@@ -81,6 +81,15 @@ footer {
 
 
 /* -------------------------workout.html styling ------------------------- */
+.workout{
+    margin-top: 0 !important;
+}
+
+div.container.info-container.workout-title-container{
+    margin-top: 0;
+    padding-top: 0;
+}
+
 .parent-container.addworkout-btn{
    min-width: 0 !important;
    min-height: 0 !important;
@@ -219,6 +228,10 @@ footer {
 
 .hidden{
     display: none;
+}
+
+.parent-container.addworkout{
+    min-height: 0 !important;
 }
 
 
