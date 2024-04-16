@@ -150,3 +150,19 @@ def show_my_foods():
 def create_food():
     return render_template('createFood.html')
 
+@app.post('/createFoodPost')
+def create_food_post():
+    name = request.form.get('name')
+    calories = request.form.get('calories')
+    total_fat = request.form.get('total-fat')
+    saturated_fat = request.form.get('saturated-fat')
+    trans_fat = request.form.get('trans-fat')
+    cholesterol = request.form.get('cholesterol')
+    sodium = request.form.get('sodium')
+    carbohydrates = request.form.get('carbohydrates')
+    sugars = request.form.get('sugars')
+    protein = request.form.get('protein')
+    
+
+    return render_template('myFoods.html')
+
