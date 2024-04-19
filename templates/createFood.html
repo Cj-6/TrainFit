@@ -5,6 +5,10 @@
     <div class=" info-container" id="create-food-container">
         <form action="/createFoodPost" method="post" class="create-food-form">
             <div class="input-group input-container">
+                <label for="name" class="food-input-label">Name</label>
+                <input type="text" id="name" name="name" placeholder="Name">
+            </div>
+            <div class="input-group input-container">
                 <label for="calories" class="food-input-label">Calories</label>
                 <input type="text" id="calories" name="calories" placeholder="Calories">
             </div>
@@ -50,8 +54,9 @@
             </div>
 
             <div class="button-group">
-                <button type="submit" class="btn submit-btn">Submit</button>
                 <button type="button" class="btn cancel-btn" onclick="window.history.back();">Cancel</button>
+
+                <button type="submit" class="btn submit-btn">Submit</button>
             </div>
         </form>
     </div>

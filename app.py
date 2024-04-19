@@ -129,16 +129,9 @@ def search():
             if q.lower() in food_name.lower():
                 results[food_name] = food_info
 
-    # gets the current page based on the referrer URL
-    referrer = request.referrer
-    if 'foodInfo' in referrer:
-        current_page = 'foodInfo'
-    elif 'myFoods' in referrer:
-        current_page = 'myFoods'
-    else:
-        current_page = ''
 
-    return render_template("searchResults.html", results=results, current_page=current_page)
+
+    return render_template("searchResults.html", results=results)
 
 
 
@@ -164,5 +157,5 @@ def create_food_post():
     protein = request.form.get('protein')
     
 
-    return render_template('myFoods.html')
+    return render_template('foodInfo.html')
 

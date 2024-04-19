@@ -280,7 +280,7 @@ hr {
     border-color: #39393b;
 }
 
-.add-food-btn {
+.info-container .add-food-btn {
     font-size: 22px;
     padding: 0;
     margin-bottom: 10px;
@@ -316,12 +316,12 @@ hr {
 }
 
 .servings-box {
-    padding: 0 40px;
+    padding-left: 90px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
+    justify-content: space-between;
+    height: 100%;
+    /* This will make the container take up the full height available to it */
 }
 
 
@@ -415,7 +415,14 @@ label[for="servings"] {
     margin-bottom: 20px;
 }
 
+.create-food-btn {
+    margin-top: 140px;
+    /* This will push the button towards the middle */
+}
 
+.servings-box .add-food-btn {
+    margin-top: 100px;
+}
 
 .nutrition-value {
     text-align: right;
@@ -440,6 +447,13 @@ label[for="servings"] {
     border-radius: 4px;
     width: 400px;
     min-width: 40%;
+    transition: transform 0.17s ease-in-out;
+
+}
+
+.search-results-container:hover {
+    transform: scale(1.05);
+    background-color: rgba(255, 123, 0, 0.45);
 
 }
 
@@ -471,7 +485,6 @@ label[for="servings"] {
 
 .my-foods-btn {
     margin-top: 20px;
-    /* Adjust this value as needed */
 }
 
 .submit-btn {
@@ -518,7 +531,7 @@ label[for="servings"] {
     width: 50vw;
     height: 100%;
     box-sizing: border-box;
-    margin: 0 10px;
+    margin: 5px 10px;
 }
 
 .food-input-label {
