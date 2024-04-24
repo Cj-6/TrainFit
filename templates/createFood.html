@@ -1,0 +1,64 @@
+{% extends "_layout.html" %}
+{% block content %}
+<h1 class="page-title">Create a New Food</h1>
+<div class="parent-container">
+    <div class=" info-container" id="create-food-container">
+        <form action="/createFoodPost" method="post" class="create-food-form">
+            <div class="input-group input-container">
+                <label for="name" class="food-input-label">Name</label>
+                <input type="text" id="name" name="name" placeholder="Name">
+            </div>
+            <div class="input-group input-container">
+                <label for="calories" class="food-input-label">Calories</label>
+                <input type="text" id="calories" name="calories" placeholder="Calories">
+            </div>
+
+            <div class="input-group input-container">
+                <label for="total-fat" class="food-input-label">Total Fat</label>
+                <input type="text" id="total-fat" name="total-fat" placeholder="Total Fat">
+            </div>
+
+            <div class="input-group input-container">
+                <label for="saturated-fat" class="food-input-label">Saturated Fat</label>
+                <input type="text" id="saturated-fat" name="saturated-fat" placeholder="Saturated Fat">
+            </div>
+
+            <div class="input-group input-container">
+                <label for="trans-fat" class="food-input-label">Trans Fat</label>
+                <input type="text" id="trans-fat" name="trans-fat" placeholder="Trans Fat">
+            </div>
+
+            <div class="input-group input-container">
+                <label for="cholesterol" class="food-input-label">Cholesterol</label>
+                <input type="text" id="cholesterol" name="cholesterol" placeholder="Cholesterol">
+            </div>
+
+            <div class="input-group input-container">
+                <label for="sodium" class="food-input-label">Sodium</label>
+                <input type="text" id="sodium" name="sodium" placeholder="Sodium">
+            </div>
+
+            <div class="input-group input-container">
+                <label for="carbohydrates" class="food-input-label">Total Carbohydrates</label>
+                <input type="text" id="carbohydrates" name="carbohydrates" placeholder="Total Carbohydrates">
+            </div>
+
+            <div class="input-group input-container">
+                <label for="sugars" class="food-input-label">Sugars</label>
+                <input type="text" id="sugars" name="sugars" placeholder="Sugars">
+            </div>
+
+            <div class="input-group input-container">
+                <label for="protein" class="food-input-label">Protein</label>
+                <input type="text" id="protein" name="protein" placeholder="Protein">
+            </div>
+
+            <div class="button-group">
+                <button type="button" class="btn cancel-btn" onclick="window.history.back();">Cancel</button>
+
+                <button type="submit" class="btn submit-btn">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

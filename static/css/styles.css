@@ -142,15 +142,18 @@ div.container.info-container.workout-title-container{
    min-height: 0 !important;
    height: 10vh !important;
 }
-.addworkout-btn{
+
+.addworkout-btn {
     width: 41.5vw !important;
 }
-.workout-name{
+
+.workout-name {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 5vh;
 }
+
 .col form div {
     display: flex;
 }
@@ -188,37 +191,36 @@ div.container.info-container.workout-title-container{
     max-width: 60%;
 }
 
-.addInput{
-    background-color:  #575757;
+.addInput {
+    background-color: #575757;
     border: 2px solid rgb(51, 51, 51)
-     
 }
 
-.addInput::placeholder{
+.addInput::placeholder {
     color: white;
     font-style: italic;
     opacity: 0.3;
 }
 
-.exercise{
+.exercise {
     width: 10vw;
     height: 3vh;
 }
 
-.workout-submit-button-container{
+.workout-submit-button-container {
     display: flex;
     justify-content: center;
     margin-top: 0;
 }
 
-.addworkout{
+.addworkout {
     margin-top: 5vh !important;
     margin-bottom: 2px !important;
 }
 
-.preview-set{
+.preview-set {
     opacity: 0.2;
-    
+
 }
 
 
@@ -228,48 +230,49 @@ div.container.info-container.workout-title-container{
 /* -------------------------workout.html styling ------------------------- */
 
 /* -------------------------------------addWorkout.html styling------------------------------------------------- */
-.exercise-title{
+.exercise-title {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
 }
 
-.bi.bi-x-square-fill{
+.bi.bi-x-square-fill {
     font-size: xx-large;
     color: #FF7B00;
     opacity: 50%;
     cursor: pointer;
 }
 
-.bi.bi-x-square-fill:hover{
+.bi.bi-x-square-fill:hover {
     opacity: 100%;
     cursor: pointer;
 }
 
-.addInput.set:last-child{
+.addInput.set:last-child {
     vertical-align: middle;
 
 }
 
-.w-minus{
+.w-minus {
     background-color: #2e2e2f;
     border: none;
 }
 
-.w-plus{
+.w-plus {
     background-color: #2e2e2f;
-    border: none; 
+    border: none;
 }
-.bi-dash-circle-dotted{
+
+.bi-dash-circle-dotted {
     color: #FF7B00;
 }
 
-.bi-plus-circle-dotted{
+.bi-plus-circle-dotted {
     color: #FF7B00;
 }
 
-.preview-set span:last-child{
+.preview-set span:last-child {
     opacity: 1 !important;
 }
 
@@ -304,15 +307,15 @@ div.container.info-container.workout-title-container{
     justify-content: center;
     background-color: #242425;
     margin: 20px auto;
-    padding: 20px;
+    padding: 40px;
     width: fit-content;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .info-container {
     background-color: #2e2e2f;
-    margin: 30px auto 0;
-    min-width: 1000px;
+    margin: 15px auto;
+    min-width: 800px;
     border-radius: 6px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     white-space: nowrap;
@@ -336,7 +339,7 @@ hr {
     border-color: #39393b;
 }
 
-.add-food-btn {
+.info-container .add-food-btn {
     font-size: 22px;
     padding: 0;
     margin-bottom: 10px;
@@ -352,11 +355,10 @@ hr {
 /* -------------------------search-bar-container styling ------------------------- */
 .search-bar-container {
     width: 50%;
-    margin: 20px auto;
+    margin: 10px auto;
     display: flex;
     justify-content: center;
-    margin-top: 30px;
-    margin-bottom: 30px;
+
 
 }
 
@@ -373,12 +375,12 @@ hr {
 }
 
 .servings-box {
-    padding: 0 40px;
+    padding-left: 90px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
+    justify-content: space-between;
+    height: 100%;
+    /* This will make the container take up the full height available to it */
 }
 
 
@@ -397,7 +399,9 @@ label[for="servings"] {
     display: flex;
     flex-direction: column;
     min-width: 500px;
-    min-height: 600px;
+    min-height: 200px;
+    position: relative;
+
 }
 
 .top-container {
@@ -417,14 +421,15 @@ label[for="servings"] {
 
 .search-bar {
     flex-grow: 1;
-    margin-right: 10px;
+    margin: 10px;
+    padding: 20px;
     background-color: #2e2e2f;
     border: none;
     outline: none;
     color: #fff;
     height: 50px;
     font-size: 24px;
-
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.09);
 }
 
 .parent-container {
@@ -469,7 +474,14 @@ label[for="servings"] {
     margin-bottom: 20px;
 }
 
+.create-food-btn {
+    margin-top: 140px;
+    /* This will push the button towards the middle */
+}
 
+.servings-box .add-food-btn {
+    margin-top: 100px;
+}
 
 .nutrition-value {
     text-align: right;
@@ -494,6 +506,13 @@ label[for="servings"] {
     border-radius: 4px;
     width: 400px;
     min-width: 40%;
+    transition: transform 0.17s ease-in-out;
+
+}
+
+.search-results-container:hover {
+    transform: scale(1.05);
+    background-color: rgba(255, 123, 0, 0.45);
 
 }
 
@@ -525,12 +544,74 @@ label[for="servings"] {
 
 .my-foods-btn {
     margin-top: 20px;
-    /* Adjust this value as needed */
 }
 
 .submit-btn {
     margin-top: 60px;
     bottom: 0;
+}
+
+
+
+.page-title {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.page-description {
+    margin: 0px 20px;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    width: 1000px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.submit-btn {
+    margin: 0 auto;
+}
+
+#create-food-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+
+.input-container {
+    display: flex;
+    align-items: center;
+    width: 50vw;
+    height: 100%;
+    box-sizing: border-box;
+    margin: 5px 10px;
+}
+
+.food-input-label {
+    width: 100px;
+    text-align: left;
+    font-size: 22px;
+}
+
+.input-container input[type="text"] {
+    margin: 10px auto;
+    background-color: #39393b;
+    width: 300px;
+    height: 30px;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    padding: 0;
+    border-radius: 2px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    color: #fff;
+    padding: 0 10px;
 }
 
 /* --------------------------addFood.html styling ------------------------- */

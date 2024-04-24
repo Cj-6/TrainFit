@@ -89,9 +89,9 @@ def nutrition():
     return render_template('nutrition.html', active_page='nutrition')
 
 
-@app.get('/addFood')
-def add_food():
-    return render_template('addFood.html', current_page='addFood', active_page='nutrition', results={})
+@app.get('/foodInfo')
+def food_info():
+    return render_template('foodInfo.html', current_page='foodInfo', active_page='nutrition', results={})
 
 @app.post('/nutrition')
 def save_food():
@@ -118,7 +118,7 @@ def signin():
 def add_exercise():
     return render_template('addWorkout.html', active_page='workout')
 
-print('test')
+
 
 @app.get('/search')
 def search():
@@ -130,19 +130,33 @@ def search():
             if q.lower() in food_name.lower():
                 results[food_name] = food_info
 
-    # gets the current page based on the referrer URL
-    referrer = request.referrer
-    if 'addFood' in referrer:
-        current_page = 'addFood'
-    elif 'myFoods' in referrer:
-        current_page = 'myFoods'
-    else:
-        current_page = ''
 
-    return render_template("searchResults.html", results=results, current_page=current_page)
+
+    return render_template("searchResults.html", results=results)
+
 
 
 @app.get('/myFoods')
 def show_my_foods():
     return render_template('myFoods.html')
+
+@app.get('/createFood')
+def create_food():
+    return render_template('createFood.html')
+
+@app.post('/createFoodPost')
+def create_food_post():
+    name = request.form.get('name')
+    calories = request.form.get('calories')
+    total_fat = request.form.get('total-fat')
+    saturated_fat = request.form.get('saturated-fat')
+    trans_fat = request.form.get('trans-fat')
+    cholesterol = request.form.get('cholesterol')
+    sodium = request.form.get('sodium')
+    carbohydrates = request.form.get('carbohydrates')
+    sugars = request.form.get('sugars')
+    protein = request.form.get('protein')
+    
+
+    return render_template('foodInfo.html')
 
