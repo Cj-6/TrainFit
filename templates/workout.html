@@ -3,6 +3,26 @@
 {% block content %}
 
 
+<div class="calendar-container">
+    
+<div class="calendar-sub-container">
+        <div class="left-arrow">
+            <i class="bi bi-chevron-left"></i>
+        </div>
+
+        <div class="date">
+            <input type="date" id="calendar" name="calendar">
+        </div>
+
+        <div class="right-arrow">
+            <i class="bi bi-chevron-right"></i>
+        </div>
+
+    </div>
+</div>
+
+
+
 <div class="parent-container addworkout-btn">
 
 <form method="GET" action="/addWorkout">
@@ -15,7 +35,7 @@
 
 </div>
 
-<div class="parent-container">
+<div class="parent-container workout">
 
     <div class="container info-container workout-title-container">
         <h3 class="workout-name">Workout Name</h3>
