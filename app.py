@@ -1,5 +1,10 @@
 from dotenv import load_dotenv
-from flask import Flask, render_template, session, redirect, url_for, request
+from flask import Flask, render_template, session, redirect, url_for, request, abort
+import os
+
+from repositories import user_repository
+
+load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = 'bigsecretvibes'
@@ -160,3 +165,14 @@ def create_food_post():
 
     return render_template('foodInfo.html')
 
+@app.post('/signup')
+def signup():
+    username = request.form.get('username')
+    password = request.form.get('password')
+    if not username or not password:
+        abort(400)
+    does_user_exist = user_repository.does_username_exist(username)
+    if does_user_exist:
+        abort(400)
+    user_repository.create_user(username)
+    return redirect('/profile.html')
