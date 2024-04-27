@@ -3,6 +3,7 @@ from flask import Flask, render_template, session, redirect, url_for, request, a
 import os
 
 from repositories import user_repository
+from repositories.food_repo import search_food
 
 load_dotenv()
 
@@ -85,7 +86,6 @@ food_dict = {
 
 @app.get('/')
 def index():
-    session['num_exercises'] = 3
     return render_template('index.html', active_page='home')
 
 
@@ -124,8 +124,6 @@ def signin():
 def add_exercise():
     return render_template('addWorkout.html', active_page='workout')
 
-
-
 @app.get('/search')
 def search():
     q = request.args.get('q')
@@ -148,6 +146,8 @@ def create_food():
 @app.get("/chat")
 def chat():
     return render_template("chat.html")
+
+
 
 
 @app.post('/createFoodPost')
