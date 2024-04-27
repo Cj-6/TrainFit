@@ -133,8 +133,10 @@ input[type="date"]:hover::-webkit-calendar-picker-indicator {
 }
 
 div.container.info-container.workout-title-container{
-    margin-top: 0;
-    padding-top: 0;
+    margin: 0 auto;
+    padding-top: 12px;
+    padding-bottom: 5px;
+    
 }
 
 .parent-container.addworkout-btn{
@@ -193,7 +195,27 @@ div.container.info-container.workout-title-container{
 
 .addInput {
     background-color: #575757;
-    border: 2px solid rgb(51, 51, 51)
+    border: none;    
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.09);
+
+}
+
+.workout-title {
+
+}
+
+.exercise-name {
+    min-width: 130px;
+    font-size: 22px;
+}
+
+.exercise-name:focus {
+    font-size: 20px;
+}
+
+.addInput.exercise{
+    width: 150px;
+    height: 100px;
 }
 
 .addInput::placeholder {
@@ -257,6 +279,8 @@ div.container.info-container.workout-title-container{
 .w-minus {
     background-color: #2e2e2f;
     border: none;
+    margin: 0; 
+    
 }
 
 .w-plus {
@@ -282,6 +306,18 @@ div.container.info-container.workout-title-container{
 
 .parent-container.addworkout{
     min-height: 0 !important;
+    width: fit-content;
+}
+
+
+.set-container input,
+.preview-set input{
+    width: 120px;
+}
+
+.set-container {
+    width: fit-content;
+    margin: 0 auto;
 }
 
 
