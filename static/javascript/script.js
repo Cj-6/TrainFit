@@ -1,16 +1,14 @@
-
 // ---------------------- add workout page -----------------------------------
 
-
-
-// adds a new container for an exercise 
-const addExerciseBtn = document.querySelector('.d-flex.justify-content-center.align-items-center');
+// adds a new container for an exercise
+const addExerciseBtn = document.querySelector(
+  ".d-flex.justify-content-center.align-items-center"
+);
 
 // event listener added to the addExercise button
-addExerciseBtn.addEventListener('click', function() {
-   
-    // variable pointing to the html that is going to be added everytime the addExercise button is clicked, the code is just copy and pasted from the addWorkout page 
-    const html = `<div class="exercise-container">
+addExerciseBtn.addEventListener("click", function () {
+  // variable pointing to the html that is going to be added everytime the addExercise button is clicked, the code is just copy and pasted from the addWorkout page
+  const html = `<div class="exercise-container">
         
     <div class="container info-container">
         
@@ -95,38 +93,41 @@ addExerciseBtn.addEventListener('click', function() {
 </div>
     `;
 
-    // grabbing the container that holds all of the exercise containers
-    const allExerciseContainer = document.querySelector('.all-exercises-container');
+  // grabbing the container that holds all of the exercise containers
+  const allExerciseContainer = document.querySelector(
+    ".all-exercises-container"
+  );
 
-    // inserting the html variable with our boiler plate exercise container code right before the end of the allExerciseContainer, 
-    allExerciseContainer.insertAdjacentHTML('beforeend', html);
+  // inserting the html variable with our boiler plate exercise container code right before the end of the allExerciseContainer,
+  allExerciseContainer.insertAdjacentHTML("beforeend", html);
 });
 
 // deletes an exercise
-document.addEventListener('click', function(event) {
-    
-    // using if statement to see if the click matches the button instead of adding the listener to all buttons because exercise containers can be dynamically added so this approach is more dynamic to accomodate that
-    if(event.target.matches('.bi.bi-x-square-fill')) {
-        const exerciseContainer = event.target.closest('.exercise-container');
-        
-        // removes exercise container that is closest to the click event    
-        exerciseContainer.remove();
-    }
+document.addEventListener("click", function (event) {
+  // using if statement to see if the click matches the button instead of adding the listener to all buttons because exercise containers can be dynamically added so this approach is more dynamic to accomodate that
+  if (event.target.matches(".bi.bi-x-square-fill")) {
+    const exerciseContainer = event.target.closest(".exercise-container");
+
+    // removes exercise container that is closest to the click event
+    exerciseContainer.remove();
+  }
 });
 
 //  adds a set
-document.addEventListener('click', function(event){
-    
-    // checking if click matches the addSet button, again for a more dynamic approach with the add buttons
-    if(event.target.matches('.bi.bi-plus-circle-dotted')){
-        const currentExerciseContainer = event.target.closest('.exercise-container');
-        const repDivElement = event.target.closest('div');
-        
-        // counting the number of set containers including the one that is about to be added so we can use it to dynamically name the set numbers when displaying them
-        const setNumber = currentExerciseContainer.querySelectorAll('.set-container').length + 1;
-    
+document.addEventListener("click", function (event) {
+  // checking if click matches the addSet button, again for a more dynamic approach with the add buttons
+  if (event.target.matches(".bi.bi-plus-circle-dotted")) {
+    const currentExerciseContainer = event.target.closest(
+      ".exercise-container"
+    );
+    const repDivElement = event.target.closest("div");
+
+    // counting the number of set containers including the one that is about to be added so we can use it to dynamically name the set numbers when displaying them
+    const setNumber =
+      currentExerciseContainer.querySelectorAll(".set-container").length + 1;
+
     // variable with html code to be used to add to the document, pertaining to a new set
-        const newSetHTML = `
+    const newSetHTML = `
     <div class="set-container">
     <span>Set ${setNumber}:
         <input class="addInput set" type="number" name="set-${setNumber}-weight"  placeholder="Weight">LBS
@@ -141,42 +142,84 @@ document.addEventListener('click', function(event){
 
         <span><button class="w-minus" type="button"><i class="bi bi-dash-circle-dotted"></i></button></span>
 </div>`;
-    
+
     // adds new set code before the preview set begins
-    repDivElement.insertAdjacentHTML('beforebegin', newSetHTML);
+    repDivElement.insertAdjacentHTML("beforebegin", newSetHTML);
 
     // updates the minus button after a set is added, puts the minus button at the last set
-    const allSets = currentExerciseContainer.querySelectorAll('.set-container');
+    const allSets = currentExerciseContainer.querySelectorAll(".set-container");
     const oldLastSet = allSets[allSets.length - 2];
-    const minusButton = oldLastSet.querySelector('.w-minus');
-    minusButton.classList.toggle('hidden');
-    }
+    const minusButton = oldLastSet.querySelector(".w-minus");
+    minusButton.classList.toggle("hidden");
+  }
 });
 
 // removes a set
-document.addEventListener('click', function(event){
-   
-    // checking if the click event matches the minus button 
-    if(event.target.matches('.bi.bi-dash-circle-dotted')){
-        const currentExerciseContainer = event.target.closest('.exercise-container');
-        const targetedDeletedElement = event.target.closest('.set-container');
-        if(targetedDeletedElement){
-            targetedDeletedElement.remove();
-        }
-    
-        //    updating the minus button to the last child of the exercise container
-        const allSets = currentExerciseContainer.querySelectorAll('.set-container');
-        if(allSets.length > 0) {
-            const lastSet = allSets[allSets.length - 1];
-            const minusButton = lastSet.querySelector('.w-minus');
-            minusButton.classList.toggle('hidden');
-        }
-        
+document.addEventListener("click", function (event) {
+  // checking if the click event matches the minus button
+  if (event.target.matches(".bi.bi-dash-circle-dotted")) {
+    const currentExerciseContainer = event.target.closest(
+      ".exercise-container"
+    );
+    const targetedDeletedElement = event.target.closest(".set-container");
+    if (targetedDeletedElement) {
+      targetedDeletedElement.remove();
     }
+
+    //    updating the minus button to the last child of the exercise container
+    const allSets = currentExerciseContainer.querySelectorAll(".set-container");
+    if (allSets.length > 0) {
+      const lastSet = allSets[allSets.length - 1];
+      const minusButton = lastSet.querySelector(".w-minus");
+      minusButton.classList.toggle("hidden");
+    }
+  }
 });
-
-
-
 
 // ------------------------- add workout page -----------------------------
 
+
+
+
+google.charts.load("current", { packages: ["corechart", "bar"] });
+google.charts.setOnLoadCallback(drawBasic);
+
+function drawBasic() {
+  var data = new google.visualization.DataTable();
+  data.addColumn("timeofday", "Time of Day");
+  data.addColumn("number", "Motivation Level");
+
+  data.addRows([
+    [{ v: [8, 0, 0], f: "8 am" }, 1],
+    [{ v: [9, 0, 0], f: "9 am" }, 2],
+    [{ v: [10, 0, 0], f: "10 am" }, 3],
+    [{ v: [11, 0, 0], f: "11 am" }, 4],
+    [{ v: [12, 0, 0], f: "12 pm" }, 5],
+    [{ v: [13, 0, 0], f: "1 pm" }, 6],
+    [{ v: [14, 0, 0], f: "2 pm" }, 7],
+    [{ v: [15, 0, 0], f: "3 pm" }, 8],
+    [{ v: [16, 0, 0], f: "4 pm" }, 9],
+    [{ v: [17, 0, 0], f: "5 pm" }, 10],
+  ]);
+
+  var options = {
+    title: "Motivation Level Throughout the Day",
+    hAxis: {
+      title: "Time of Day",
+      format: "h:mm a",
+      viewWindow: {
+        min: [7, 30, 0],
+        max: [17, 30, 0],
+      },
+    },
+    vAxis: {
+      title: "Rating (scale of 1-10)",
+    },
+  };
+
+  var chart = new google.visualization.ColumnChart(
+    document.getElementById("chart_div")
+  );
+
+  chart.draw(data, options);
+}

@@ -3,8 +3,10 @@ from flask import Flask, render_template, session, redirect, url_for, request, a
 import os
 
 from repositories import user_repository
+from repositories.food_repo import search_food
 
 load_dotenv()
+
 
 app = Flask(__name__)
 app.secret_key = 'bigsecretvibes'
@@ -84,7 +86,6 @@ food_dict = {
 
 @app.get('/')
 def index():
-    session['num_exercises'] = 3
     return render_template('index.html', active_page='home')
 
 
@@ -123,20 +124,12 @@ def signin():
 def add_exercise():
     return render_template('addWorkout.html', active_page='workout')
 
-
-
 @app.get('/search')
 def search():
     q = request.args.get('q')
     results = {}
-
     if q:
-        for food_name, food_info in food_dict.items():
-            if q.lower() in food_name.lower():
-                results[food_name] = food_info
-
-
-
+        results = search_food(q)
     return render_template("searchResults.html", results=results)
 
 
@@ -148,6 +141,14 @@ def show_my_foods():
 @app.get('/createFood')
 def create_food():
     return render_template('createFood.html')
+
+
+@app.get("/chat")
+def chat():
+    return render_template("chat.html")
+
+
+
 
 @app.post('/createFoodPost')
 def create_food_post():

@@ -90,59 +90,65 @@ input[type="date"]:hover::-webkit-calendar-picker-indicator {
     filter: invert(33%) sepia(40%) saturate(2462%) hue-rotate(8deg) brightness(100%) contrast(101%);
 }
 
-#calendar{
+#calendar {
     width: 20vw;
     height: 70px;
     text-align: center;
     font-size: 50px;
     background: rgba(51, 51, 51, 0.9);
     color: white;
-   
+
 }
 
 
-.calendar-container{
+.calendar-container {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.calendar-sub-container{
+.calendar-sub-container {
     display: flex;
     flex-direction: row;
     width: 75%;
     height: 10vh;
     align-items: center;
     justify-content: center;
-   
+
 }
 
-.left-arrow, .right-arrow{
+.left-arrow,
+.right-arrow {
     font-size: 100px;
     color: #FF7B00;
     opacity: 0.3;
     cursor: pointer;
 }
 
-.left-arrow:hover, .right-arrow:hover{
+.left-arrow:hover,
+.right-arrow:hover {
     opacity: 1;
 }
 
-.workout{
+.workout {
     margin-top: 0 !important;
 }
 
-div.container.info-container.workout-title-container{
+div.container.info-container.workout-title-container {
     margin: 0 auto;
     padding-top: 12px;
     padding-bottom: 5px;
-    
 }
 
-.parent-container.addworkout-btn{
-   min-width: 0 !important;
-   min-height: 0 !important;
-   height: 10vh !important;
+div.container.info-container.workout-title-container {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.parent-container.addworkout-btn {
+    min-width: 0 !important;
+    min-height: 0 !important;
+    height: 10vh !important;
 }
 
 .addworkout-btn {
@@ -195,14 +201,12 @@ div.container.info-container.workout-title-container{
 
 .addInput {
     background-color: #575757;
-    border: none;    
+    border: none;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.09);
 
 }
 
-.workout-title {
-
-}
+.workout-title {}
 
 .exercise-name {
     min-width: 130px;
@@ -213,7 +217,7 @@ div.container.info-container.workout-title-container{
     font-size: 20px;
 }
 
-.addInput.exercise{
+.addInput.exercise {
     width: 150px;
     height: 100px;
 }
@@ -279,8 +283,8 @@ div.container.info-container.workout-title-container{
 .w-minus {
     background-color: #2e2e2f;
     border: none;
-    margin: 0; 
-    
+    margin: 0;
+
 }
 
 .w-plus {
@@ -300,18 +304,18 @@ div.container.info-container.workout-title-container{
     opacity: 1 !important;
 }
 
-.hidden{
+.hidden {
     display: none;
 }
 
-.parent-container.addworkout{
+.parent-container.addworkout {
     min-height: 0 !important;
     width: fit-content;
 }
 
 
 .set-container input,
-.preview-set input{
+.preview-set input {
     width: 120px;
 }
 
@@ -680,7 +684,8 @@ label[for="servings"] {
 .signin-btn {
     background-color: #FF7B00;
     border-color: #FF7B00;
-    color: white; /* Set the default text color */
+    color: white;
+    /* Set the default text color */
 }
 
 .signin-btn:hover,
@@ -729,3 +734,24 @@ label[for="servings"] {
 
 
 /* -------------------------profile.html styling ------------------------- */
+
+
+/* --------------------------sigin.html styling ----------------------------- */
+
+
+/* --------------------------chat.html styling ------------------------- */
+
+#chatBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 80vh;
+}
+
+form#chatInput {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* --------------------------chat.html styling ------------------------- */
