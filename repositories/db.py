@@ -9,4 +9,4 @@ def get_pool():
         pool = ConnectionPool (
         conninfo=os.getenv('DATABASE_URL'),
     )
-    return pool        
+    return pool

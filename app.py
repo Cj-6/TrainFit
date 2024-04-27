@@ -1,5 +1,7 @@
 from dotenv import load_dotenv
 from flask import Flask, render_template, session, redirect, url_for, request
+from repositories.food_repo import search_food
+
 
 app = Flask(__name__)
 app.secret_key = 'bigsecretvibes'
@@ -124,14 +126,8 @@ def add_exercise():
 def search():
     q = request.args.get('q')
     results = {}
-
     if q:
-        for food_name, food_info in food_dict.items():
-            if q.lower() in food_name.lower():
-                results[food_name] = food_info
-
-
-
+        results = search_food(q)
     return render_template("searchResults.html", results=results)
 
 
@@ -143,6 +139,12 @@ def show_my_foods():
 @app.get('/createFood')
 def create_food():
     return render_template('createFood.html')
+
+
+@app.get("/chat")
+def chat():
+    return render_template("chat.html")
+
 
 @app.post('/createFoodPost')
 def create_food_post():
