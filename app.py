@@ -1,15 +1,20 @@
 from dotenv import load_dotenv
 from flask import Flask, render_template, session, redirect, url_for, request, abort
 import os
+import repositories
+from repositories import db
 
-from repositories import user_repository
+from repositories import user_repository, workout_repo
 from repositories.food_repo import search_food
+from repositories.workout_repo import *
 
 load_dotenv()
 
 
 app = Flask(__name__)
 app.secret_key = 'bigsecretvibes'
+
+
 
 
 # This is a test dictionary for the food items
@@ -86,6 +91,8 @@ food_dict = {
 
 @app.get('/')
 def index():
+    all_workouts = workout_repo.get_all_workouts()
+    print(all_workouts)
     return render_template('index.html', active_page='home')
 
 

@@ -6,6 +6,7 @@ def get_all_workouts():
     with pool.connection() as conn:
         with conn.cursor(row_factory=dict_row) as cursor:
             cursor.execute('SELECT * FROM workout')
-        return cursor.fetchall()
+            workouts = cursor.fetchall()
+        return workouts
 
 # base function add as needed and fix what you need
