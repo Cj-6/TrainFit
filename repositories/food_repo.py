@@ -5,17 +5,21 @@ def get_all_foods():
     pool = get_pool()
     with pool.connection() as conn:
         with conn.cursor(row_factory=dict_row) as cursor:
-            cursor.execute('SELECT * FROM foods')
-        return cursor.fetchall()
-    
+            cursor.execute('SELECT * FROM food')
+            return cursor.fetchall()
+
 def search_food(search_term):
     pool = get_pool()
     with pool.connection() as conn:
         with conn.cursor(row_factory=dict_row) as cursor: 
-            cursor.execute("SELECT * FROM foods WHERE name LIKE %s", ('%' + search_term + '%',))
-        return cursor.fetchall()
+            cursor.execute("SELECT * FROM food WHERE name ILIKE %s", ('%' + search_term + '%',))
+            return cursor.fetchall() 
 
+def get_food_by_id(food_id):
+    pool = get_pool()
+    with pool.connection() as conn:
+        with conn.cursor(row_factory=dict_row) as cursor: 
+            cursor.execute("SELECT * FROM food WHERE foodid = %s", (food_id,))
+            return cursor.fetchone()  # fetch the food with the given ID
 
-
-# base function add as needed and fix what you need
 

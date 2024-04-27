@@ -1,54 +1,51 @@
 {% extends "_layout.html" %}
 {% block content %}
 <div class="search-bar-container">
-    <input type="text" name="q" class="search-bar" hx-get="/search" hx-trigger="keyup changed delay:50ms"
+    <input type="text" name="q" class="search-bar" hx-get="/search" hx-trigger="keyup changed delay:20ms"
         hx-target="#results" placeholder="Search for your food">
 </div>
 <div id="results"></div>
 <div class="parent-container">
     <div class="top-container">
         <div class="nutrition-label">
+            <h1>{{ food.name }}</h1>
             <h4>Nutrition Values</h4>
             <div class="nutrition-facts">
-                <div class="serving-size">
-                    <span class="nutrition-label">Servings: </span>
-                    <span class="nutrition-value">1</span>
-                </div>
                 <div class="nutrition-item">
                     <span class="nutrition-label">Calories:</span>
-                    <span class="nutrition-value">520</span>
+                    <span class="nutrition-value">{{ food.calories }}</span>
                 </div>
                 <div class="nutrition-item">
                     <span class="nutrition-label">Total Fat:</span>
-                    <span class="nutrition-value">3</span>
+                    <span class="nutrition-value">{{ food.total_fat }}</span>
                 </div>
                 <div class="nutrition-item">
                     <span class="nutrition-label">Saturated Fat:</span>
-                    <span class="nutrition-value">1</span>
+                    <span class="nutrition-value">{{ food.saturated_fat }}</span>
                 </div>
                 <div class="nutrition-item">
                     <span class="nutrition-label">Trans Fat:</span>
-                    <span class="nutrition-value">2</span>
+                    <span class="nutrition-value">{{ food.trans_fat }}</span>
                 </div>
                 <div class="nutrition-item">
                     <span class="nutrition-label">Cholesterol:</span>
-                    <span class="nutrition-value">13</span>
+                    <span class="nutrition-value">{{ food.cholesterol }}</span>
                 </div>
                 <div class="nutrition-item">
                     <span class="nutrition-label">Sodium:</span>
-                    <span class="nutrition-value">120</span>
+                    <span class="nutrition-value">{{ food.sodium }}</span>
                 </div>
                 <div class="nutrition-item">
                     <span class="nutrition-label">Total Carbohydrates:</span>
-                    <span class="nutrition-value">33</span>
+                    <span class="nutrition-value">{{ food.carbohydrates }}</span>
                 </div>
                 <div class="nutrition-item">
                     <span class="nutrition-label">Sugars:</span>
-                    <span class="nutrition-value">35</span>
+                    <span class="nutrition-value">{{ food.sugars }}</span>
                 </div>
                 <div class="nutrition-item">
                     <span class="nutrition-label">Protein:</span>
-                    <span class="nutrition-value">20</span>
+                    <span class="nutrition-value">{{ food.protein }}</span>
                 </div>
             </div>
         </div>
