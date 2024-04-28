@@ -38,10 +38,10 @@
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
+                <li class="nav-item {% if active_page == 'signin' %}active{% endif %}">
                     <a class="nav-link" href="/signin" style="border: none;">Sign In</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {% if active_page == 'signup' %}active{% endif %}">
                     <a class="nav-link" href="/signup" style="border: 1px solid white;">Sign Up</a>
                 </li>
             </ul>
