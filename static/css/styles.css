@@ -402,6 +402,13 @@ hr {
 
 }
 
+
+a.food-link {
+    display: block;
+    text-decoration: none;
+    width: fit-content;
+}
+
 /* -------------------------search-bar-container styling ------------------------- */
 
 .search-bar {
@@ -470,6 +477,12 @@ label[for="servings"] {
     height: 50px;
     font-size: 24px;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.09);
+}
+
+.search-result-link {
+    display: block;
+    width: fit-content;
+    margin: 0 auto;
 }
 
 .parent-container {
@@ -544,7 +557,7 @@ label[for="servings"] {
     padding: 4px;
     margin: 5px auto;
     border-radius: 4px;
-    width: 400px;
+    width: 600px;
     min-width: 40%;
     transition: transform 0.17s ease-in-out;
 
@@ -552,7 +565,7 @@ label[for="servings"] {
 
 .search-results-container:hover {
     transform: scale(1.05);
-    background-color: rgba(255, 123, 0, 0.45);
+    background-color: rgba(255, 123, 0, 0.626);
 
 }
 
