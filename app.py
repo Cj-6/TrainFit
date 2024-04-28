@@ -6,6 +6,7 @@ from repositories import user_repository, workout_repo
 from repositories.food_repo import *
 from repositories.workout_repo import *
 
+
 load_dotenv()
 
 
@@ -96,9 +97,9 @@ def search():
 def show_my_foods():
     return render_template('myFoods.html')
 
-@app.get('/createFood')
-def create_food():
-    return render_template('createFood.html')
+@app.get('/addFood')
+def add_food():
+    return render_template('createNewFood.html')
 
 
 @app.get("/chat")
@@ -110,19 +111,22 @@ def chat():
 
 @app.post('/createFoodPost')
 def create_food_post():
-    name = request.form.get('name')
-    calories = request.form.get('calories')
-    total_fat = request.form.get('total-fat')
-    saturated_fat = request.form.get('saturated-fat')
-    trans_fat = request.form.get('trans-fat')
-    cholesterol = request.form.get('cholesterol')
-    sodium = request.form.get('sodium')
-    carbohydrates = request.form.get('carbohydrates')
-    sugars = request.form.get('sugars')
-    protein = request.form.get('protein')
-    
+    food_data = {
+        'name': request.form.get('name'),
+        'calories': request.form.get('calories'),
+        'total_fat': request.form.get('total_fat'),
+        'saturated_fat': request.form.get('saturated_fat'),
+        'trans_fat': request.form.get('trans_fat'),
+        'cholesterol': request.form.get('cholesterol'),
+        'sodium': request.form.get('sodium'),
+        'carbohydrates': request.form.get('carbohydrates'),
+        'sugars': request.form.get('sugars'),
+        'protein': request.form.get('protein')
+    }
+    new_food = create_food(food_data)
 
-    return render_template('foodInfo.html')
+    return render_template('foodInfo.html', food=food_data)
+
 
 @app.post('/signup')
 def signup():
