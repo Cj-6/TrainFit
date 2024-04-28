@@ -38,7 +38,7 @@
 <div class="parent-container workout">
 
     <div class="container info-container workout-title-container">
-        <h3 class="workout-name">Workout Name</h3>
+        <h3 class="workout-name">workout name  </h3>
     </div>
         
     <div class="container info-container">
@@ -72,6 +72,27 @@
 </div>
 </div>
 
+{% for workout in workouts %}
+    <div class="parent-container workout">
+        <div class="container info-container workout-title-container">
+            <h3 class="workout-name">{{ workout.name }}</h3>
+        </div>
+        <div class="container info-container">
+            <h2 class="info-container-title">{{ workout.exercisename }}</h2>
+            <hr>
+            <!-- items will be dynamically added here -->
+            {% for set in workout.set %}
+                <div>
+                    <span>Set {{ loop.index }}:</span>
+                    <span>{{ set.weight }} Lbs /</span>
+                    <span>{{ set.reps }} Reps /</span>
+                    <span>RPE {{ set.rpe }}</span>
+                    <span>{{ set.note }}</span>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endfor %}
 
 
 
@@ -80,4 +101,5 @@
 
 
 
+<script src="{{ url_for('static', filename='javascript/script.js') }}"></script>
 {% endblock %}

@@ -718,7 +718,7 @@ label[for="servings"] {
 
 .profile-card {
     background-color: #2e2e2f;
-    color: white;
+    color: black !important;
 }
 
 .profile-card-header {
@@ -726,11 +726,23 @@ label[for="servings"] {
 }
 
 .profile-card-title {
-    color: #FF7B00;
+    color: #FF7B00 !important;
 }
 
 .profile-card-text {
     color: white;
+}
+.card-body{
+    background-color: #2e2e2f;
+    color: white;
+}
+
+.card-header{
+    
+}
+
+.text-center{
+    background-color: black;
 }
 
 .profile-btn {
