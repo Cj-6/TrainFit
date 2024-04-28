@@ -1,8 +1,6 @@
 from dotenv import load_dotenv
-from flask import Flask, render_template, session, redirect, url_for, request, abort
-import os
-import repositories
-from repositories import db
+from flask import Flask, render_template, redirect, request, url_for, session, abort
+
 
 from repositories import user_repository, workout_repo
 from repositories.food_repo import search_food
@@ -91,8 +89,6 @@ food_dict = {
 
 @app.get('/')
 def index():
-    all_workouts = workout_repo.get_all_workouts()
-    print(all_workouts)
     return render_template('index.html', active_page='home')
 
 
@@ -116,16 +112,41 @@ def save_food():
 
 @app.get('/workout')
 def workout():
-    return render_template('workout.html', active_page = 'workout')
+    userid = session.get('user_id')
+    date = request.args.get('date')
+    print(userid, date)  
+    workouts = workout_repo.get_workout_by_userid_and_date(userid, date)
+
+    return render_template('workout.html', active_page = 'workout', workouts=workouts )
 
 
 @app.get('/profile')
 def profile():
-    return render_template('profile.html', active_page='profile')
+    user_id = session.get('user_id')
+    if user_id is None:
+        return redirect(url_for('signin'))
+    
+    user = user_repository.get_user_by_id(user_id)
+    if user is None:
+        return redirect('error.html', message='User not found')
+    return render_template('profile.html', name=user['first_name'])
 
 @app.get('/signin')
 def signin():
     return render_template('signin.html', active_page='signin')
+
+@app.post('/signin')
+def signin_post():
+    email = request.form.get('email')
+    password = request.form.get('password')
+    if user_repository.validate_user(email, password):
+        # The email and password are valid, create a new session
+        session['userid'] = user_repository.get_user_id_by_email(email)
+        # Redirect the user to the profile page
+        return redirect(url_for('profile'))
+    # The email or password is invalid, show an error message
+    return render_template('signin.html', error='Invalid email or password')
+
 
 @app.get('/addWorkout')
 def add_exercise():

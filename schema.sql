@@ -51,9 +51,3 @@ CREATE TABLE Food (
     protein VARCHAR(255)
 );
 
-CREATE TABLE MealFood (
-    mealFoodID SERIAL PRIMARY KEY,
-    meal_name INT REFERENCES Meal(meal_name),
-    FoodID INT REFERENCES Food(FoodID),
-    servingSize INT
-);

@@ -3,37 +3,71 @@ from repositories.db import get_pool
 from psycopg.rows import dict_row
 
 
-def does_username_exist(username: str) -> bool:
+def get_userid_by_email(email: str):
     pool = get_pool()
     with pool.connection() as conn:
         with conn.cursor() as cur:
             cur.execute('''
                         SELECT
-                            user_id
+                            userID
                         FROM
-                            app_user
-                        WHERE username = %s
-                        ''', [username])
-            user_id = cur.fetchone()
-            return user_id is not None
+                            users
+                        WHERE email = %s
+                        ''', [email])
+            result = cur.fetchone()
+            if result is not None:
+                return result[0]
+    return None
 
-
-def create_user(username: str, password: str) -> dict[str, Any]:
+def validate_user(email: str, password: str) -> bool:
     pool = get_pool()
     with pool.connection() as conn:
         with conn.cursor() as cur:
             cur.execute('''
-                        INSERT INTO app_user (username, password)
+                        SELECT
+                            password
+                        FROM
+                            users
+                        WHERE email = %s
+                        ''', [email])
+            result = cur.fetchone()
+            if result is None:
+                # The email does not exist in the database
+                return False
+            stored_password = result[0]
+            return stored_password == password
+
+def does_username_exist(email: str) -> bool:
+    pool = get_pool()
+    with pool.connection() as conn:
+        with conn.cursor() as cur:
+            cur.execute('''
+                        SELECT
+                            email
+                        FROM
+                            users
+                        WHERE email = %s
+                        ''', [email])
+            userid = cur.fetchone()
+            return userid is not None
+
+
+def create_user(email: str, password: str) -> dict[str, Any]:
+    pool = get_pool()
+    with pool.connection() as conn:
+        with conn.cursor() as cur:
+            cur.execute('''
+                        INSERT INTO app_user (email, password)
                         VALUES (%s, %s)
-                        RETURNING user_id
-                        ''', [username, password]
+                        RETURNING userid
+                        ''', [first_name, password]
                         )
-            user_id = cur.fetchone()
-            if user_id is None:
+            userid = cur.fetchone()
+            if userid is None:
                 raise Exception('failed to create user')
             return {
-                'user_id': user_id,
-                'username': username
+                'userid': userid,
+                'first_name': first_name
             }
 
 
@@ -43,28 +77,28 @@ def get_user_by_username(username: str) -> dict[str, Any] | None:
         with conn.cursor(row_factory=dict_row) as cur:
             cur.execute('''
                         SELECT
-                            user_id,
-                            username,
+                            userid,
+                            first_name,
                             password AS hashed_password
                         FROM
-                            app_user
-                        WHERE username = %s
-                        ''', [username])
+                            users
+                        WHERE first_name = %s
+                        ''', [first_name])
             user = cur.fetchone()
             return user
 
 
-def get_user_by_id(user_id: int) -> dict[str, Any] | None:
+def get_user_by_id(userid: int) -> dict[str, Any] | None:
     pool = get_pool()
     with pool.connection() as conn:
         with conn.cursor(row_factory=dict_row) as cur:
             cur.execute('''
                         SELECT
-                            user_id,
-                            username
+                            userid,
+                            first_name
                         FROM
-                            app_user
-                        WHERE user_id = %s
-                        ''', [user_id])
+                            users
+                        WHERE userid = %s
+                        ''', [userid])
             user = cur.fetchone()
             return user
