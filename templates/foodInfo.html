@@ -1,8 +1,8 @@
 {% extends "_layout.html" %}
 {% block content %}
 <div class="search-bar-container">
-    <input type="text" name="q" class="search-bar" hx-get="/search" hx-trigger="keyup changed delay:20ms"
-        hx-target="#results" placeholder="Search for your food">
+    <input type="text" name="q" class="search-bar" autocomplete="off" hx-get="/search"
+        hx-trigger="keyup changed delay:20ms" hx-target="#results" placeholder="Search for your food">
 </div>
 <div id="results"></div>
 <div class="parent-container">
@@ -50,7 +50,7 @@
             </div>
         </div>
         <div class="servings-box">
-            <form action="/createFood" method="get">
+            <form action="/addFood" method="get">
                 <button type="submit" class="btn create-food-btn">Create Food</button>
             </form>
             <form action="/nutrition" method="post">
