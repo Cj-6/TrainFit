@@ -68,6 +68,10 @@ def profile():
 def signin():
     return render_template('signin.html', active_page='signin')
 
+@app.get('/signup')
+def signup():
+    return render_template('signup.html', active_page='signup')
+
 @app.post('/signin')
 def signin_post():
     email = request.form.get('email')
@@ -129,7 +133,7 @@ def create_food_post():
 
 
 @app.post('/signup')
-def signup():
+def signup_account():
     username = request.form.get('username')
     password = request.form.get('password')
     if not username or not password:

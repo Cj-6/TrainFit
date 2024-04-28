@@ -78,7 +78,10 @@ footer {
     margin-top: auto;
 }
 
-
+.index-page footer {
+    position: fixed;
+    bottom: 0;
+}
 
 /* -------------------------workout.html styling ------------------------- */
 input[type="date"]::-webkit-calendar-picker-indicator {
@@ -206,7 +209,6 @@ div.container.info-container.workout-title-container {
 
 }
 
-.workout-title {}
 
 .exercise-name {
     min-width: 130px;
@@ -705,6 +707,7 @@ label[for="servings"] {
 .signin-btn:focus {
     background-color: #d95c00;
     border-color: #d95c00;
+    color: white !important;
 }
 
 
@@ -735,14 +738,6 @@ label[for="servings"] {
 .card-body{
     background-color: #2e2e2f;
     color: white;
-}
-
-.card-header{
-    
-}
-
-.text-center{
-    background-color: black;
 }
 
 .profile-btn {
