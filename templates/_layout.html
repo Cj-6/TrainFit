@@ -11,6 +11,29 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <link rel="icon" href="/static/images/favicon-16x16.png" sizes="16x16" type="image/png">
     <link rel="icon" href="/static/images/favicon-32x32.png" sizes="16x16" type="image/png">
+    <style>
+        .alert {
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .alert-success {
+            text-align: center;
+            background-color: #dff0d8;
+            color: #3c763d;
+            border: 1px solid #d6e9c6;
+        }
+
+        .alert-danger {
+            text-align: center;
+            background-color: #f2dede;
+            color: #a94442;
+            border: 1px solid #ebccd1;
+        }
+    </style>
 </head>
 
 <body>
@@ -48,9 +71,31 @@
                     <a class="nav-link" href="/signup" style="border: 1px solid white;">Sign Up</a>
                 </li>
                 {% endif %}
+                {% if 'userID' in session %}
+                <li class="nav-item">
+                    <a class="nav-link logout-nav" href="/logout" style="border: 1px solid white;">Logout</a>
+                </li>
+                {% endif %}
             </ul>
         </div>
     </nav>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                {% for category, message in messages %}
+                <div class="alert alert-{{ category }}" role="alert">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% endwith %}
+
     {% block content %}{% endblock %}
     <footer>
         <span class="text-muted">© 2024 TRAINFIT. All rights reserved.</span>

@@ -1,5 +1,4 @@
-/* Body */
-
+/* Body Styles */
 body {
     background-color: #1d1e1e;
     color: white;
@@ -8,15 +7,16 @@ body {
     min-height: 100vh;
 }
 
+/* Page Title */
 .page-title {
     margin: 20px;
 }
 
+/* Navbar */
 .navbar-brand {
     margin-bottom: 0;
 }
 
-/* Nav */
 .navbar-nav .nav-item.active .nav-link {
     color: #FF7B00;
 }
@@ -42,8 +42,6 @@ body {
     color: #FF7B00;
 }
 
-
-
 /* Text */
 .description {
     max-width: 700px;
@@ -68,7 +66,7 @@ body {
     background-color: rgb(207, 114, 1);
 }
 
-
+/* Footer */
 footer {
     width: 100%;
     padding: 20px;
@@ -83,7 +81,8 @@ footer {
     bottom: 0;
 }
 
-/* -------------------------workout.html styling ------------------------- */
+/* Workout Styles */
+
 input[type="date"]::-webkit-calendar-picker-indicator {
     filter: invert(33%) sepia(40%) saturate(2462%) hue-rotate(8deg) brightness(50%) contrast(101%);
     cursor: pointer;
@@ -137,25 +136,11 @@ input[type="date"]:hover::-webkit-calendar-picker-indicator {
     margin-top: 0 !important;
 }
 
+/* Workout Title Container */
 div.container.info-container.workout-title-container {
     margin: 0 auto;
     padding-top: 12px;
     padding-bottom: 5px;
-}
-
-div.container.info-container.workout-title-container {
-    margin-top: 0;
-    padding-top: 0;
-}
-
-.parent-container.addworkout-btn {
-    min-width: 0 !important;
-    min-height: 0 !important;
-    height: 10vh !important;
-}
-
-.addworkout-btn {
-    width: 41.5vw !important;
 }
 
 .workout-name {
@@ -165,6 +150,7 @@ div.container.info-container.workout-title-container {
     height: 5vh;
 }
 
+/* Form Styles */
 .col form div {
     display: flex;
 }
@@ -189,7 +175,6 @@ div.container.info-container.workout-title-container {
     color: #FF7B00;
     opacity: 50%;
     font-size: 30px;
-
 }
 
 .btn:hover {
@@ -202,21 +187,11 @@ div.container.info-container.workout-title-container {
     max-width: 60%;
 }
 
+/* Add Input Styles */
 .addInput {
     background-color: #575757;
     border: none;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.09);
-
-}
-
-
-.exercise-name {
-    min-width: 130px;
-    font-size: 22px;
-}
-
-.exercise-name:focus {
-    font-size: 20px;
 }
 
 .addInput.exercise {
@@ -230,34 +205,40 @@ div.container.info-container.workout-title-container {
     opacity: 0.3;
 }
 
+/* Exercise Styles */
+.exercise-name {
+    min-width: 130px;
+    font-size: 22px;
+}
+
+.exercise-name:focus {
+    font-size: 20px;
+}
+
 .exercise {
     width: 10vw;
     height: 3vh;
 }
 
+/* Workout Submit Button Container */
 .workout-submit-button-container {
     display: flex;
     justify-content: center;
     margin-top: 0;
 }
 
+/* Add Workout Styles */
 .addworkout {
     margin-top: 5vh !important;
     margin-bottom: 2px !important;
 }
 
+/* Preview Set Styles */
 .preview-set {
     opacity: 0.2;
-
 }
 
-
-
-
-
-/* -------------------------workout.html styling ------------------------- */
-
-/* -------------------------------------addWorkout.html styling------------------------------------------------- */
+/* Exercise Title Styles */
 .exercise-title {
     display: flex;
     flex-direction: row;
@@ -265,6 +246,7 @@ div.container.info-container.workout-title-container {
     align-items: center;
 }
 
+/* Close Button Styles */
 .bi.bi-x-square-fill {
     font-size: xx-large;
     color: #FF7B00;
@@ -277,23 +259,25 @@ div.container.info-container.workout-title-container {
     cursor: pointer;
 }
 
+/* Set Container Styles */
 .addInput.set:last-child {
     vertical-align: middle;
-
 }
 
+/* Minus Button Styles */
 .w-minus {
     background-color: #2e2e2f;
     border: none;
     margin: 0;
-
 }
 
+/* Plus Button Styles */
 .w-plus {
     background-color: #2e2e2f;
     border: none;
 }
 
+/* Dash and Plus Circle Styles */
 .bi-dash-circle-dotted {
     color: #FF7B00;
 }
@@ -302,20 +286,23 @@ div.container.info-container.workout-title-container {
     color: #FF7B00;
 }
 
+/* Preview Set Styles */
 .preview-set span:last-child {
     opacity: 1 !important;
 }
 
+/* Hidden Styles */
 .hidden {
     display: none;
 }
 
+/* Parent Container Styles */
 .parent-container.addworkout {
     min-height: 0 !important;
     width: fit-content;
 }
 
-
+/* Set Container Input Styles */
 .set-container input,
 .preview-set input {
     width: 120px;
@@ -326,32 +313,195 @@ div.container.info-container.workout-title-container {
     margin: 0 auto;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* -------------------------------------addWorkout.html styling------------------------------------------------- */
-
-
-/* -------------------------nutrition.html styling ------------------------- */
+/* Parent Container Styles */
 .parent-container {
-    justify-content: center;
-    background-color: #242425;
-    margin: 20px auto;
-    padding: 40px;
-    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    min-width: 500px;
+    min-height: 200px;
+    position: relative;
+}
+
+/* Info Container Styles */
+.info-container {
+    background-color: #2e2e2f;
+    margin: 15px auto;
+    min-width: 800px;
+    border-radius: 6px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    white-space: nowrap;
+}
+
+/* Horizontal Rule Styles */
+.container hr {
+    border-width: 2px;
+}
+
+/* Info Container Title Styles */
+.info-container-title {
+    padding: 10px 0 0 0;
+}
+
+/* Servings and Calories Styles */
+#servings,
+#calories {
+    color: #aaa;
+}
+
+hr {
+    border-color: #39393b;
+}
+
+/* Add Food Button Styles */
+.info-container .add-food-btn {
+    font-size: 22px;
+    padding: 0;
+    margin-bottom: 10px;
+}
+
+/* Search Bar Container Styles */
+.search-bar-container {
+    width: 50%;
+    margin: 10px auto;
+    display: flex;
+    justify-content: center;
+}
+
+/* Food Link Styles */
+a.food-link {
+    display: block;
+    text-decoration: none;
+    width: fit-content;
+}
+
+/* Signin Container Styles */
+.signin-container {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+/* Signin Card Styles */
+.signin-card {
+    background-color: #2e2e2f;
+    color: white;
+}
+
+/* Signin Card Header Styles */
+.signin-card-header {
+    background-color: #FF7B00;
+}
+
+/* Signin Form Label Styles */
+.signin-form-label {
+    color: white;
+}
+
+/* Signin Form Control Styles */
+.signin-form-control {
+    background-color: #39393b;
+    color: white;
+}
+
+/* Signin Button Styles */
+.signin-btn {
+    background-color: #FF7B00;
+    border-color: #FF7B00;
+    color: white;
+}
+
+.signin-btn:hover,
+.signin-btn:focus {
+    background-color: #f06d0f;
+    border-color: #d95c00;
+    color: white !important;
+}
+
+/* Profile Container Styles */
+.profile-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Profile Card Styles */
+.profile-card {
+    background-color: #2e2e2f;
+    color: white;
+}
+
+/* Profile Card Header Styles */
+.profile-card-header {
+    background-color: #FF7B00;
+}
+
+/* Profile Card Title Styles */
+.profile-card-title {
+    color: #FF7B00;
+}
+
+/* Profile Card Text Styles */
+.profile-card-text {
+    color: white;
+}
+
+/* Profile Button Styles */
+.profile-btn {
+    background-color: #FF7B00;
+    border-color: #FF7B00;
+    color: white;
+}
+
+/* Card Divider Styles */
+.card-divider {
+    border-bottom: 2px solid #444;
+    margin-bottom: 20px;
+}
+
+/* Trainor Styles */
+.trainor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+
+/* Logout Button Styles */
+.logout-btn {
+    background-color: #d10404b4;
+    color: white;
+    opacity: 50%;
+}
+
+.logout-nav{
+    background-color: #d1040469;
+    color: white;
+    opacity: 90%;
+}
+
+.logout-nav:hover{
+    background-color: #d10404f8;
+    color: white;
+    opacity: 100%;
+}
+
+.logout-btn:hover {
+    background-color: #d10404;
+    opacity: 100%;
+    color: white;
+}
+
+/* Chat Box Styles */
+#chatBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 80vh;
+}
+
+/* Chat Input Form Styles */
+form#chatInput {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .info-container {
@@ -367,51 +517,121 @@ div.container.info-container.workout-title-container {
     border-width: 2px;
 }
 
-.info-container-title {
-    padding: 10px 0 0 0;
-    /* Adjust this value as needed */
-}
-
+/* Servings and Calories Styles */
 #servings,
 #calories {
-    color: #aaa;
+    background-color: #2e2e2f;
+    color: white;
+    border: none;
+    outline: none;
 }
 
-hr {
-    border-color: #39393b;
+/* Parent Container Styles */
+.parent-container {
+    justify-content: center;
+    background-color: #242425;
+    margin: 20px auto;
+    padding: 40px;
+    width: fit-content;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.info-container .add-food-btn {
-    font-size: 22px;
-    padding: 0;
-    margin-bottom: 10px;
+/* Top Container Styles */
+.top-container {
+    display: flex;
+    justify-content: space-between;
 }
 
-/* --------------------------nutrition.html styling ------------------------- */
+/* Nutrition Label Styles */
+.nutrition-label {
+    flex-grow: 1;
+    margin-right: 10px;
+    width: 300px;
+}
 
-/* --------------------------addFood.html styling ------------------------- */
+/* Black Rectangle Styles */
+.black-rectangle {
+    background-color: black;
+    color: white;
+}
 
+/* Bottom Container Styles */
+.bottom-container {
+    flex-grow: 1;
+    margin-top: 20px;
+}
 
+/* Nutrition Facts Styles */
+.nutrition-facts {
+    display: flex;
+    flex-direction: column;
+}
 
+/* Nutrition Item Styles */
+.nutrition-item {
+    border-bottom: 1px solid #444444;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 20px;
+}
 
-/* -------------------------search-bar-container styling ------------------------- */
+/* Create Food Button Styles */
+.create-food-btn {
+    margin-top: 140px;
+}
+
+/* Servings Box and Add Food Button Styles */
+.servings-box .add-food-btn {
+    margin-top: 100px;
+}
+
+/* Nutrition Value Styles */
+.nutrition-value {
+    text-align: right;
+}
+
+/* Serving Size Styles */
+.serving-size {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+/* Search Results Container Styles */
+.search-results-container {
+    background-color: #2e2e2f;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px;
+    margin: 5px auto;
+    border-radius: 4px;
+    width: 600px;
+    min-width: 40%;
+    transition: transform 0.17s ease-in-out;
+}
+
+.search-results-container:hover {
+    transform: scale(1.05);
+    background-color: rgba(255, 123, 0, 0.626);
+}
+
 .search-bar-container {
     width: 50%;
     margin: 10px auto;
     display: flex;
     justify-content: center;
-
-
 }
-
 
 a.food-link {
     display: block;
     text-decoration: none;
     width: fit-content;
 }
-
-/* -------------------------search-bar-container styling ------------------------- */
 
 .search-bar {
     flex-grow: 1;
@@ -429,167 +649,32 @@ a.food-link {
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
-    /* This will make the container take up the full height available to it */
 }
 
-
-label[for="servings"] {
-    font-size: 20px;
-}
-
-#servings {
-    background-color: #2e2e2f;
-    color: white;
-    border: none;
-    outline: none;
-}
-
-.parent-container {
-    display: flex;
-    flex-direction: column;
-    min-width: 500px;
-    min-height: 200px;
-    position: relative;
-
-}
-
-.top-container {
-    display: flex;
-    justify-content: space-between;
-}
-
-.nutrition-label {
-    flex-grow: 1;
-    margin-right: 10px;
-    width: 300px;
-}
-
-.black-rectangle {
-    background-color: black;
-}
-
-.search-bar {
-    flex-grow: 1;
-    margin: 10px;
-    padding: 20px;
-    background-color: #2e2e2f;
-    border: none;
-    outline: none;
-    color: #fff;
-    height: 50px;
-    font-size: 24px;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.09);
-}
-
-.search-result-link {
-    display: block;
-    width: fit-content;
-    margin: 0 auto;
-}
-
-.parent-container {
-    display: flex;
-    flex-direction: column;
-}
-
-.top-container {
-    display: flex;
-    justify-content: space-between;
-}
-
-.nutrition-label {
-    flex-grow: 1;
-    margin-right: 10px;
-    width: 300px;
-}
-
-.black-rectangle {
-    background-color: black;
-    color: white;
-    padding: 10px;
-}
-
-
-
-.bottom-container {
-    flex-grow: 1;
-    margin-top: 20px;
-}
-
-.nutrition-facts {
-    display: flex;
-    flex-direction: column;
-}
-
-.nutrition-item {
-    border-bottom: 1px solid #444444;
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin-bottom: 20px;
-}
-
-.create-food-btn {
-    margin-top: 140px;
-    /* This will push the button towards the middle */
-}
-
-.servings-box .add-food-btn {
-    margin-top: 100px;
-}
-
-.nutrition-value {
-    text-align: right;
-}
-
-.serving-size {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin-bottom: 30px;
-    font-weight: bold;
-}
-
-.search-results-container {
-    background-color: #2e2e2f;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 4px;
-    margin: 5px auto;
-    border-radius: 4px;
-    width: 600px;
-    min-width: 40%;
-    transition: transform 0.17s ease-in-out;
-
-}
-
-.search-results-container:hover {
-    transform: scale(1.05);
-    background-color: rgba(255, 123, 0, 0.626);
-
-}
-
+/* Food Name Styles */
 .food-name {
     font-size: 20px;
     font-weight: bold;
 }
 
+/* Food Calories Styles */
 .food-calories {
     font-size: 20px;
     color: #aaa;
 }
 
+/* Food Nutrition Styles */
 .food-nutrition {
     font-size: 18px;
 }
 
+/* Food Info Styles */
 .food-info {
     display: flex;
     flex-direction: column;
 }
 
+/* Food Info Container Styles */
 .food-info-container {
     display: flex;
     flex-direction: column;
@@ -597,22 +682,24 @@ label[for="servings"] {
     align-items: flex-start;
 }
 
+/* My Foods Button Styles */
 .my-foods-btn {
     margin-top: 20px;
 }
 
+/* Submit Button Styles */
 .submit-btn {
     margin-top: 60px;
     bottom: 0;
 }
 
-
-
+/* Page Title Styles */
 .page-title {
     font-size: 2em;
     margin-bottom: 10px;
 }
 
+/* Page Description Styles */
 .page-description {
     margin: 0px 20px;
     font-size: 1.2em;
@@ -620,16 +707,19 @@ label[for="servings"] {
     width: 1000px;
 }
 
+/* Button Container Styles */
 .button-container {
     display: flex;
     justify-content: center;
     gap: 30px;
 }
 
+/* Submit Button Styles */
 .submit-btn {
     margin: 0 auto;
 }
 
+/* Create Food Container Styles */
 #create-food-container {
     display: flex;
     flex-direction: column;
@@ -638,7 +728,7 @@ label[for="servings"] {
     margin-top: 20px;
 }
 
-
+/* Input Container Styles */
 .input-container {
     display: flex;
     align-items: center;
@@ -648,12 +738,14 @@ label[for="servings"] {
     margin: 5px 10px;
 }
 
+/* Food Input Label Styles */
 .food-input-label {
     width: 100px;
     text-align: left;
     font-size: 22px;
 }
 
+/* Input Styles */
 .input-container input[type="text"] {
     margin: 10px auto;
     background-color: #39393b;
@@ -667,146 +759,4 @@ label[for="servings"] {
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
     color: #fff;
     padding: 0 10px;
-}
-
-/* --------------------------addFood.html styling ------------------------- */
-
-/* -------------------------signin.html styling ------------------------- */
-
-.signin-container {
-    max-width: 400px;
-    margin: 0 auto;
-}
-
-.signin-card {
-    background-color: #2e2e2f;
-    color: white;
-}
-
-.signin-card-header {
-    background-color: #FF7B00;
-}
-
-.signin-form-label {
-    color: white;
-}
-
-.signin-form-control {
-    background-color: #39393b;
-    color: white;
-}
-
-.signin-btn {
-    background-color: #FF7B00;
-    border-color: #FF7B00;
-    color: white;
-    /* Set the default text color */
-}
-
-.signin-btn:hover,
-.signin-btn:focus {
-    background-color: #d95c00;
-    border-color: #d95c00;
-    color: white !important;
-}
-
-
-/* -------------------------signin.html styling ------------------------- */
-
-/* -------------------------profile.html styling ------------------------- */
-.profile-container {
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.profile-card {
-    background-color: #2e2e2f;
-    color: black !important;
-}
-
-.profile-card-header {
-    background-color: #FF7B00;
-}
-
-.profile-card-title {
-    color: #FF7B00 !important;
-}
-
-.profile-card-text {
-    color: white;
-}
-.card-body{
-    background-color: #2e2e2f;
-    color: white;
-}
-
-.profile-btn {
-    background-color: #FF7B00;
-    border-color: #FF7B00;
-    color: white;
-}
-
-.profile-btn:hover,
-.profile-btn:focus {
-    background-color: #d95c00;
-    border-color: #d95c00;
-}
-
-
-/* -------------------------profile.html styling ------------------------- */
-
-
-/* --------------------------sigin.html styling ----------------------------- */
-
-
-/* --------------------------chat.html styling ------------------------- */
-
-#chatBox {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 80vh;
-}
-
-form#chatInput {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* --------------------------chat.html styling ------------------------- */
-
-
-.profile-container {
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.profile-card {
-    background-color: #2e2e2f;
-    color: white;
-}
-
-.profile-card-header {
-    background-color: #FF7B00;
-}
-
-.profile-card-title {
-    color: #FF7B00;
-}
-
-.profile-card-text {
-    color: white;
-}
-
-.profile-btn {
-    background-color: #FF7B00;
-    border-color: #FF7B00;
-    color: white;
-}
-
-.profile-btn:hover,
-.profile-btn:focus {
-    background-color: #d95c00;
-    border-color: #d95c00;
 }
