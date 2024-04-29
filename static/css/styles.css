@@ -775,3 +775,38 @@ form#chatInput {
 }
 
 /* --------------------------chat.html styling ------------------------- */
+
+
+.profile-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.profile-card {
+    background-color: #2e2e2f;
+    color: white;
+}
+
+.profile-card-header {
+    background-color: #FF7B00;
+}
+
+.profile-card-title {
+    color: #FF7B00;
+}
+
+.profile-card-text {
+    color: white;
+}
+
+.profile-btn {
+    background-color: #FF7B00;
+    border-color: #FF7B00;
+    color: white;
+}
+
+.profile-btn:hover,
+.profile-btn:focus {
+    background-color: #d95c00;
+    border-color: #d95c00;
+}

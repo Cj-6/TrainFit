@@ -1,7 +1,5 @@
 CREATE TABLE Users (
     userID UUID PRIMARY KEY,
-    Fname VARCHAR(255),
-    Lname VARCHAR(255),
     email VARCHAR(255) UNIQUE,
     password VARCHAR(255)
 );
@@ -50,4 +48,3 @@ CREATE TABLE Food (
     sugars VARCHAR(255),
     protein VARCHAR(255)
 );
-

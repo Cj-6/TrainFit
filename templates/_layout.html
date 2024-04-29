@@ -9,13 +9,14 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <link rel="icon" href="/static/images/favicon-16x16.png" sizes="16x16" type="image/png">
+    <link rel="icon" href="/static/images/favicon-32x32.png" sizes="16x16" type="image/png">
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark">
         <h1 class="navbar-brand">TR<span style="color:#FF7B00;">AI</span>NFIT</h1>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -32,14 +33,14 @@
                 <li class="nav-item {% if active_page == 'chat' %}active{% endif %}">
                     <a class="nav-link" href="/chat">Chat</a>
                 </li>
-                {% if 'user_id' in session %}
+                {% if 'userID' in session %}
                 <li class="nav-item {% if active_page == 'profile' %}active{% endif %}">
                     <a class="nav-link" href="/profile">Profile</a>
                 </li>
                 {% endif %}
             </ul>
             <ul class="navbar-nav ml-auto">
-                {% if 'user_id' not in session %}
+                {% if 'userID' not in session %}
                 <li class="nav-item {% if active_page == 'signin' %}active{% endif %}">
                     <a class="nav-link" href="/signin" style="border: none;">Sign In</a>
                 </li>
@@ -50,10 +51,7 @@
             </ul>
         </div>
     </nav>
-
-    {% block content %}
-    {% endblock %}
-
+    {% block content %}{% endblock %}
     <footer>
         <span class="text-muted">© 2024 TRAINFIT. All rights reserved.</span>
     </footer>

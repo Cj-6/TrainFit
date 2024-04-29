@@ -8,5 +8,3 @@ def get_workout_by_userid_and_date(userid, date):
             cursor.execute('SELECT * FROM workout where userid = %s and date = %s', [userid, date])
             workouts = cursor.fetchall()
         return workouts
-
-# base function add as needed and fix what you need
