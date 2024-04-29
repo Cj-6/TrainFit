@@ -3,7 +3,7 @@ from repositories.db import get_pool
 from psycopg.rows import dict_row
 
 
-def get_userid_by_email(email: str):
+def does_email_exist(email: str) -> bool:
     pool = get_pool()
     with pool.connection() as conn:
         with conn.cursor() as cur:
@@ -14,42 +14,8 @@ def get_userid_by_email(email: str):
                             users
                         WHERE email = %s
                         ''', [email])
-            result = cur.fetchone()
-            if result is not None:
-                return result[0]
-    return None
-
-def validate_user(email: str, password: str) -> bool:
-    pool = get_pool()
-    with pool.connection() as conn:
-        with conn.cursor() as cur:
-            cur.execute('''
-                        SELECT
-                            password
-                        FROM
-                            users
-                        WHERE email = %s
-                        ''', [email])
-            result = cur.fetchone()
-            if result is None:
-                # The email does not exist in the database
-                return False
-            stored_password = result[0]
-            return stored_password == password
-
-def does_username_exist(email: str) -> bool:
-    pool = get_pool()
-    with pool.connection() as conn:
-        with conn.cursor() as cur:
-            cur.execute('''
-                        SELECT
-                            email
-                        FROM
-                            users
-                        WHERE email = %s
-                        ''', [email])
-            userid = cur.fetchone()
-            return userid is not None
+            userID = cur.fetchone()
+            return userID is not None
 
 
 def create_user(email: str, password: str) -> dict[str, Any]:
@@ -57,48 +23,48 @@ def create_user(email: str, password: str) -> dict[str, Any]:
     with pool.connection() as conn:
         with conn.cursor() as cur:
             cur.execute('''
-                        INSERT INTO app_user (email, password)
+                        INSERT INTO users (email, password)
                         VALUES (%s, %s)
-                        RETURNING userid
-                        ''', [first_name, password]
+                        RETURNING userID
+                        ''', [email, password]
                         )
-            userid = cur.fetchone()
-            if userid is None:
+            userID = cur.fetchone()
+            if userID is None:
                 raise Exception('failed to create user')
             return {
-                'userid': userid,
-                'first_name': first_name
+                'userID': userID,
+                'email': email
             }
 
 
-def get_user_by_username(username: str) -> dict[str, Any] | None:
+def get_user_by_email(email: str) -> dict[str, Any] | None:
     pool = get_pool()
     with pool.connection() as conn:
         with conn.cursor(row_factory=dict_row) as cur:
             cur.execute('''
                         SELECT
-                            userid,
-                            first_name,
+                            userID,
+                            email,
                             password AS hashed_password
                         FROM
                             users
-                        WHERE first_name = %s
-                        ''', [first_name])
+                        WHERE email = %s
+                        ''', [email])
             user = cur.fetchone()
             return user
 
 
-def get_user_by_id(userid: int) -> dict[str, Any] | None:
+def get_user_by_id(userID: int) -> dict[str, Any] | None:
     pool = get_pool()
     with pool.connection() as conn:
         with conn.cursor(row_factory=dict_row) as cur:
             cur.execute('''
                         SELECT
-                            userid,
-                            first_name
+                            userID,
+                            email
                         FROM
                             users
-                        WHERE userid = %s
-                        ''', [userid])
+                        WHERE userID = %s
+                        ''', [userID])
             user = cur.fetchone()
             return user
