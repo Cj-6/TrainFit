@@ -1,3 +1,4 @@
+import os
 from dotenv import load_dotenv
 from flask import Flask, render_template, redirect, request, url_for, session, abort, g
 from flask_bcrypt import Bcrypt
@@ -10,7 +11,7 @@ load_dotenv()
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
-app.secret_key = 'bigsecretvibes'
+app.secret_key = os.getenv('APP_SECRET_KEY')
 
 @app.get('/')
 def index():
@@ -32,8 +33,6 @@ def food_info_by_id(food_id):
 
 @app.post('/nutrition')
 def save_food():
-    # Get the food and relevant info for the food item
-    # check to see if you can just get an id or something so that it only passes the id to the session
     return render_template('nutrition.html', active_page='nutrition')
 
 @app.get('/workout')
@@ -41,41 +40,8 @@ def workout():
     userID = session.get('userID')
     date = request.args.get('date')
     print(userID, date)
-    workouts = workout_repo.get_workout_by_userID_and_date(userID, date)  # corrected function name
+    workouts = workout_repo.get_workout_by_userid_and_date(userID, date)
     return render_template('workout.html', active_page='workout', workouts=workouts)
-
-@app.get('/profile')
-def profile():
-    if 'userID' in session:
-        return render_template('profile.html')
-    return redirect(url_for('signin'))
-
-@app.get('/signin')
-def signin():
-    return render_template('signin.html', active_page='signin')
-
-@app.get('/signup')
-def signup():
-    return render_template('signup.html', active_page='signup')
-
-@app.post('/signin')
-def signin_post():
-    email = request.form.get('email')
-    password = request.form.get('password')
-    if not email or not password:
-        abort(400)
-    user = user_repository.get_user_by_username(email)
-    if user is None:
-        abort(401)
-    if not bcrypt.check_password_hash(user['hashed_password'], password):
-        abort(401)
-    session['userID'] = user['userID']
-    return redirect('/profile')
-
-@app.get('/signout')
-def signout():
-    session.pop('userID', None)
-    return redirect(url_for('index'))
 
 @app.get('/addWorkout')
 def add_exercise():
@@ -118,12 +84,20 @@ def create_food_post():
     new_food = create_food(food_data)
     return render_template('foodInfo.html', food=food_data)
 
+
+@app.get('/signin')
+def signin():
+    return render_template('signin.html', active_page='signin')
+
+@app.get('/signup')
+def signup():
+    return render_template('signup.html', active_page='signup')
+
 @app.post('/signup')
 def signup_account():
     email = request.form.get('email')
     password = request.form.get('password')
-    confirm_password = request.form.get('confirm_password')
-    if not email or not password or not confirm_password or password != confirm_password:
+    if not email or not password:
         abort(400)
     does_user_exist = user_repository.does_email_exist(email)
     if does_user_exist:
@@ -131,3 +105,28 @@ def signup_account():
     hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
     user_repository.create_user(email, hashed_password)
     return redirect(url_for('profile'))
+
+@app.post('/signin')
+def signin_account():
+    email = request.form.get('email')
+    password = request.form.get('password')
+    user = user_repository.get_user_by_email(email)
+    if user is None or not bcrypt.check_password_hash(user['hashed_password'], password):
+        # Incorrect email or password
+        return render_template('signin.html', error='Invalid email or password')
+    else:
+        session['userID'] = user['userID']
+        return redirect(url_for('profile'))
+
+@app.get('/profile')
+def profile():
+    if 'userID' not in session:
+        return redirect('/')
+    userID = session.get('userID')
+    user = user_repository.get_user_by_id(userID)
+    return render_template('profile.html', user=user, active_page='profile')
+
+@app.get('/logout')
+def logout():
+    del session['userID']
+    return redirect('/')

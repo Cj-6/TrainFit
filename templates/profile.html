@@ -1,26 +1,28 @@
 {% extends "_layout.html" %}
 {% block content %}
-<div class="container mt-5">
+<div class="container mt-5 profile-container">
     <div class="row">
         <div class="col-md-6 offset-md-3">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="text-center"> Profile </h3>
+            <div class="card profile-card">
+                <div class="card-header profile-card-header">
+                    <h3 class="text-center profile-card-title">Profile</h3>
                 </div>
                 <div class="card-body">
                     <div class="text-center mb-4">
+                        <!-- Profile Picture -->
                     </div>
-                    <h4 class="card-title text-center">{{ name }}</h4>
-                    <p class="card-text text-center">Age: 52</p>
-                    <p class="card-text text-center">Height: 6'2"</p>
-                    <p class="card-text text-center">Weight: 187 lb</p>
-                    <p class="card-text text-center">Goal: Lose weight</p>
-                    <hr>
-                    <h5 class="card-title">Fitness Stats</h5>
-                    <p class="card-text">Workouts Completed: 5</p>
-                    <p class="card-text">Total Distance Run: 5 miles</p>
-                    <p class="card-text">Total Calories Burned: 2000</p>
-                    <a href="#" class="btn btn-primary btn-block">Edit Profile</a>
+                    <h4 class="card-title text-center profile-card-title">placeholder for name</h4>
+                    <p class="card-text text-center profile-card-text">Age: 52</p>
+                    <p class="card-text text-center profile-card-text">Height: 6'2"</p>
+                    <p class="card-text text-center profile-card-text">Weight: 187 lb</p>
+                    <p class="card-text text-center profile-card-text">Goal: Lose weight</p>
+                    <hr class="black-rectangle">
+                    <h5 class="card-title profile-card-title">Fitness Stats</h5>
+                    <p class="card-text profile-card-text">Workouts Completed: 5</p>
+                    <p class="card-text profile-card-text">Total Distance Run: 5 miles</p>
+                    <p class="card-text profile-card-text">Total Calories Burned: 2000</p>
+                    <a href="#" class="btn btn-primary btn-block profile-btn">Edit Profile</a>
+                    <a href="{{ url_for('logout') }}" class="btn btn-danger btn-block profile-btn">Sign Out</a>
                 </div>
             </div>
         </div>

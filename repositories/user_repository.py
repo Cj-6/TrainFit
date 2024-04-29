@@ -1,3 +1,4 @@
+import uuid
 from typing import Any
 from repositories.db import get_pool
 from psycopg.rows import dict_row
@@ -17,24 +18,17 @@ def does_email_exist(email: str) -> bool:
             userID = cur.fetchone()
             return userID is not None
 
-
 def create_user(email: str, password: str) -> dict[str, Any]:
+    user_id = str(uuid.uuid4())
     pool = get_pool()
     with pool.connection() as conn:
         with conn.cursor() as cur:
             cur.execute('''
-                        INSERT INTO users (email, password)
-                        VALUES (%s, %s)
+                        INSERT INTO users (userID, email, password)
+                        VALUES (%s, %s, %s)
                         RETURNING userID
-                        ''', [email, password]
-                        )
-            userID = cur.fetchone()
-            if userID is None:
-                raise Exception('failed to create user')
-            return {
-                'userID': userID,
-                'email': email
-            }
+                        ''', [user_id, email, password])
+            return {'userID': user_id, 'email': email}
 
 
 def get_user_by_email(email: str) -> dict[str, Any] | None:
@@ -51,7 +45,9 @@ def get_user_by_email(email: str) -> dict[str, Any] | None:
                         WHERE email = %s
                         ''', [email])
             user = cur.fetchone()
-            return user
+            if user:
+                return {'userID': user.get('userID'), 'email': user.get('email'), 'hashed_password': user.get('hashed_password')}
+            return None
 
 
 def get_user_by_id(userID: int) -> dict[str, Any] | None:
