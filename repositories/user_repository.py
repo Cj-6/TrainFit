@@ -37,7 +37,7 @@ def get_user_by_email(email: str) -> dict[str, Any] | None:
         with conn.cursor(row_factory=dict_row) as cur:
             cur.execute('''
                         SELECT
-                            userID,
+                            userid,
                             email,
                             password AS hashed_password
                         FROM
@@ -46,7 +46,7 @@ def get_user_by_email(email: str) -> dict[str, Any] | None:
                         ''', [email])
             user = cur.fetchone()
             if user:
-                return {'userID': user.get('userID'), 'email': user.get('email'), 'hashed_password': user.get('hashed_password')}
+                return {'userID': user.get('userid'), 'email': user.get('email'), 'hashed_password': user.get('hashed_password')}
             return None
 
 

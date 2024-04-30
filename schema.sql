@@ -5,7 +5,7 @@ CREATE TABLE Users (
 );
 
 CREATE TABLE Workout (
-    workoutID SERIAL PRIMARY KEY,
+    workoutID UUID PRIMARY KEY,
     userID UUID REFERENCES Users(userID),
     name VARCHAR(255),
     date TIMESTAMP
@@ -24,7 +24,7 @@ CREATE TABLE Set (
     rpe INT,
     note TEXT,
     reps INT,
-    imageID INT -- Assuming this references another table which is not included in the diagram
+    imageID INT 
 );
 
 CREATE TABLE Meal (

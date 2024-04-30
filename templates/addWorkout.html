@@ -2,7 +2,30 @@
 
 {% block content %}
 <div class="parent-container addworkout">
-    <form action="/workout" method="post">
+    <form action="/addWorkout" method="post">
+
+
+        <div class="calendar-container">
+    
+            <div class="calendar-sub-container">
+                    <div class="left-arrow">
+                        <i class="bi bi-chevron-left"></i>
+                    </div>
+            
+                    <div class="date">
+                        <input type="date" id="calendar" name="calendar">
+                    </div>
+            
+                    <div class="right-arrow">
+                        <i class="bi bi-chevron-right"></i>
+                    </div>
+            
+                </div>
+            </div>
+
+            <br>
+            <br>    
+            
 
     <div class="container info-container workout-title-container">
         
@@ -20,7 +43,7 @@
             
         <div class="exercise-title">
             <h2 class="info-container-title">
-                <input class="addInput exercise-name" type="text" name="exerciseName"  placeholder="Exercise Name">
+                <input class="addInput exercise-name" type="text" name="exercise-1-name"  placeholder="Exercise Name">
             </h2>
 
             
@@ -29,16 +52,16 @@
       <hr>
         <div class="set-container">
             <span>Set 1:
-                <input class="addInput set" type="number" name="set-1-weight"  placeholder="Weight">LBS
+                <input class="addInput set" type="number" name="exercise-1-set-1-weight"  placeholder="Weight">LBS
             </span>
             <span>
-                <input class="addInput set" type="number" name="set-1-reps"  placeholder="Repetitions">Reps
+                <input class="addInput set" type="number" name="exercise-1-set-1-reps"  placeholder="Repetitions">Reps
             </span>
             <span>
-                <input class="addInput set" type="number" name="set-1-rpe"  placeholder="Rate Of Percieved Exertion">RPE
+                <input class="addInput set" type="number" name="exercise-1-set-1-rpe"  placeholder="Rate Of Percieved Exertion">RPE
             </span>
             <span>
-                <textarea class="addInput set" type="textarea" name="set-1-text"  placeholder="Notes..." rows="1"></textarea>
+                <textarea class="addInput set" type="textarea" name="exercise-1-set-1-text"  placeholder="Notes..." rows="1"></textarea>
             </span>
 
             <span><button class="w-minus hidden" type="button"><i class="bi bi-dash-circle-dotted"></i></button></span>
@@ -46,14 +69,14 @@
 
         <div class="set-container">
             <span>Set 2:
-                <input class="addInput set" type="number" name="set-2-weight"  placeholder="Weight">LBS
+                <input class="addInput set" type="number" name="exercise-1-set-2-weight"  placeholder="Weight">LBS
             </span>
             <span>
-                <input class="addInput set" type="number" name="set-2-reps"  placeholder="Repetitions">Reps</span>
+                <input class="addInput set" type="number" name="exercise-1-set-2-reps"  placeholder="Repetitions">Reps</span>
             <span>
-                <input class="addInput set" type="number" name="set-2-rpe"  placeholder="Rate Of Percieved Exertion">RPE</span>
+                <input class="addInput set" type="number" name="exercise-1-set-2-rpe"  placeholder="Rate Of Percieved Exertion">RPE</span>
             <span>
-                <textarea class="addInput set" type="textarea" name="set-1-text"  placeholder="Notes..." rows="1"></textarea>
+                <textarea class="addInput set" type="textarea" name="exercise-1-set-2-text"  placeholder="Notes..." rows="1"></textarea>
             </span>
 
             <span><button class="w-minus hidden" type="button"><i class="bi bi-dash-circle-dotted"></i></button></span>
@@ -62,14 +85,14 @@
 
         <div class="set-container">
             <span>Set 3:
-                <input class="addInput set" type="number" name="set-3-weight"  placeholder="Weight">LBS
+                <input class="addInput set" type="number" name="exercise-1-set-3-weight"  placeholder="Weight">LBS
             </span>
             <span>
-                <input class="addInput set" type="number" name="set-3-reps"  placeholder="Repetitions">Reps</span>
+                <input class="addInput set" type="number" name="exercise-1-set-3-reps"  placeholder="Repetitions">Reps</span>
             <span>
-                <input class="addInput set" type="number" name="set-3-rpe"  placeholder="Rate Of Percieved Exertion">RPE</span>
+                <input class="addInput set" type="number" name="exercise-1-set-3-rpe"  placeholder="Rate Of Percieved Exertion">RPE</span>
                 <span>
-                    <textarea class="addInput set" type="textarea" name="set-1-text"  placeholder="Notes..." rows="1"></textarea>
+                    <textarea class="addInput set" type="textarea" name="exercise-1-set-3-text"  placeholder="Notes..." rows="1"></textarea>
                 </span>
 
                 <span><button class="w-minus" type="button"><i class="bi bi-dash-circle-dotted"></i></button></span>
@@ -78,14 +101,14 @@
         
         <div>
             <span class="preview-set">Set #:
-                <input class="addInput set" type="number" name="set-4-weight"  placeholder="Weight" disabled>LBS
+                <input class="addInput set" type="number" name="set-weight"  placeholder="Weight" disabled>LBS
             </span>
             <span class="preview-set">
-                <input class="addInput set" type="number" name="set-4-reps"  placeholder="Repetitions" disabled>Reps</span>
+                <input class="addInput set" type="number" name="set-reps"  placeholder="Repetitions" disabled>Reps</span>
             <span class="preview-set">
-                <input class="addInput set" type="number" name="set-4-rpe"  placeholder="Rate Of Percieved Exertion" disabled>RPE</span>
+                <input class="addInput set" type="number" name="set-rpe"  placeholder="Rate Of Percieved Exertion" disabled>RPE</span>
             <span class="preview-set">
-                <textarea class="addInput set" type="textarea" name="set-1-text"  placeholder="Notes..." rows="1"></textarea>
+                <textarea class="addInput set" type="textarea" name="set-text"  placeholder="Notes..." rows="1"></textarea>
             </span>
 
                 <span><button class="w-plus" type="button"><i class="bi bi-plus-circle-dotted"></i></button></span>
@@ -101,7 +124,7 @@
 </div>
 
     <div class="d-flex justify-content-center align-items-center">
-        <button class="btn" type="button">
+        <button class="btn" type="button" >
             <i class="bi bi-plus-circle-fill"></i>
         </button>
     </div>
@@ -116,5 +139,4 @@
 </form>
 
 
-<script src="{{ url_for('static', filename='javascript/script.js') }}"></script>
 {% endblock %}

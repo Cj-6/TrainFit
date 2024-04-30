@@ -16,6 +16,8 @@ app.secret_key = os.getenv('APP_SECRET_KEY')
 #index
 @app.get('/')
 def index():
+    userID = session.get('userid')
+    print(userID)
     return render_template('index.html', active_page='home')
 
 
@@ -28,7 +30,6 @@ def chat():
 #workout get
 @app.get('/workout')
 def workout():
-    
     userID = session.get('userID')
     date = request.args.get('date')
     print(userID, date) #this line is test code
@@ -40,11 +41,53 @@ def workout():
 
 @app.get('/addWorkout')
 def add_exercise():
-    userID = session.get('userID')
-    if userID is None:
+    if 'userID' not in session:
         return redirect(url_for('signin'))
     return render_template('addWorkout.html', active_page='workout') 
 
+@app.post('/addWorkout')
+def submit_workout():
+    userID = session.get('userID')
+    date = request.form.get('calendar')
+    workout_name = request.form.get('workout-name')
+    print(userID)
+    workout = {
+        'name': workout_name,
+        'userID': userID,
+        'date': date,
+    }
+    print(workout)
+    workoutID = workout_repo.create_workout(workout)
+    print(workoutID)
+    exercises = []
+    for i in range(1, 12): 
+        sets = []
+        for j in range(1, 12):  
+            set_weight = request.form.get(f'exercise-{i}-set-{j}-weight')
+            set_reps = request.form.get(f'exercise-{i}-set-{j}-reps')
+            set_rpe = request.form.get(f'exercise-{i}-set-{j}-rpe')
+            set_text = request.form.get(f'exercise-{i}-set-{j}-text')
+            if set_weight or set_reps or set_rpe or set_text:
+                sets.append({
+                    'weight': set_weight,
+                    'rpe': set_rpe,
+                    'note': set_text,
+                    'reps': set_reps,
+                })
+        if sets:
+            exercise_name = request.form.get(f'exercise-{i}-name')
+            if exercise_name is not None:
+                exercise = {
+                    'name': exercise_name,
+                    'workoutID': workoutID,
+                }
+                print(f'exercise name : {exercise['name']}')
+                exerciseID = workout_repo.create_exercise(exercise)
+                for set in sets:
+                    set['exerciseID'] = exerciseID
+                    workout_repo.create_set(set)
+            
+    return redirect(url_for('workout'))
 
 #nutrition get
 @app.get('/nutrition')
@@ -104,6 +147,7 @@ def create_food_post():
 #user get
 @app.get('/signin')
 def signin():
+    userID = session.get('userID')
     return render_template('signin.html', active_page='signin')
 
 @app.get('/signup')
@@ -152,5 +196,7 @@ def signin_account():
         flash('Invalid email or password.', 'danger')
         return render_template('signin.html')  
     else:
+        print(f'user: {user}')
         session['userID'] = user['userID']
+        print(f"session['userID']: {session['userID']}")
         return redirect(url_for('profile'))
