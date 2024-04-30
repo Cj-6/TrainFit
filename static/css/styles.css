@@ -380,6 +380,30 @@ a.food-link {
     margin: 0 auto;
 }
 
+.alert {
+    max-width: 550px;
+    margin: 0 auto;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.alert-success {
+    text-align: center;
+    background-color: #dff0d8;
+    color: #3c763d;
+    border: 1px solid #d6e9c6;
+}
+
+.alert-danger {
+    text-align: center;
+    background-color: #f2dede;
+    color: #a94442;
+    border: 1px solid #ebccd1;
+}
+
 /* Signin Card Styles */
 .signin-card {
     background-color: #2e2e2f;

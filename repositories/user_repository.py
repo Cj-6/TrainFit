@@ -64,3 +64,16 @@ def get_user_by_id(userID: int) -> dict[str, Any] | None:
                         ''', [userID])
             user = cur.fetchone()
             return user
+
+def update_user(userID: int, name: str, age: int, height: str, weight: float, goal: str) -> dict[str, Any] | None:
+    pool = get_pool()
+    with pool.connection() as conn:
+        with conn.cursor(row_factory=dict_row) as cur:
+            cur.execute('''
+                        UPDATE users
+                        SET name = %s, age = %s, height = %s, weight = %s, goal = %s
+                        WHERE userID = %s
+                        RETURNING userID, email, name, age, height, weight, goal
+                        ''', (name, age, height, weight, goal, userID))
+            updated_user = cur.fetchone()
+            return updated_user
