@@ -28,14 +28,21 @@ def chat():
 #workout get
 @app.get('/workout')
 def workout():
+    
     userID = session.get('userID')
     date = request.args.get('date')
-    print(userID, date)
-    workouts = workout_repo.get_workout_by_userid_and_date(userID, date)
+    print(userID, date) #this line is test code
+
+    workouts= None
+    if userID is not None:
+        workouts = workout_repo.get_workout_by_userid_and_date(userID, date)
     return render_template('workout.html', active_page='workout', workouts=workouts)
 
 @app.get('/addWorkout')
 def add_exercise():
+    userID = session.get('userID')
+    if userID is None:
+        return redirect(url_for('signin'))
     return render_template('addWorkout.html', active_page='workout') 
 
 
