@@ -6,6 +6,7 @@ from flask_bcrypt import Bcrypt
 from repositories import user_repository, workout_repo
 from repositories.food_repo import *
 from repositories.workout_repo import *
+from repositories.user_repository import *
 
 load_dotenv()
 
@@ -157,6 +158,15 @@ def logout():
     del session['userID']
     return redirect('/')
 
+@app.get('/editprofile')
+def edit_profile():
+    if 'userID' not in session:
+        return redirect('/')
+    
+    userID = session.get('userID')
+    user = user_repository.get_user_by_id(userID)
+    return render_template('editprofile.html', user=user, active_page='profile')
+
 
 #user post
 @app.post('/signup')
@@ -188,3 +198,29 @@ def signin_account():
     else:
         session['userID'] = user['userID']
         return redirect(url_for('profile'))
+    
+@app.post('/editprofile')
+def update_profile():
+    if 'userID' not in session:
+        return redirect('/')
+
+    userID = session.get('userID')
+    name = request.form.get('name')
+    age = request.form.get('age')
+    height = request.form.get('height')
+    weight = request.form.get('weight')
+    goal = request.form.get('goal')
+
+    if not name or not age or not height or not weight or not goal:
+        flash('All fields are required.', 'danger')
+        return redirect(url_for('profile'))
+    updated_user = user_repository.update_user(userID, name, age, height, weight, goal)
+    if updated_user is None:
+        flash('An error occurred while updating the profile.', 'danger')
+        return redirect(url_for('profile'))
+
+    flash('Profile updated successfully!', 'success')
+    return render_template('profile.html', user=updated_user, active_page='profile')
+
+
+

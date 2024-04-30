@@ -1,10 +1,13 @@
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 CREATE TABLE Users (
-                       userID UUID PRIMARY KEY,
-                       first_name VARCHAR(255),
-                       last_name VARCHAR(255),
-                       email VARCHAR(255) UNIQUE,
-                       password VARCHAR(255)
+    userID UUID PRIMARY KEY,
+    email VARCHAR(255) UNIQUE,
+    password VARCHAR(255)
+    name VARCHAR(255), 
+    age INT, 
+    height VARCHAR(10),  
+    weight INT, 
+    goal VARCHAR(50) 
 );
 
 CREATE TABLE Workout (
