@@ -1,13 +1,14 @@
 {% for food in results %}
-<a href="{{ url_for('food_info_by_id', food_id=food.foodid) }}" class="search-result-link"
-    style="text-decoration: none;">
-    <div class="search-results-container">
+
+<div class="search-results-container">
+    <a href="{{ url_for('food_info_by_id', food_id=food.foodid) }}" class="search-result-link">
         <div class="food-info-container">
             <div class="food-info">
                 <div class="food-name">{{ food['name'] }}</div>
                 <div class="food-calories">{{ food['calories'] }} cal</div>
             </div>
         </div>
-    </div>
-</a>
+    </a>
+
+</div>
 {% endfor %}

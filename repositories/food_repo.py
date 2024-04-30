@@ -13,8 +13,16 @@ def search_food(search_term):
     pool = get_pool()
     with pool.connection() as conn:
         with conn.cursor(row_factory=dict_row) as cursor: 
-            cursor.execute("SELECT * FROM food WHERE name ILIKE %s", ('%' + search_term + '%',))
-            return cursor.fetchall() 
+            # first, search for foods that start with the search term
+            cursor.execute("SELECT * FROM food WHERE name ILIKE %s LIMIT 5", (search_term + '%',))
+            results = cursor.fetchall()
+
+            # if less than 5 results, search for foods that contain the search term but do not start with it
+            if len(results) < 5:
+                cursor.execute("SELECT * FROM food WHERE name ILIKE %s AND name NOT ILIKE %s LIMIT %s", ('%' + search_term + '%', search_term + '%', 5 - len(results)))
+                results += cursor.fetchall()
+
+            return results
 
 def get_food_by_id(food_id):
     pool = get_pool()
@@ -37,5 +45,19 @@ def create_food(food):
                             food['saturated_fat'], food['trans_fat'], food['cholesterol'], 
                             food['sodium'], food['carbohydrates'], food['sugars'], food['protein']))
             conn.commit()
+
+
+def create_meal(meal_name, user_id, food_id, date):
+    pool = get_pool()
+    with pool.connection() as conn:
+        with conn.cursor() as cursor:
+            cursor.execute('''
+                            INSERT INTO Meal 
+                                (meal_name, userID, FoodID, date) 
+                            VALUES 
+                                (%s, %s, %s, %s)''', 
+                            (meal_name, user_id, food_id, date))
+            conn.commit()
+            conn.close()
 
 
