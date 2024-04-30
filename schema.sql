@@ -1,41 +1,48 @@
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 CREATE TABLE Users (
-    userID UUID PRIMARY KEY,
-    email VARCHAR(255) UNIQUE,
-    password VARCHAR(255)
+                       userID UUID PRIMARY KEY,
+                       first_name VARCHAR(255),
+                       last_name VARCHAR(255),
+                       email VARCHAR(255) UNIQUE,
+                       password VARCHAR(255)
 );
 
 CREATE TABLE Workout (
-    workoutID SERIAL PRIMARY KEY,
-    userID UUID REFERENCES Users(userID),
-    name VARCHAR(255),
-    date TIMESTAMP
+                         workoutID UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+                         userID UUID REFERENCES Users(userID),
+                         name VARCHAR(255),
+                         date TIMESTAMP
 );
 
 CREATE TABLE Exercise (
-    exerciseID SERIAL PRIMARY KEY,
-    workoutID INT REFERENCES Workout(workoutID),
-    exerciseName VARCHAR(255)
+                          exerciseID SERIAL PRIMARY KEY,
+                          workoutID UUID REFERENCES Workout(workoutID),
+                          exerciseName VARCHAR(255)
 );
+
+
+
 
 CREATE TABLE Set (
-    setID SERIAL PRIMARY KEY,
-    exerciseID INT REFERENCES Exercise(exerciseID),
-    weight INT,
-    rpe INT,
-    note TEXT,
-    reps INT,
-    imageID INT -- Assuming this references another table which is not included in the diagram
+                     setID SERIAL PRIMARY KEY,
+                     exerciseID INT REFERENCES Exercise(exerciseID),
+                     weight INT,
+                     rpe INT,
+                     note TEXT,
+                     reps INT
 );
 
+
 CREATE TABLE Meal (
-    meal_name VARCHAR(255) PRIMARY KEY,
+    meal_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    meal_name VARCHAR(255),
     userID UUID REFERENCES Users(userID),
-    FoodID VARCHAR(255), -- Assuming this should be a foreign key
+    FoodID VARCHAR(255),
     date TIMESTAMP
 );
 
 CREATE TABLE Food (
-    FoodID SERIAL PRIMARY KEY,
+    FoodID UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     createdByID UUID REFERENCES Users(userID),
     Name VARCHAR(255) UNIQUE,
     Calories VARCHAR(255),

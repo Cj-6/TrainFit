@@ -1,11 +1,29 @@
 {% extends "_layout.html" %}
 {% block content %}
+<div class="calendar-container">
+
+    <div class="calendar-sub-container">
+        <div class="left-arrow">
+            <i class="bi bi-chevron-left"></i>
+        </div>
+
+        <div class="date">
+            <input type="date" id="calendar" name="calendar">
+        </div>
+
+        <div class="right-arrow">
+            <i class="bi bi-chevron-right"></i>
+        </div>
+
+    </div>
+</div>
 <div class="parent-container">
+
     <div class="container info-container">
         <h2 class="info-container-title">Breakfast</h2>
         <hr>
         <!-- items will be dynamically added here -->
-        <a href="/foodInfo" class="btn add-food-btn">Add Food</a>
+        <a href="/foodInfo?mealName=breakfast" class="btn add-food-btn">Add Breakfast Food</a>
     </div>
 
     <div class="container info-container">
@@ -34,8 +52,9 @@
                 </div>
             </div>
         </div>
-        <form action="/addFood" method="post">
-            <button type="button" class="btn add-food-btn">Add Food</button>
+        <form action="/addFood" method="GET">
+            <input type="hidden" id="meal_name" name="meal_name" value="{{ meal_name }}">
+            <a href="/foodInfo?mealName=dinner" class="btn add-food-btn">Add Dinner Food</a>
         </form>
     </div>
 
@@ -54,8 +73,8 @@
                 </div>
             </div>
         </div>
-        <form action="/addFood" method="post">
-            <button type="button" class="btn add-food-btn">Add Food</button>
+        <form action="/addFood" method="GET">
+            <a href="/foodInfo?mealName=dinner" class="btn add-food-btn">Add Dinner Food</a>
         </form>
     </div>
 
@@ -63,10 +82,12 @@
         <h2 class="info-container-title">Snack</h2>
         <hr>
         <!-- Food items will be dynamically added here -->
-        <form action="/addFood" method="post">
-            <button type="button" class="btn add-food-btn">Add Food</button>
+        <form action="/addFood" method="GET">
+            <a href="/foodInfo?mealName=snack" class="btn add-food-btn">Add Snack Food</a>
         </form>
     </div>
 </div>
-<script src="/static/javascript/chart.js"></script>
+<script>
+    document.getElementById('calendar').valueAsDate = new Date();
+</script>
 {% endblock %}
