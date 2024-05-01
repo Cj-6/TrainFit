@@ -67,6 +67,31 @@
             </form>
         </div>
     </div>
+    <div class="comments-section">
+        <h2>Comments</h2>
+        <div id="comments-container"></div>
+            <!-- Comments will be dynamically added here -->
+        </div>
+        <form action="{{ url_for('add_comment', food_id=food.id) }}" method="post">
+            <div class="form-group">
+                <label for="comment">Add a comment:</label>
+                <textarea class="form-control" id="comment" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <div class="delete-comment">
+           {% for comment in comments %}
+            <div class="comment">
+                <p>{{ comment.comment }}</p>
+                <p>{{ comment.date }}</p>
+                <p>{{ comment.username }}</p>
+            <form action="/deleteComment" method="post">
+                <input type="hidden" name="comment_id" value="{{ comment.commentid }}">
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form> 
+            </div>
+            {% endfor %}  
+    </div>
 </div>
 <script>
     document.getElementById('calendar').value = "{{ selected_date }}";

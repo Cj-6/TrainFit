@@ -263,3 +263,35 @@ def update_profile():
     user_data = user_repository.get_user_profile_data(userID)
     flash('Profile updated successfully!', 'success')
     return render_template('profile.html', user=user_data, active_page='profile')
+
+@app.get('/comments/<food_id>')
+def comments(food_id):
+    comments = get_comments(food_id)
+    return render_template('comments.html', active_page='comments', comments=comments)
+
+@app.post('/comments/<food_id>')
+def add_comment(food_id):
+    user_id = session.get('userID')
+    comment_text = request.form.get('comment')
+    if not comment_text:
+        flash('Comment cannot be empty.', 'danger')
+        return redirect(url_for('comments', food_id=food_id))
+    comment = {
+        'food_id': food_id,
+        'user_id': user_id,
+        'comment_text': comment_text
+    }
+    create_comment(comment, user_id, food_id)
+    flash('Comment added successfully!', 'success')
+    return redirect(url_for('comments', food_id=food_id))
+
+@app.post('/comments/<food_id>/delete/<comment_id>')
+def delete_comment(food_id, comment_id):
+    user_id = session.get('userID')
+    comment = get_comments(comment_id)
+    if comment['user_id'] != user_id:
+        flash('You can only delete your own comments.', 'danger')
+        return redirect(url_for('comments', food_id=food_id))
+    delete_comments(comment_id)
+    flash('Comment deleted successfully!', 'success')
+    return redirect(url_for('comments', food_id=food_id))
