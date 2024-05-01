@@ -8,17 +8,19 @@
                     <h3 class="text-center">Welcome back {{ user.name }}</h3>
                 </div>
                 <div class="card-body">
-                    <div class="text-center mb-4">
+                    <div class="text-center mb-1">
                     </div>
-                    <p class="card-text text-center">Age: {{ user.age }}</p>
-                    <p class="card-text text-center">Height: {{ user.height }}</p>
-                    <p class="card-text text-center">Weight: {{ user.weight }}</p>
-                    <p class="card-text text-center">Goal: {{ user.goal }}</p>
-                    <div class="card-divider"></div> 
-                    <h5 class="card-title">Fitness Stats</h5>
-                    <p class="card-text">Workouts Completed: 5</p>
-                    <p class="card-text">Total Distance Run: 5 miles</p>
-                    <p class="card-text">Total Calories Burned: 2000</p>
+                    <div class="user-info">
+                        <h4 class="user-info-title">User Info</h4>
+                        <p class="user-info-text">Age: <span class="user-info-age">{{ user.age }}</span></p>
+                        <p class="user-info-text">Height: <span class="user-info-height">{{ user.height }}</span></p>
+                        <p class="user-info-text">Weight: <span class="user-info-weight">{{ user.weight }}</span></p>
+                        <p class="user-info-text">Goal: <span class="user-info-goal">{{ user.goal }}</span></p>
+                    </div>
+                    <div class="card-divider"></div>
+                    <h5 class="fitness-stats-title">Fitness Stats</h5>
+                    <p class="fitness-stats-text">Created Foods: <span class="fitness-stats-created">{{ user.created_foods_count }}</span></p>
+                    <p class="fitness-stats-text" style="margin-bottom: 20px;">Workouts Added: <span class="fitness-stats-workouts">{{ user.workouts_count }}</span></p>
                     <a href="{{ url_for('edit_profile') }}" class="btn btn-block signin-btn">Edit Profile</a>
                     <a href="{{ url_for('logout') }}" class="btn btn-danger btn-block logout-btn">Log Out</a>
                 </div>
