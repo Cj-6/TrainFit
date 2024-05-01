@@ -80,7 +80,6 @@ def submit_workout():
                     'name': exercise_name,
                     'workoutID': workoutID,
                 }
-                print(f'exercise name : {exercise['name']}')
                 exerciseID = workout_repo.create_exercise(exercise)
                 for set in sets:
                     set['exerciseID'] = exerciseID
