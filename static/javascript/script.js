@@ -1,10 +1,7 @@
-
 // ---------------------- add workout page -----------------------------------
-
-  document.getElementById('calendar').addEventListener('change', function() {
-    document.getElementById('dateForm').submit();
-  });
-
+function submitForm() {
+  document.getElementById("dateForm").submit();
+}
 
 // adds a new container for an exercise
 const addExerciseBtn = document.querySelector(
@@ -14,7 +11,7 @@ const addExerciseBtn = document.querySelector(
 // event listener added to the addExercise button
 addExerciseBtn.addEventListener("click", function () {
   const exerciseNumber =
-      currentExerciseContainer.querySelectorAll(".exercise-container").length + 1;
+    currentExerciseContainer.querySelectorAll(".exercise-container").length + 1;
   // variable pointing to the html that is going to be added everytime the addExercise button is clicked, the code is just copy and pasted from the addWorkout page
   const html = `<div class="exercise-container">
         
@@ -132,8 +129,10 @@ document.addEventListener("click", function (event) {
     // counting the number of set containers including the one that is about to be added so we can use it to dynamically name the set numbers when displaying them
     const setNumber =
       currentExerciseContainer.querySelectorAll(".set-container").length + 1;
-      const exerciseName = currentExerciseContainer.querySelector('input[name^="exercise-"]').name;
-      const exerciseNumber = exerciseName.match(/exercise-(\d+)-name/)[1];
+    const exerciseName = currentExerciseContainer.querySelector(
+      'input[name^="exercise-"]'
+    ).name;
+    const exerciseNumber = exerciseName.match(/exercise-(\d+)-name/)[1];
 
     // variable with html code to be used to add to the document, pertaining to a new set
     const newSetHTML = `
@@ -189,8 +188,4 @@ document.addEventListener("click", function (event) {
 
 //----------------------------workout page --------------------------------
 
-
-
 // ---------------------------  workout page --------------------------------------
-
-

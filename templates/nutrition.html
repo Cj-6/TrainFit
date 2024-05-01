@@ -1,20 +1,12 @@
 {% extends "_layout.html" %}
 {% block content %}
 <div class="calendar-container">
-
     <div class="calendar-sub-container">
-        <div class="left-arrow">
-            <i class="bi bi-chevron-left"></i>
-        </div>
-
-        <div class="date">
-            <input type="date" id="calendar" name="calendar">
-        </div>
-
-        <div class="right-arrow">
-            <i class="bi bi-chevron-right"></i>
-        </div>
-
+        <form id="dateForm" action="/nutrition" method="get">
+            <div class="date">
+                <input type="date" id="date" name="date" value="{{ date }}" onchange="submitForm()">
+            </div>
+        </form>
     </div>
 </div>
 <div class="parent-container">
@@ -87,7 +79,4 @@
         </form>
     </div>
 </div>
-<script>
-    document.getElementById('calendar').valueAsDate = new Date();
-</script>
 {% endblock %}

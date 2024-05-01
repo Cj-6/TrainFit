@@ -60,9 +60,9 @@ CREATE TABLE Food (
 );
 
 CREATE TABLE comments (
-                          id SERIAL PRIMARY KEY,
-                          comment_text TEXT,
-                          date_posted DATE,
-                          userID UUID REFERENCES Users(userID),
-                          FoodID UUID REFERENCES Food(FoodID)
+    id SERIAL PRIMARY KEY,
+    comment_text TEXT,
+    date_posted DATE,
+    userID UUID REFERENCES Users(userID)
+    FoodID UUID REFERENCES Food(FoodID)
 );
