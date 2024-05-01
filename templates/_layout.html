@@ -11,35 +11,13 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <link rel="icon" href="/static/images/favicon-16x16.png" sizes="16x16" type="image/png">
     <link rel="icon" href="/static/images/favicon-32x32.png" sizes="16x16" type="image/png">
-    <style>
-        .alert {
-            padding: 10px;
-            border-radius: 5px;
-            font-size: 16px;
-            font-weight: bold;
-            margin-top: 20px;
-        }
-
-        .alert-success {
-            text-align: center;
-            background-color: #dff0d8;
-            color: #3c763d;
-            border: 1px solid #d6e9c6;
-        }
-
-        .alert-danger {
-            text-align: center;
-            background-color: #f2dede;
-            color: #a94442;
-            border: 1px solid #ebccd1;
-        }
-    </style>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark">
         <h1 class="navbar-brand">TR<span style="color:#FF7B00;">AI</span>NFIT</h1>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -86,7 +64,7 @@
         <div class="row">
             <div class="col">
                 {% for category, message in messages %}
-                <div class="alert alert-{{ category }}" role="alert">
+                <div class="{{ category }}-alert">
                     {{ message }}
                 </div>
                 {% endfor %}
