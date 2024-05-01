@@ -1,11 +1,11 @@
 from repositories.db import get_pool
 from psycopg.rows import dict_row
 
-def get_workout_by_userid_and_date(userid, date):
+def get_workout_by_userID_and_date(userID, date):
     pool = get_pool()
     with pool.connection() as conn:
         with conn.cursor(row_factory=dict_row) as cursor:
-            cursor.execute('SELECT * FROM workout where userid = %s and date = %s', [userid, date])
+            cursor.execute('SELECT * FROM workout where userID = %s and date = %s', [userID, date])
             workouts = cursor.fetchall()
         return workouts
     
@@ -26,7 +26,7 @@ def create_workout(workout):
     with pool.connection() as conn:
         with conn.cursor() as cursor:
             cursor.execute(
-                'INSERT INTO workout (userid, name, date) VALUES (%s, %s, %s) RETURNING workoutid',
+                'INSERT INTO workout (userID, name, date) VALUES (%s, %s, %s) RETURNING workoutid',
                 [workout['userID'], workout['name'], workout['date']]
             )
             workout_id = cursor.fetchone()[0]

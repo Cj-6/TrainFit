@@ -414,6 +414,7 @@ a.food-link {
 }
 
 .alert-danger {
+    max-width: 550px;
     text-align: center;
     background-color: #f2dede;
     color: #a94442;
@@ -828,7 +829,8 @@ a.food-link {
 
 /* alert Styles */
 .danger-alert {
-    margin: 10px;
+    margin: 10px auto;
+    margin-top: 40px;
     padding: 10px 0;
     font-size: 20px;
     font-weight: bold;
@@ -837,10 +839,12 @@ a.food-link {
     color: #ffffff;
     background-color: #a93634;
     border-radius: 5px;
+    max-width: 550px;
 }
 
 .success-alert {
-    margin: 10px;
+    margin: 10px auto;
+    margin-top: 40px;
     padding: 10px 0;
     font-size: 20px;
     font-weight: bold;
@@ -849,4 +853,5 @@ a.food-link {
     color: #ffffff;
     background-color: #1e7513;
     border-radius: 5px;
+    max-width: 550px;
 }

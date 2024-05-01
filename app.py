@@ -17,7 +17,7 @@ app.secret_key = os.getenv('APP_SECRET_KEY')
 #index
 @app.get('/')
 def index():
-    userID = session.get('userid')
+    userID = session.get('userID')
     print(userID)
     return render_template('index.html', active_page='home')
 
@@ -36,12 +36,11 @@ def workout():
 
     workouts= None
     if userID is not None:
-        workouts = workout_repo.get_workout_by_userid_and_date(userID, date)
+        workouts = workout_repo.get_workout_by_userID_and_date(userID, date)
     return render_template('workout.html', active_page='workout', workouts=workouts)
 
 @app.get('/addWorkout')
 def add_exercise():
-    if 'userID' not in session:
     if 'userID' not in session:
         return redirect(url_for('signin'))
     return render_template('addWorkout.html', active_page='workout')
@@ -99,7 +98,7 @@ def nutrition():
 @app.post('/nutrition')
 def add_food_to_meal():
     meal_name = session.get('mealName')
-    user_id = session.get('userid')
+    user_id = session.get('userID')
     date = request.form.get('calendar')
     food_id = request.form.get('food_id')
     session['date'] = date
@@ -157,9 +156,6 @@ def search():
 def show_my_foods():
     return render_template('myFoods.html')
 
-
-
-
 @app.post('/createFoodPost')
 def create_food_post():
     food_data = {
@@ -193,9 +189,8 @@ def profile():
     if 'userID' not in session:
         flash('You must be signed in to view your profile.', 'danger')
         return redirect('/')
-    userID = session.get('userid')
+    userID = session.get('userID')
     user = user_repository.get_user_by_id(userID)
-    flash('you have successfully signed in', 'success')
     return render_template('profile.html', user=user, active_page='profile')
 
 @app.get('/logout')
@@ -242,7 +237,30 @@ def signin_account():
         flash('Invalid email or password.', 'danger')
         return render_template('signin.html')  
     else:
-        print(f'user: {user}')
         session['userID'] = user['userID']
-        print(f"session['userID']: {session['userID']}")
+        flash('You have successfully signed in.', 'success')
         return redirect(url_for('profile'))
+    
+@app.post('/editprofile')
+def update_profile():
+    if 'userID' not in session:
+        return redirect('/')
+
+    userID = session.get('userID')
+    name = request.form.get('name')
+    age = request.form.get('age')
+    height = request.form.get('height')
+    weight = request.form.get('weight')
+    goal = request.form.get('goal')
+
+    if not name or not age or not height or not weight or not goal:
+        flash('All fields are required.', 'danger')
+        return redirect(url_for('profile'))
+
+    updated_user = user_repository.update_user(userID, name, age, height, weight, goal)
+    if updated_user is None:
+        flash('An error occurred while updating the profile.', 'danger')
+        return redirect(url_for('profile'))
+
+    flash('Profile updated successfully!', 'success')
+    return render_template('profile.html', user=updated_user, active_page='profile')
