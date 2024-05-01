@@ -75,10 +75,34 @@ def update_user(userID: uuid.UUID, name: str, age: int, height: str, weight: flo
     with pool.connection() as conn:
         with conn.cursor(row_factory=dict_row) as cur:
             cur.execute('''
-                        UPDATE users
-                        SET name = %s, age = %s, height = %s, weight = %s, goal = %s
-                        WHERE userID = %s
-                        RETURNING userID, email, name, age, height, weight, goal
-                        ''', (name, age, height, weight, goal, userID))
+                UPDATE users
+                SET name = %s, age = %s, height = %s, weight = %s, goal = %s
+                WHERE userID = %s
+                RETURNING userID, email, name, age, height, weight, goal,
+                    (SELECT COUNT(*) FROM Food WHERE createdByID = userID) AS created_foods_count,
+                    (SELECT COUNT(*) FROM Workout WHERE userID = userID) AS workouts_count
+            ''', (name, age, height, weight, goal, userID))
             updated_user = cur.fetchone()
             return updated_user
+
+def get_user_profile_data(userID: uuid.UUID) -> dict[str, Any] | None:
+    pool = get_pool()
+    with pool.connection() as conn:
+        with conn.cursor(row_factory=dict_row) as cur:
+            cur.execute('''
+                        SELECT
+                            u.userID,
+                            u.email,
+                            u.name,
+                            u.age,
+                            u.height,
+                            u.weight,
+                            u.goal,
+                            (SELECT COUNT(*) FROM Food WHERE createdByID = u.userID) AS created_foods_count,
+                            (SELECT COUNT(*) FROM Workout WHERE userID = u.userID) AS workouts_count
+                        FROM
+                            users u
+                        WHERE u.userID = %s
+                        ''', [userID])
+            user_data = cur.fetchone()
+            return user_data

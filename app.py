@@ -18,7 +18,6 @@ app.secret_key = os.getenv('APP_SECRET_KEY')
 @app.get('/')
 def index():
     userID = session.get('userID')
-    print(userID)
     return render_template('index.html', active_page='home')
 
 
@@ -190,8 +189,8 @@ def profile():
         flash('You must be signed in to view your profile.', 'danger')
         return redirect('/')
     userID = session.get('userID')
-    user = user_repository.get_user_by_id(userID)
-    return render_template('profile.html', user=user, active_page='profile')
+    user_data = user_repository.get_user_profile_data(userID)
+    return render_template('profile.html', user=user_data, active_page='profile')
 
 @app.get('/logout')
 def logout():
@@ -235,12 +234,12 @@ def signin_account():
     user = user_repository.get_user_by_email(email)
     if user is None or not bcrypt.check_password_hash(user['hashed_password'], password):
         flash('Invalid email or password.', 'danger')
-        return render_template('signin.html')  
+        return render_template('signin.html', active_page='signin')  
     else:
         session['userID'] = user['userID']
         flash('You have successfully signed in.', 'success')
         return redirect(url_for('profile'))
-    
+
 @app.post('/editprofile')
 def update_profile():
     if 'userID' not in session:
@@ -261,6 +260,6 @@ def update_profile():
     if updated_user is None:
         flash('An error occurred while updating the profile.', 'danger')
         return redirect(url_for('profile'))
-
+    user_data = user_repository.get_user_profile_data(userID)
     flash('Profile updated successfully!', 'success')
-    return render_template('profile.html', user=updated_user, active_page='profile')
+    return render_template('profile.html', user=user_data, active_page='profile')

@@ -855,3 +855,34 @@ a.food-link {
     border-radius: 5px;
     max-width: 550px;
 }
+
+/* User Info Title */
+.user-info-title {
+    color: #FF7B00;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+/* User Info Text */
+.user-info-text {
+    color: white;
+    font-size: 18px;
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+/* Fitness Stats Title */
+.fitness-stats-title {
+    color: #FF7B00;
+    font-size: 20px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+/* Fitness Stats Text */
+.fitness-stats-text {
+    color: white;
+    font-size: 18px;
+    margin-bottom: 10px;
+    text-align: left;
+}
