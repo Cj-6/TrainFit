@@ -2,11 +2,13 @@ import os
 from dotenv import load_dotenv
 from flask import Flask, render_template, redirect, request, url_for, session, abort, flash
 from flask_bcrypt import Bcrypt
+from datetime import date as dt
 
 from repositories import user_repository, workout_repo
 from repositories.food_repo import *
 from repositories.workout_repo import *
 from repositories.user_repository import *
+from datetime import date
 
 load_dotenv()
 
@@ -33,17 +35,27 @@ def chat():
 def workout():
     userID = session.get('userID')
     date = request.args.get('date')
-
+    if date is None:
+        date = dt.today().strftime('%Y-%m-%d')
+        return redirect(url_for('workout', date=date))
     workouts= None
     if userID is not None:
         workouts = workout_repo.get_workout_by_userID_and_date(userID, date)
-    return render_template('workout.html', active_page='workout', workouts=workouts)
+    return render_template('workout.html', active_page='workout', workouts=workouts, date=date)
+
+@app.post('/workout')
+def adddate():
+    date = request.form.get('calendar')
+    if date is None:
+        date = date.today()
+    return redirect(url_for('workout', date=date))
 
 @app.get('/addWorkout')
 def add_exercise():
     if 'userID' not in session:
-        return redirect(url_for('signin'))
-    return render_template('addWorkout.html', active_page='workout')
+        return redirect(url_for('signin')) 
+    date = dt.today().strftime('%Y-%m-%d')
+    return render_template('addWorkout.html', active_page='workout', date=date)
 
 @app.post('/addWorkout')
 def submit_workout():
