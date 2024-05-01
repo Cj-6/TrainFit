@@ -75,7 +75,10 @@ def submit_workout():
                 })
         if sets:
             exercise_name = request.form.get(f'exercise-{i}-name')
-            if exercise_name is not None:
+            if 'name' in exercise:
+                print(f"exercise name : {exercise['name']}")
+            else:
+                print("exercise does not have a name")
                 exercise = {
                     'name': exercise_name,
                     'workoutID': workoutID,
