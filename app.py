@@ -97,7 +97,7 @@ def nutrition():
 @app.post('/nutrition')
 def add_food_to_meal():
     meal_name = session.get('mealName')
-    user_id = session.get('userID')
+    userID = session.get('userID')
     date = request.form.get('calendar')
     food_id = request.form.get('food_id')
     session['date'] = date
@@ -115,7 +115,7 @@ def add_food_to_meal():
         flash('You must select a date.', 'danger')
         return redirect(url_for('food_info_by_id', food_id=food_id))
 
-    create_meal(meal_name, user_id, food_id, date)
+    create_meal(meal_name, userID, food_id, date)
     flash('Food added successfully!', 'success')
     return render_template('nutrition.html', active_page='nutrition')
 
@@ -130,7 +130,8 @@ def food_info():
 @app.get('/foodInfo/<food_id>')
 def food_info_by_id(food_id):
     food = get_food_by_id(food_id)
-    return render_template('foodInfo.html', current_page='foodInfo', active_page='nutrition', food=food)
+    comments = get_comments(food_id)
+    return render_template('foodInfo.html', current_page='foodInfo', active_page='nutrition', food=food, comments=comments)
 
 @app.get('/createFood')
 def create_food():
@@ -264,34 +265,31 @@ def update_profile():
     flash('Profile updated successfully!', 'success')
     return render_template('profile.html', user=user_data, active_page='profile')
 
-@app.get('/comments/<food_id>')
-def comments(food_id):
-    comments = get_comments(food_id)
-    return render_template('comments.html', active_page='comments', comments=comments)
 
-@app.post('/comments/<food_id>')
+#comments
+@app.post('/foodInfo/<food_id>')
 def add_comment(food_id):
-    user_id = session.get('userID')
+    userID = session.get('userID')
     comment_text = request.form.get('comment')
     if not comment_text:
         flash('Comment cannot be empty.', 'danger')
-        return redirect(url_for('comments', food_id=food_id))
+        return redirect(url_for('food_info', food_id=food_id))
     comment = {
         'food_id': food_id,
-        'user_id': user_id,
+        'userID': userID,
         'comment_text': comment_text
     }
-    create_comment(comment, user_id, food_id)
+    create_comment(comment)
     flash('Comment added successfully!', 'success')
-    return redirect(url_for('comments', food_id=food_id))
+    return redirect(url_for('food_info', food_id=food_id))
 
-@app.post('/comments/<food_id>/delete/<comment_id>')
+@app.post('/foodInfo/<food_id>/delete/<comment_id>')
 def delete_comment(food_id, comment_id):
-    user_id = session.get('userID')
-    comment = get_comments(comment_id)
-    if comment['user_id'] != user_id:
+    userID = session.get('userID')
+    comment = get_comments(food_id)  # Assuming you fetch comments by food_id
+    if comment['userID'] != userID:
         flash('You can only delete your own comments.', 'danger')
-        return redirect(url_for('comments', food_id=food_id))
-    delete_comments(comment_id)
+        return redirect(url_for('food_info', food_id=food_id))
+    delete_comments(food_id, comment_id)
     flash('Comment deleted successfully!', 'success')
-    return redirect(url_for('comments', food_id=food_id))
+    return redirect(url_for('food_info', food_id=food_id))

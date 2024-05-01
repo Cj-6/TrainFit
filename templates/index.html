@@ -9,7 +9,10 @@
         <p class="lead fs-4 description">TrainFit is an innovative AI-supported health application designed
             to revolutionize the way you manage your well-being. With a seamless integration
             of cutting-edge technology and user-friendly features, Trainfit aims to empower
-            individuals in their journey towards better health and fitness. Sign up to get started!
+            individuals in their journey towards better health and fitness. 
+        {% if 'userID' not in session %}    
+        Sign up to get started!</p>
+        {% endif %}
     </div>
 </body>
     {% endblock %}
