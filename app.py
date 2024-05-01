@@ -20,7 +20,6 @@ app.secret_key = os.getenv('APP_SECRET_KEY')
 @app.get('/')
 def index():
     userID = session.get('userID')
-    print(userID)
     return render_template('index.html', active_page='home')
 
 
@@ -88,12 +87,14 @@ def submit_workout():
                 })
         if sets:
             exercise_name = request.form.get(f'exercise-{i}-name')
-            if exercise_name is not None:
+            if 'name' in exercise:
+                print(f"exercise name : {exercise['name']}")
+            else:
+                print("exercise does not have a name")
                 exercise = {
                     'name': exercise_name,
                     'workoutID': workoutID,
                 }
-                print(f'exercise name : {exercise['name']}')
                 exerciseID = workout_repo.create_exercise(exercise)
                 for set in sets:
                     set['exerciseID'] = exerciseID
@@ -110,7 +111,7 @@ def nutrition():
 @app.post('/nutrition')
 def add_food_to_meal():
     meal_name = session.get('mealName')
-    user_id = session.get('userID')
+    userID = session.get('userID')
     date = request.form.get('calendar')
     food_id = request.form.get('food_id')
     session['date'] = date
@@ -128,7 +129,7 @@ def add_food_to_meal():
         flash('You must select a date.', 'danger')
         return redirect(url_for('food_info_by_id', food_id=food_id))
 
-    create_meal(meal_name, user_id, food_id, date)
+    create_meal(meal_name, userID, food_id, date)
     flash('Food added successfully!', 'success')
     return render_template('nutrition.html', active_page='nutrition')
 
@@ -143,7 +144,8 @@ def food_info():
 @app.get('/foodInfo/<food_id>')
 def food_info_by_id(food_id):
     food = get_food_by_id(food_id)
-    return render_template('foodInfo.html', current_page='foodInfo', active_page='nutrition', food=food)
+    comments = get_comments(food_id)
+    return render_template('foodInfo.html', current_page='foodInfo', active_page='nutrition', food=food, comments=comments)
 
 @app.get('/createFood')
 def create_food():
@@ -202,8 +204,8 @@ def profile():
         flash('You must be signed in to view your profile.', 'danger')
         return redirect('/')
     userID = session.get('userID')
-    user = user_repository.get_user_by_id(userID)
-    return render_template('profile.html', user=user, active_page='profile')
+    user_data = user_repository.get_user_profile_data(userID)
+    return render_template('profile.html', user=user_data, active_page='profile')
 
 @app.get('/logout')
 def logout():
@@ -247,12 +249,12 @@ def signin_account():
     user = user_repository.get_user_by_email(email)
     if user is None or not bcrypt.check_password_hash(user['hashed_password'], password):
         flash('Invalid email or password.', 'danger')
-        return render_template('signin.html')  
+        return render_template('signin.html', active_page='signin')  
     else:
         session['userID'] = user['userID']
         flash('You have successfully signed in.', 'success')
         return redirect(url_for('profile'))
-    
+
 @app.post('/editprofile')
 def update_profile():
     if 'userID' not in session:
@@ -273,6 +275,35 @@ def update_profile():
     if updated_user is None:
         flash('An error occurred while updating the profile.', 'danger')
         return redirect(url_for('profile'))
-
+    user_data = user_repository.get_user_profile_data(userID)
     flash('Profile updated successfully!', 'success')
-    return render_template('profile.html', user=updated_user, active_page='profile')
+    return render_template('profile.html', user=user_data, active_page='profile')
+
+
+#comments
+@app.post('/foodInfo/<food_id>')
+def add_comment(food_id):
+    userID = session.get('userID')
+    comment_text = request.form.get('comment')
+    if not comment_text:
+        flash('Comment cannot be empty.', 'danger')
+        return redirect(url_for('food_info', food_id=food_id))
+    comment = {
+        'food_id': food_id,
+        'userID': userID,
+        'comment_text': comment_text
+    }
+    create_comment(comment)
+    flash('Comment added successfully!', 'success')
+    return redirect(url_for('food_info', food_id=food_id))
+
+@app.post('/foodInfo/<food_id>/delete/<comment_id>')
+def delete_comment(food_id, comment_id):
+    userID = session.get('userID')
+    comment = get_comments(food_id)  # Assuming you fetch comments by food_id
+    if comment['userID'] != userID:
+        flash('You can only delete your own comments.', 'danger')
+        return redirect(url_for('food_info', food_id=food_id))
+    delete_comments(food_id, comment_id)
+    flash('Comment deleted successfully!', 'success')
+    return redirect(url_for('food_info', food_id=food_id))

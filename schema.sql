@@ -58,3 +58,11 @@ CREATE TABLE Food (
     sugars VARCHAR(255),
     protein VARCHAR(255)
 );
+
+CREATE TABLE comments (
+                          id SERIAL PRIMARY KEY,
+                          comment_text TEXT,
+                          date_posted DATE,
+                          userID UUID REFERENCES Users(userID),
+                          FoodID UUID REFERENCES Food(FoodID)
+);
