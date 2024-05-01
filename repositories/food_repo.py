@@ -47,7 +47,7 @@ def create_food(food):
             conn.commit()
 
 
-def create_meal(meal_name, user_id, food_id, date):
+def create_meal(meal_name, userID, food_id, date):
     pool = get_pool()
     with pool.connection() as conn:
         with conn.cursor() as cursor:
@@ -56,33 +56,32 @@ def create_meal(meal_name, user_id, food_id, date):
                                 (meal_name, userID, FoodID, date) 
                             VALUES 
                                 (%s, %s, %s, %s)''', 
-                            (meal_name, user_id, food_id, date))
+                            (meal_name, userID, food_id, date))
             conn.commit()
             conn.close()
 
-def create_comment(comment, user_id, food_id):
+def create_comment(comment):
     pool = get_pool()
     with pool.connection() as conn:
         with conn.cursor() as cursor:
             cursor.execute('''
                             INSERT INTO comments 
-                                (comment_text, user_id, food_id) 
+                                (comment_text, userID, food_id) 
                             VALUES 
                                 (%s, %s, %s)''', 
-                            (comment, user_id, food_id))
+                            (comment['comment_text'], comment['userID'], comment['food_id']))
             conn.commit()
-            conn.close()
+
+def delete_comments(food_id, comment_id):
+    pool = get_pool()
+    with pool.connection() as conn:
+        with conn.cursor() as cursor:
+            cursor.execute('DELETE FROM comments WHERE food_id = %s AND comment_id = %s', (food_id, comment_id))
+            conn.commit()
 
 def get_comments(food_id):
     pool = get_pool()
     with pool.connection() as conn:
         with conn.cursor(row_factory=dict_row) as cursor:
-            cursor.execute('SELECT * FROM Comment WHERE FoodID = %s', (food_id,))
-            return cursor.fetchall()      
-def delete_comments(food_id, comment_id):
-    pool = get_pool()
-    with pool.connection() as conn:
-        with conn.cursor() as cursor:
-            cursor.execute('DELETE FROM Comment WHERE FoodID = %s AND commentID = %s', (food_id, comment_id))
-            conn.commit()
-            conn.close()
+            cursor.execute('SELECT * FROM comments WHERE food_id = %s', (food_id,))
+            return cursor.fetchall()
