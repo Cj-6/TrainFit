@@ -50,14 +50,19 @@ def get_user_by_email(email: str) -> dict[str, Any] | None:
             return None
 
 
-def get_user_by_id(userID: int) -> dict[str, Any] | None:
+def get_user_by_id(userID: uuid.UUID) -> dict[str, Any] | None:
     pool = get_pool()
     with pool.connection() as conn:
         with conn.cursor(row_factory=dict_row) as cur:
             cur.execute('''
                         SELECT
                             userID,
-                            email
+                            email,
+                            name,
+                            age,
+                            height,
+                            weight,
+                            goal
                         FROM
                             users
                         WHERE userID = %s
@@ -65,7 +70,7 @@ def get_user_by_id(userID: int) -> dict[str, Any] | None:
             user = cur.fetchone()
             return user
 
-def update_user(userID: int, name: str, age: int, height: str, weight: float, goal: str) -> dict[str, Any] | None:
+def update_user(userID: uuid.UUID, name: str, age: int, height: str, weight: float, goal: str) -> dict[str, Any] | None:
     pool = get_pool()
     with pool.connection() as conn:
         with conn.cursor(row_factory=dict_row) as cur:
