@@ -1,17 +1,11 @@
 
 // ---------------------- add workout page -----------------------------------
 
-//for loading the calendar workout page putting the date in the url
-var calendar = document.getElementById('calendar');
+  document.getElementById('calendar').addEventListener('change', function() {
+    document.getElementById('dateForm').submit();
+  });
 
-// Add an event listener for the 'change' event
-calendar.addEventListener('change', function() {
-    // Get the selected date
-    var date = calendar.value;
 
-    // Redirect to the /workout route with the selected date as a query parameter
-    window.location.href = '/workout?date=' + date;
-});
 // adds a new container for an exercise
 const addExerciseBtn = document.querySelector(
   ".d-flex.justify-content-center.align-items-center"
@@ -195,26 +189,7 @@ document.addEventListener("click", function (event) {
 
 //----------------------------workout page --------------------------------
 
-var calendar = document.getElementById("calendar");
 
-// Check if there's a date stored in localStorage
-var date = localStorage.getItem("date");
-if (date) {
-  // If there's a date, set the value of the date input to this date
-  calendar.value = date;
-}
-
-// Add an event listener for the 'change' event
-calendar.addEventListener("change", function () {
-  // Get the selected date
-  var date = calendar.value;
-
-  // Store the selected date in localStorage
-  localStorage.setItem("date", date);
-
-  // Redirect to the /workout route with the selected date as a query parameter
-  window.location.href = "/workout?date=" + date;
-});
 
 // ---------------------------  workout page --------------------------------------
 
