@@ -4,7 +4,7 @@ from flask import Flask, g, render_template, redirect, request, url_for, session
 from flask_bcrypt import Bcrypt
 from datetime import date as dt
 
-from repositories import user_repository, workout_repo
+from repositories import user_repository, workout_repo, food_repo
 from repositories.food_repo import *
 from repositories.workout_repo import *
 from repositories.user_repository import *
@@ -39,7 +39,60 @@ def workout():
         return redirect(url_for('workout', date=date))
     workouts= None
     if userID is not None:
-        workouts = workout_repo.get_workout_by_userID_and_date(userID, date)
+        if date is not None:
+            workouts = workout_repo.get_workout_details_by_user_and_date(userID, date)
+    if not workouts:
+        workouts = [{
+            'name': 'Template Workout',
+            'exercises': [
+                {
+                    'exercisename': 'Template Press',
+                    'sets': [
+                        {
+                            'weight': '225',
+                            'reps': '8',
+                            'rpe': '6',
+                            'note': 'Lightweight babbbbayyyyy!',
+                        },
+                        {
+                            'weight': '315',
+                            'reps': '4',
+                            'rpe': '9',
+                            'note': 'Elbow was hurting on this set!',
+                        },
+                        {
+                            'weight': '405',
+                            'reps': '1',
+                            'rpe': '10',
+                            'note': 'Just hit a PR!!!',
+                        }   
+                    ]
+                },
+                {
+                    'exercisename': 'Template Row',
+                    'sets': [
+                        {
+                        'weight': '225',
+                        'reps': '8',
+                        'rpe': '6',
+                        'note': 'Lightweight babbbbayyyyy!',
+                    },
+                    {
+                        'weight': '315',
+                        'reps': '4',
+                        'rpe': '9',
+                        'note': 'Elbow was hurting on this set!',
+                    },
+                    {
+                        'weight': '405',
+                        'reps': '1',
+                        'rpe': '10',
+                        'note': 'Just hit a PR!!!',
+                    }
+                ]
+            }
+        ]
+    }]
     return render_template('workout.html', active_page='workout', workouts=workouts, date=date)
 
 @app.post('/workout')
@@ -87,18 +140,14 @@ def submit_workout():
                 })
         if sets:
             exercise_name = request.form.get(f'exercise-{i}-name')
-            if 'name' in exercise:
-                print(f"exercise name : {exercise['name']}")
-            else:
-                print("exercise does not have a name")
-                exercise = {
-                    'name': exercise_name,
-                    'workoutID': workoutID,
-                }
-                exerciseID = workout_repo.create_exercise(exercise)
-                for set in sets:
-                    set['exerciseID'] = exerciseID
-                    workout_repo.create_set(set)
+            exercise = {
+                'name': exercise_name,
+                'workoutID': workoutID,
+            }
+            exerciseID = workout_repo.create_exercise(exercise)
+            for set in sets:
+                set['exerciseID'] = exerciseID
+                workout_repo.create_set(set)
             
     return redirect(url_for('workout'))
 
@@ -336,3 +385,76 @@ def delete_comment(food_id, comment_id):
     delete_comments(food_id, comment_id)
     flash('Comment deleted successfully!', 'success')
     return redirect(url_for('food_info', food_id=food_id))
+
+
+@app.get('/userFoods')
+def show_user_foods():
+    if 'userID' not in session:
+        flash('You must be signed in to view your foods.', 'danger')
+        return redirect(url_for('signin'))
+
+    userID = session['userID']
+    user_foods = food_repo.get_user_foods(userID)
+    return render_template('userFoods.html', user_foods=user_foods, active_page='nutrition')
+
+@app.get('/editFood/<food_id>')
+def edit_food(food_id):
+    if 'userID' not in session:
+        flash('You must be signed in to edit a food.', 'danger')
+        return redirect(url_for('signin'))
+
+    food = food_repo.get_food_by_id(food_id)
+    if food is None:
+        flash('Food not found.', 'danger')
+        return redirect(url_for('show_user_foods'))
+
+    return render_template('editFood.html', food=food)
+
+@app.post('/editFood/<food_id>')
+def update_food(food_id):
+    if 'userID' not in session:
+        flash('You must be signed in to edit a food.', 'danger')
+        return redirect(url_for('signin'))
+
+    name = request.form.get('name')
+    calories = request.form.get('calories')
+    total_fat = request.form.get('total_fat')
+    saturated_fat = request.form.get('saturated_fat')
+    trans_fat = request.form.get('trans_fat')
+    cholesterol = request.form.get('cholesterol')
+    sodium = request.form.get('sodium')
+    carbohydrates = request.form.get('carbohydrates')
+    sugars = request.form.get('sugars')
+    protein = request.form.get('protein')
+
+    if not name or not calories or not total_fat or not saturated_fat or not trans_fat or not cholesterol or not sodium or not carbohydrates or not sugars or not protein:
+        flash('All fields are required.', 'danger')
+        return redirect(url_for('edit_food', food_id=food_id))
+
+    food_data = {
+        'foodid': food_id,
+        'name': name,
+        'calories': calories,
+        'total_fat': total_fat,
+        'saturated_fat': saturated_fat,
+        'trans_fat': trans_fat,
+        'cholesterol': cholesterol,
+        'sodium': sodium,
+        'carbohydrates': carbohydrates,
+        'sugars': sugars,
+        'protein': protein
+    }
+
+    food_repo.update_food(food_data)
+    flash('Food updated successfully!', 'success')
+    return redirect(url_for('show_user_foods'))
+
+@app.post('/deleteFood/<food_id>')
+def delete_food(food_id):
+    if 'userID' not in session:
+        flash('You must be signed in to delete a food.', 'danger')
+        return redirect(url_for('signin'))
+
+    food_repo.delete_food_by_id(food_id)
+    flash('Food deleted successfully!', 'success')
+    return redirect(url_for('show_user_foods'))

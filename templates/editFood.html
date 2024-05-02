@@ -1,0 +1,53 @@
+{% extends "_layout.html" %}
+{% block content %}
+<div class="parent-container">
+    <div class="info-container" id="create-food-container">
+        <form action="{{ url_for('update_food', food_id=food.foodid) }}" method="POST" class="create-food-form">
+            <div class="input-group input-container">
+                <label for="name" class="food-input-label">Name</label>
+                <input type="text" id="name" name="name" value="{{ food.name }}" required>
+            </div>
+            <div class="input-group input-container">
+                <label for="calories" class="food-input-label">Calories</label>
+                <input type="text" name="calories" value="{{ food.calories }}" required>
+            </div>
+            <div class="input-group input-container">
+                <label for="total_fat" class="food-input-label">Total Fat</label>
+                <input type="text" id="total_fat" name="total_fat" value="{{ food.total_fat }}" required>
+            </div>
+            <div class="input-group input-container">
+                <label for="saturated_fat" class="food-input-label">Saturated Fat</label>
+                <input type="text" id="saturated_fat" name="saturated_fat" value="{{ food.saturated_fat }}" required>
+            </div>
+            <div class="input-group input-container">
+                <label for="trans_fat" class="food-input-label">Trans Fat</label>
+                <input type="text" id="trans_fat" name="trans_fat" value="{{ food.trans_fat }}" required>
+            </div>
+            <div class="input-group input-container">
+                <label for="cholesterol" class="food-input-label">Cholesterol</label>
+                <input type="text" id="cholesterol" name="cholesterol" value="{{ food.cholesterol }}" required>
+            </div>
+            <div class="input-group input-container">
+                <label for="sodium" class="food-input-label">Sodium</label>
+                <input type="text" id="sodium" name="sodium" value="{{ food.sodium }}" required>
+            </div>
+            <div class="input-group input-container">
+                <label for="carbohydrates" class="food-input-label">Total Carbohydrates</label>
+                <input type="text" id="carbohydrates" name="carbohydrates" value="{{ food.carbohydrates }}" required>
+            </div>
+            <div class="input-group input-container">
+                <label for="sugars" class="food-input-label">Sugars</label>
+                <input type="text" id="sugars" name="sugars" value="{{ food.sugars }}" required>
+            </div>
+            <div class="input-group input-container">
+                <label for="protein" class="food-input-label">Protein</label>
+                <input type="text" id="protein" name="protein" value="{{ food.protein }}" required>
+            </div>
+            <div class="button-group">
+                <button type="button" class="btn cancel-btn" onclick="window.history.back();">Cancel</button>
+                <button type="submit" class="btn submit-btn">Update</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

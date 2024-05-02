@@ -110,3 +110,38 @@ def get_comments(food_id):
         with conn.cursor(row_factory=dict_row) as cursor:
             cursor.execute('SELECT * FROM comments WHERE food_id = %s', (food_id,))
             return cursor.fetchall()
+
+def get_user_foods(userID):
+    pool = get_pool()
+    with pool.connection() as conn:
+        with conn.cursor(row_factory=dict_row) as cursor:
+            cursor.execute('''
+                SELECT f.foodid, f.name, f.calories, f.total_fat, f.saturated_fat, f.trans_fat,
+                       f.cholesterol, f.sodium, f.carbohydrates, f.sugars, f.protein
+                FROM food f
+                JOIN meal m ON f.foodid = m.foodid
+                WHERE m.userID = %s
+            ''', (userID,))
+            return cursor.fetchall()
+
+def update_food(food):
+    pool = get_pool()
+    with pool.connection() as conn:
+        with conn.cursor() as cursor:
+            cursor.execute('''
+                UPDATE food
+                SET name = %s, calories = %s, total_fat = %s, saturated_fat = %s,
+                    trans_fat = %s, cholesterol = %s, sodium = %s, carbohydrates = %s,
+                    sugars = %s, protein = %s
+                WHERE foodid = %s
+            ''', (food['name'], food['calories'], food['total_fat'], food['saturated_fat'],
+                  food['trans_fat'], food['cholesterol'], food['sodium'], food['carbohydrates'],
+                  food['sugars'], food['protein'], food['foodid']))
+            conn.commit()
+
+def delete_food_by_id(food_id):
+    pool = get_pool()
+    with pool.connection() as conn:
+        with conn.cursor() as cursor:
+            cursor.execute('DELETE FROM food WHERE foodid = %s', (food_id,))
+            conn.commit()
