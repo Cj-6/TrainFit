@@ -29,6 +29,10 @@
 <div class="parent-container workout">
     <div class="container info-container workout-title-container">
         <h3 class="workout-name">{{ workout.name }}</h3>
+        <form action="/delete-workout" method="POST">
+            <input type="hidden" name="workout_id" value="{{ workout.workoutid }}">
+            <button type="submit" class="delete-workout"><i class="bi bi-x-square-fill"></i></button>
+        </form>
     </div>
     {% for exercise in workout.exercises %}
     <div class="container info-container workout">

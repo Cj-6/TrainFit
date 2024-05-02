@@ -95,6 +95,12 @@ def workout():
     }]
     return render_template('workout.html', active_page='workout', workouts=workouts, date=date)
 
+@app.post('/delete-workout')
+def delete_workout_by_id():
+    workoutID = request.form.get('workout_id')
+    workout_repo.delete_workout_by_id(workoutID)
+    return redirect(url_for('workout'))
+
 @app.post('/workout')
 def adddate():
     date = request.form.get('calendar')
