@@ -174,7 +174,18 @@ div.container.info-container.workout-title-container {
     position: absolute;
     right: 10px;
     bottom: 5px;
+}
 
+.edit-workout{
+    position: absolute;
+    right: 60px;
+    bottom: 5px;
+    background: transparent;
+    border: none;
+}
+
+.col-md-6.offset-md-3{
+    margin-bottom: 50px;
 }
 
 button.delete-workout{
@@ -186,6 +197,9 @@ button.delete-workout{
 
 .container.info-container.workout{
     padding-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
 .workout-name {
@@ -235,10 +249,21 @@ button.delete-workout{
 
 /* Add Input Styles */
 .addInput {
-    background-color: #575757;
+    background-color: #39393b;
     border: none;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.09);
+    transition: background-color 0.3s ease-in-out;
 }
+
+.addInput:hover {
+    background-color: rgba(255, 123, 0, 0.5);
+    border: none;
+}
+
+.preview-set > .addInput:hover{
+    display: none;
+}
+
 
 .addInput.exercise {
     width: 150px;
@@ -300,14 +325,16 @@ button.delete-workout{
 }
 
 /* Close Button Styles */
-.bi.bi-x-square-fill {
+.bi.bi-x-square-fill,
+.bi.bi-pencil-square{
     font-size: xx-large;
     color: #FF7B00;
     opacity: 50%;
     cursor: pointer;
 }
 
-.bi.bi-x-square-fill:hover {
+.bi.bi-x-square-fill:hover,
+.bi.bi-pencil-square:hover{
     opacity: 100%;
     cursor: pointer;
 }

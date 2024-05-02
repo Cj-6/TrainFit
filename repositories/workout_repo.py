@@ -37,9 +37,10 @@ def get_workout_details_by_user_and_date(userID, date):
                     sets = cursor.fetchall()
                     exercise['sets'] = sets
                 workout['exercises'] = exercises
-
     print(f"Returning workouts: {workouts}")
     return workouts
+
+
 
 def delete_workout_by_id(workoutID):
     pool = get_pool()
