@@ -261,18 +261,38 @@ def create_food_post():
         flash('You must be signed in to add a food.', 'danger')
         return redirect(url_for('signin'))
     
+    name = request.form.get('name')
+    if not name:
+        flash('Please enter a name for the food.', 'danger')
+        return redirect(url_for('get_create_food'))
+    
+    calories = request.form.get('calories')
+    total_fat = request.form.get('total_fat')
+    saturated_fat = request.form.get('saturated_fat')
+    trans_fat = request.form.get('trans_fat')
+    cholesterol = request.form.get('cholesterol')
+    sodium = request.form.get('sodium')
+    carbohydrates = request.form.get('carbohydrates')
+    sugars = request.form.get('sugars')
+    protein = request.form.get('protein')
+    
+    if not calories or not total_fat or not saturated_fat or not trans_fat or not cholesterol or not sodium or not carbohydrates or not sugars or not protein:
+        flash('Please fill in all fields.', 'danger')
+        return redirect(url_for('get_create_food'))
+    
     food_data = {
-        'name': request.form.get('name'),
-        'calories': request.form.get('calories'),
-        'total_fat': request.form.get('total_fat'),
-        'saturated_fat': request.form.get('saturated_fat'),
-        'trans_fat': request.form.get('trans_fat'),
-        'cholesterol': request.form.get('cholesterol'),
-        'sodium': request.form.get('sodium'),
-        'carbohydrates': request.form.get('carbohydrates'),
-        'sugars': request.form.get('sugars'),
-        'protein': request.form.get('protein'),
+        'name': name,
+        'calories': calories,
+        'total_fat': total_fat,
+        'saturated_fat': saturated_fat,
+        'trans_fat': trans_fat,
+        'cholesterol': cholesterol,
+        'sodium': sodium,
+        'carbohydrates': carbohydrates,
+        'sugars': sugars,
+        'protein': protein,
     }
+    
     user_id = session.get('userID')
     food_data['user_id'] = user_id
     food_data = create_food(food_data, user_id)
