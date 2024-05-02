@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-from flask import Flask, render_template, redirect, request, url_for, session, abort, flash
+from flask import Flask, g, render_template, redirect, request, url_for, session, abort, flash
 from flask_bcrypt import Bcrypt
 from datetime import date as dt
 
@@ -99,7 +99,7 @@ def workout():
 def adddate():
     date = request.form.get('calendar')
     if date is None:
-        date = date.today()
+        date = dt.today().strftime('%Y-%m-%d')
     return redirect(url_for('workout', date=date))
 
 @app.get('/addWorkout')
@@ -151,17 +151,41 @@ def submit_workout():
             
     return redirect(url_for('workout'))
 
-#nutrition get
+
+
+@app.before_request
+def before_request():
+    date = request.args.get('date')
+    if request.endpoint in ['nutrition', 'food_info', 'workout'] and date is None:
+        date = dt.today().strftime('%Y-%m-%d')
+        session['date'] = date
+    if date is None:
+        date = dt.today().strftime('%Y-%m-%d')
+    g.date = date
+
 @app.get('/nutrition')
 def nutrition():
-    return render_template('nutrition.html', active_page='nutrition')
+    date = request.args.get('date')
+    if date is None:
+        date = dt.today().strftime('%Y-%m-%d')
+        return redirect(url_for('nutrition', date=date))
+
+    user_id = session.get('userID')  # Get the user ID from the session
+    meals = ['breakfast', 'lunch', 'dinner', 'snack']  # Define the meal names
+    meal_data = {}
+
+    # Fetch the meal data for each meal
+    for meal_name in meals:
+        meal_data[meal_name] = get_meal_by_user_and_date(meal_name, date, user_id)
+
+    return render_template('nutrition.html', active_page='nutrition', date=date, meal_data=meal_data)
 
 #nutrition post
 @app.post('/nutrition')
 def add_food_to_meal():
     meal_name = session.get('mealName')
     userID = session.get('userID')
-    date = request.form.get('calendar')
+    date = request.form.get('date')
     food_id = request.form.get('food_id')
     session['date'] = date
 
@@ -180,12 +204,15 @@ def add_food_to_meal():
 
     create_meal(meal_name, userID, food_id, date)
     flash('Food added successfully!', 'success')
-    return render_template('nutrition.html', active_page='nutrition')
+    meal_data = {}
+    for meal_name in ['breakfast', 'lunch', 'dinner', 'snack']:
+        meal_data[meal_name] = get_meal_by_user_and_date(meal_name, date, userID)
+    return render_template('nutrition.html', active_page='nutrition', meal_data=meal_data)
 
 @app.get('/foodInfo')
 def food_info():
     meal_name = request.args.get('mealName')
-    date = request.args.get('date')
+    date = session.get('date', dt.today().strftime('%Y-%m-%d'))
     session['mealName'] = meal_name 
     food = get_all_foods()
     return render_template('foodInfo.html', current_page='foodInfo', active_page='nutrition', food=food, date=date)
@@ -193,12 +220,12 @@ def food_info():
 @app.get('/foodInfo/<food_id>')
 def food_info_by_id(food_id):
     food = get_food_by_id(food_id)
+    creator = get_food_creator(food_id)
     comments = get_comments(food_id)
-    return render_template('foodInfo.html', current_page='foodInfo', active_page='nutrition', food=food, comments=comments)
+    return render_template('foodInfo.html', current_page='foodInfo', active_page='nutrition', food=food, comments=comments, creator=creator)
 
 @app.get('/createFood')
-def create_food():
-    
+def get_create_food():
     if 'userID' not in session:
         flash('You must be signed in to add a food.', 'danger')
         return redirect(url_for('signin'))
@@ -231,10 +258,12 @@ def create_food_post():
         'sodium': request.form.get('sodium'),
         'carbohydrates': request.form.get('carbohydrates'),
         'sugars': request.form.get('sugars'),
-        'protein': request.form.get('protein')
+        'protein': request.form.get('protein'),
     }
-    new_food = create_food(food_data)
-    return render_template('foodInfo.html', food=food_data)
+    user_id = session.get('userID')
+    food_data['user_id'] = user_id
+    food_data = create_food(food_data, user_id)
+    return render_template('foodInfo.html', food=food_data, active_page='nutrition')
 
 
 #user get

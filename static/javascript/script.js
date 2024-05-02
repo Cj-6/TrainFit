@@ -1,4 +1,3 @@
-
 // ---------------------- add workout page -----------------------------------
 
 var calendarElemenet = document.getElementById('calendar');
@@ -199,8 +198,4 @@ document.addEventListener("click", function (event) {
 
 //----------------------------workout page --------------------------------
 
-
-
 // ---------------------------  workout page --------------------------------------
-
-

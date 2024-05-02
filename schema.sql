@@ -2,7 +2,7 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 CREATE TABLE Users (
     userID UUID PRIMARY KEY,
     email VARCHAR(255) UNIQUE,
-    password VARCHAR(255)
+    password VARCHAR(255),
     name VARCHAR(255), 
     age INT, 
     height VARCHAR(10),  
@@ -60,9 +60,9 @@ CREATE TABLE Food (
 );
 
 CREATE TABLE comments (
-                          id SERIAL PRIMARY KEY,
-                          comment_text TEXT,
-                          date_posted DATE,
-                          userID UUID REFERENCES Users(userID),
-                          FoodID UUID REFERENCES Food(FoodID)
+    id SERIAL PRIMARY KEY,
+    comment_text TEXT,
+    date_posted DATE,
+    userID UUID REFERENCES Users(userID)
+    FoodID UUID REFERENCES Food(FoodID)
 );

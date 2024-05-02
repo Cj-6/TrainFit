@@ -6,12 +6,12 @@
 <div class="calendar-container">
 
     <div class="calendar-sub-container">
-    
-    <form id="dateForm" method="POST" action="workout">
-        <div class="date">
-            <input type="date" id="calendar" name="calendar" value="{{ date }}">
-        </div>
-    </form>
+
+        <form id="dateForm" action="/workout" method="get">
+            <div class="date">
+                <input type="date" id="date" name="date" value="{{ date }}" onchange="submitForm()">
+            </div>
+        </form>
 
     </div>
 </div>

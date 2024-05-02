@@ -94,6 +94,7 @@ input[type="date"]:hover::-webkit-calendar-picker-indicator {
 
 
 #calendar,
+#date,
 #addWorkoutCalendar {
     min-width: 50px;
     height: 34px;

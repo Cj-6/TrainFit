@@ -31,19 +31,31 @@ def get_food_by_id(food_id):
             cursor.execute("SELECT * FROM food WHERE foodid = %s", (food_id,))
             return cursor.fetchone()  # fetch the food with the given ID
         
-def create_food(food):
+def get_food_creator(food_id):
+    pool = get_pool()
+    with pool.connection() as conn:
+        with conn.cursor(row_factory=dict_row) as cursor:
+            cursor.execute("""
+            SELECT users.name 
+            FROM Food 
+            JOIN Users ON Food.createdByID = Users.userID 
+            WHERE Food.FoodID = %s
+            """, (food_id,))
+            return cursor.fetchone()
+        
+def create_food(food_data, user_id):
     pool = get_pool()
     with pool.connection() as conn:
         with conn.cursor() as cursor:
             cursor.execute('''
                             INSERT INTO food 
                                 (foodid, name, calories, protein, total_fat, saturated_fat, trans_fat, 
-                                cholesterol, sodium, carbohydrates, sugars) 
+                                cholesterol, sodium, carbohydrates, sugars, createdbyid) 
                             VALUES 
-                                (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)''', 
-                            (str(uuid.uuid4()), food['name'], food['calories'], food['total_fat'],  
-                            food['saturated_fat'], food['trans_fat'], food['cholesterol'], 
-                            food['sodium'], food['carbohydrates'], food['sugars'], food['protein']))
+                                (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)''', 
+                            (str(uuid.uuid4()), food_data['name'], food_data['calories'], food_data['total_fat'],  
+                            food_data['saturated_fat'], food_data['trans_fat'], food_data['cholesterol'], 
+                            food_data['sodium'], food_data['carbohydrates'], food_data['sugars'], food_data['protein'], user_id))
             conn.commit()
 
 
@@ -59,6 +71,19 @@ def create_meal(meal_name, userID, food_id, date):
                             (meal_name, userID, food_id, date))
             conn.commit()
             conn.close()
+
+
+def get_meal_by_user_and_date(meal_name, date, user_id):
+    pool = get_pool()
+    with pool.connection() as conn:
+        with conn.cursor() as cursor:
+            cursor.execute("""
+                SELECT Meal.*, Food.* 
+                FROM Meal 
+                INNER JOIN Food ON Meal.FoodID = Food.FoodID
+                WHERE Meal.meal_name = %s AND Meal.date = %s AND Meal.userID = %s
+            """, (meal_name, date, user_id))
+            return cursor.fetchall()
 
 def create_comment(comment):
     pool = get_pool()

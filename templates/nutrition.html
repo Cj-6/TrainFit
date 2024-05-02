@@ -1,93 +1,82 @@
 {% extends "_layout.html" %}
 {% block content %}
 <div class="calendar-container">
-
     <div class="calendar-sub-container">
-        <div class="left-arrow">
-            <i class="bi bi-chevron-left"></i>
-        </div>
-
-        <div class="date">
-            <input type="date" id="calendar" name="calendar">
-        </div>
-
-        <div class="right-arrow">
-            <i class="bi bi-chevron-right"></i>
-        </div>
-
+        <form id="dateForm" action="/nutrition" method="get">
+            <div class="date">
+                <input type="date" id="date" name="date" value="{{ date }}" onchange="submitForm()">
+            </div>
+        </form>
     </div>
 </div>
 <div class="parent-container">
 
     <div class="container info-container">
         <h2 class="info-container-title">Breakfast</h2>
-        <hr>
-        <!-- items will be dynamically added here -->
+        {% for item in meal_data.breakfast %}
+        <div class="food-item">
+            <div class="row">
+                <div class="col-6 text-left">
+                    <h4 id="food-name">{{ item[7] }}</h4> <!-- This is assuming item[2] is the food name -->
+                    <p id="calories">Calories: {{ item[8] }}</p> <!-- This is assuming item[3] is the calories -->
+                </div>
+                <div class="col-6 text-right">
+                </div>
+            </div>
+        </div>
+        {% endfor %}
         <a href="/foodInfo?mealName=breakfast" class="btn add-food-btn">Add Breakfast Food</a>
     </div>
 
     <div class="container info-container">
         <h2 class="info-container-title">Lunch</h2>
-        <hr>
-        <!-- items will be dynamically added here -->
+        {% for item in meal_data.lunch %}
         <div class="food-item">
             <div class="row">
                 <div class="col-6 text-left">
-                    <h4 id="food-name">Food Name</h4>
-                    <p id="servings">Servings: 1</p>
+                    <h4 id="food-name">{{ item[7] }}</h4>
+                    <p id="calories">Calories: {{ item[8] }}</p>
                 </div>
                 <div class="col-6 text-right">
-                    <p id="calories">Calories: 200</p>
                 </div>
             </div>
         </div>
-        <div class="food-item">
-            <div class="row">
-                <div class="col-6 text-left">
-                    <h4 id="food-name">Food Name #2</h4>
-                    <p id="servings">Servings: 2</p>
-                </div>
-                <div class="col-6 text-right">
-                    <p id="calories">Calories: 350</p>
-                </div>
-            </div>
-        </div>
-        <form action="/addFood" method="GET">
-            <input type="hidden" id="meal_name" name="meal_name" value="{{ meal_name }}">
-            <a href="/foodInfo?mealName=dinner" class="btn add-food-btn">Add Dinner Food</a>
-        </form>
+        {% endfor %}
+        <a href="/foodInfo?mealName=lunch" class="btn add-food-btn">Add lunch Food</a>
     </div>
 
     <div class="container info-container">
         <h2 class="info-container-title">Dinner</h2>
-        <hr>
-        <!-- Food items will be dynamically added here -->
+        {% for item in meal_data.dinner %}
         <div class="food-item">
             <div class="row">
                 <div class="col-6 text-left">
-                    <h4 id="food-name">Food Name</h4>
-                    <p id="servings">Servings: .5</p>
+                    <h4 id="food-name">{{ item[7] }}</h4>
+                    <p id="calories">Calories: {{ item[8] }}</p>
                 </div>
                 <div class="col-6 text-right">
-                    <p id="calories">Calories: 340</p>
                 </div>
             </div>
         </div>
-        <form action="/addFood" method="GET">
-            <a href="/foodInfo?mealName=dinner" class="btn add-food-btn">Add Dinner Food</a>
-        </form>
+        {% endfor %}
+        <a href="/foodInfo?mealName=dinner" class="btn add-food-btn">Add Dinner Food</a>
     </div>
 
     <div class="container info-container">
         <h2 class="info-container-title">Snack</h2>
-        <hr>
-        <!-- Food items will be dynamically added here -->
-        <form action="/addFood" method="GET">
-            <a href="/foodInfo?mealName=snack" class="btn add-food-btn">Add Snack Food</a>
-        </form>
+        {% for item in meal_data.snack %}
+        <div class="food-item">
+            <div class="row">
+                <div class="col-6 text-left">
+                    <h4 id="food-name">{{ item[7] }}</h4>
+                    <p id="calories">Calories: {{ item[8] }}</p>
+                </div>
+                <div class="col-6 text-right">
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <a href="/foodInfo?mealName=snack" class="btn add-food-btn">Add Snack Food</a>
     </div>
 </div>
-<script>
-    document.getElementById('calendar').valueAsDate = new Date();
-</script>
 {% endblock %}
