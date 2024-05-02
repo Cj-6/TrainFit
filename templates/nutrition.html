@@ -22,13 +22,6 @@
                     <p id="calories">Calories: {{ item[8] }}</p> <!-- This is assuming item[3] is the calories -->
                 </div>
                 <div class="col-6 text-right">
-                    <form action="/deleteMeal" method="post">
-                        <input type="hidden" name="meal_id" value="{{ item.meal_id }}">
-                        <button type="submit" class="btn">Delete</button>
-                    </form>
-                    <!-- <form action="/editMeal" method="post">
-                        <button type="submit" class="btn">Edit</button>
-                    </form>  -->
                 </div>
             </div>
         </div>
