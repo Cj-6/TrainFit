@@ -389,7 +389,7 @@ def add_comment(food_id):
     comment_text = request.form.get('comment')
     if not comment_text:
         flash('Comment cannot be empty.', 'danger')
-        return redirect(url_for('food_info', food_id=food_id))
+        return redirect(url_for('food_info_by_id', food_id=food_id))
     comment = {
         'foodid': food_id,
         'userID': userID,
@@ -397,38 +397,38 @@ def add_comment(food_id):
     }
     create_comment(comment)
     flash('Comment added successfully!', 'success')
-    return redirect(url_for('food_info', food_id=food_id))
+    return redirect(url_for('food_info_by_id', food_id=food_id))
 
 @app.post('/foodInfo/<food_id>/<id>')
 def delete_comment(food_id, id):
     userID = session.get('userID')
-    comments = get_comments(food_id)  # Assuming you fetch comments by food_id
-    print(str(len(comments)))
-    for comment in comments:
-        if comment['commentid'] == id and comment['userID'] != userID:
-            flash('You can only delete your own comments.', 'danger')
-            return redirect(url_for('food_info', food_id=food_id))
-        elif comment['commentid'] == id:
-            break
+    comment = get_comment_by_id(id)
+    if comment is None:
+        flash('Comment does not exist.', 'danger')
+        return redirect(url_for('food_info_by_id', food_id=food_id))
+    if comment['userid'] != userID:
+        flash('You can only delete your own comments.', 'danger')
+        return redirect(url_for('food_info_by_id', food_id=food_id))
+
     delete_comments(food_id, id)
     flash('Comment deleted successfully!', 'success')
-    return redirect(url_for('food_info', food_id=food_id))
+    return redirect(url_for('food_info_by_id', food_id=food_id))
 
 
 @app.post('/foodInfo/<food_id>/<id>/update')
 def edit_comment(food_id, id):
     userID = session.get('userID')
-    comments = get_comments(food_id)
-    for comment in comments:
-        if comment['commentid'] == id and comment['userID'] != userID:
-            flash('You can only edit your own comments.', 'danger')
-            return redirect(url_for('food_info', food_id=food_id))
-        elif comment['commentid'] == id:
-            break
+    comment = get_comment_by_id(id)
+    if comment is None:
+        flash('Comment does not exist.', 'danger')
+        return redirect(url_for('food_info_by_id', food_id=food_id))
+    if comment['userid'] != userID:
+        flash('You can only edit your own comments.', 'danger')
+        return redirect(url_for('food_info_by_id', food_id=food_id))
     comment_text = request.form.get('update')
     if not comment_text:
         flash('Comment cannot be empty.', 'danger')
-        return redirect(url_for('food_info', food_id=food_id))
+        return redirect(url_for('food_info_by_id', food_id=food_id))
     comment = {
         'foodid': food_id,
         'userID': userID,
@@ -436,7 +436,7 @@ def edit_comment(food_id, id):
     }
     update_comments(comment, id)
     flash('Comment updated successfully!', 'success')
-    return redirect(url_for('food_info', food_id=food_id))
+    return redirect(url_for('food_info_by_id', food_id=food_id))
 
 
 @app.get('/userFoods')

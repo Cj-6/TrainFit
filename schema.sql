@@ -3,11 +3,11 @@ CREATE TABLE Users (
     userID UUID PRIMARY KEY,
     email VARCHAR(255) UNIQUE,
     password VARCHAR(255),
-    name VARCHAR(255), 
-    age INT, 
-    height VARCHAR(10),  
-    weight INT, 
-    goal VARCHAR(50) 
+    name VARCHAR(255),
+    age INT,
+    height VARCHAR(10),
+    weight INT,
+    goal VARCHAR(50)
 );
 
 CREATE TABLE Workout (
@@ -36,6 +36,15 @@ CREATE TABLE Set (
 );
 
 
+CREATE TABLE comments (
+    commentid UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    comment_text TEXT,
+    date_posted DATE,
+    userID UUID REFERENCES Users(userID),
+    FoodID UUID REFERENCES Food(FoodID)
+);
+
+
 CREATE TABLE Meal (
     meal_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     meal_name VARCHAR(255),
@@ -57,12 +66,4 @@ CREATE TABLE Food (
     carbohydrates VARCHAR(255),
     sugars VARCHAR(255),
     protein VARCHAR(255)
-);
-
-CREATE TABLE comments (
-    id SERIAL PRIMARY KEY,
-    comment_text TEXT,
-    date_posted DATE,
-    userID UUID REFERENCES Users(userID)
-    FoodID UUID REFERENCES Food(FoodID)
 );
