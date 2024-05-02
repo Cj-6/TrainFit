@@ -92,7 +92,7 @@ addExerciseBtn.addEventListener("click", function (e) {
         <span class="preview-set">
             <input class="addInput set" type="number" name="set-4-rpe" placeholder="Rate Of Percieved Exertion" disabled>RPE</span>
             <span class="preview-set">
-            <textarea class="addInput set" type="textarea" name="set-1-text"  placeholder="Notes..." rows="1"></textarea>
+            <textarea class="addInput set" type="textarea" name="set-1-text"  placeholder="Notes..." rows="1" disabled></textarea>
         </span>
 
             <span><button class="w-plus" type="button"><i class="bi bi-plus-circle-dotted"></i></button></span>
