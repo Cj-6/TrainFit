@@ -392,18 +392,28 @@ def update_profile():
 
 
 #comments
+@app.post('/foodInfo/')
+def add_comment_no_id():
+    flash('No food item selected.', 'danger')
+    return redirect(url_for('food_info'))
+
 @app.post('/foodInfo/<food_id>')
 def add_comment(food_id):
     if 'userID' not in session:
         flash('You must be logged in to add a comment.', 'danger')
+        return redirect(url_for('login'))  # Redirect to login if user is not logged in
+
+    # Check if the food_id exists in the database
+    food = get_food_by_id(food_id)
+    if not food:
+        flash('Invalid food item.', 'danger')
         return redirect(url_for('food_info_by_id', food_id=food_id))
     
     userID = session.get('userID')
     comment_text = request.form.get('comment')
     if not comment_text:
         flash('Comment cannot be empty.', 'danger')
-        return redirect(url_for('food_info_by_id', food_id=food_id))
-    
+        return redirect(url_for('food_info_by_id', food_id=food_id))    
     comment = {
         'foodid': food_id,
         'userID': userID,
@@ -412,6 +422,7 @@ def add_comment(food_id):
     create_comment(comment)
     flash('Comment added successfully!', 'success')
     return redirect(url_for('food_info_by_id', food_id=food_id))
+
 
 @app.post('/foodInfo/<food_id>/<id>')
 def delete_comment(food_id, id):
