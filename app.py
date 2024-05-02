@@ -373,6 +373,10 @@ def update_profile():
     if not name or not age or not height or not weight or not goal:
         flash('All fields are required.', 'danger')
         return render_template('editprofile.html', user=user_repository.get_user_by_id(userID), active_page='profile')
+    updated_user = user_repository.update_user(userID, name, age, height, weight, goal)
+    if updated_user is None:
+        flash('An error occurred while updating the profile.', 'danger')
+        return redirect(url_for('profile'))
     user_data = user_repository.get_user_profile_data(userID)
     flash('Profile updated successfully!', 'success')
     return render_template('profile.html', user=user_data, active_page='profile')
