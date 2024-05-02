@@ -97,11 +97,11 @@ def create_comment(comment):
                             (comment['comment_text'], comment['userID'], comment['food_id']))
             conn.commit()
 
-def delete_comments(food_id, comment_id):
+def delete_comments(food_id, id):
     pool = get_pool()
     with pool.connection() as conn:
         with conn.cursor() as cursor:
-            cursor.execute('DELETE FROM comments WHERE food_id = %s AND comment_id = %s', (food_id, comment_id))
+            cursor.execute('DELETE FROM comments WHERE food_id = %s AND id = %s', (food_id, id))
             conn.commit()
 
 def get_comments(food_id):
@@ -110,6 +110,18 @@ def get_comments(food_id):
         with conn.cursor(row_factory=dict_row) as cursor:
             cursor.execute('SELECT * FROM comments WHERE food_id = %s', (food_id,))
             return cursor.fetchall()
+
+def update_comments(comment, id):
+    pool = get_pool()
+    with pool.connection() as conn:
+        with conn.cursor() as cursor:
+            cursor.execute('''
+                            UPDATE comments 
+                            SET comment_text = %s
+                            WHERE id = %s
+                            ''', 
+                            (comment['comment_text'], id))
+            conn.commit()
 
 def get_user_foods(userID):
     pool = get_pool()

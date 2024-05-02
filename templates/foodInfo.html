@@ -76,7 +76,15 @@
         <div id="comments-container">
             {% for comment in comments %}
             <div class="comment">
-                <p>{{ comment.comment_text }}</p>
+                <form class="comments-form" action="/foodInfo/{{ food.foodid }}/{{ comment.id }}/update" method="post">
+                    <textarea class="form-control" id="update" name="update">{{ comment.comment_text }}</textarea>
+                    {% if comment.userID == userID %}
+                        <button class="edit-button" type="submit" class="btn btn-primary">Edit</button>
+                    </form>
+                    <form class="comments-form" action="/foodInfo/{{ food.foodid }}/{{ comment.id }}" method="post">
+                        <button class="delete-button" type="submit" class="btn btn-primary">Delete</button>
+                    </form>
+                    {% endif %}
             </div>
             {% endfor %}
         </div>
@@ -88,19 +96,6 @@
         </div>
         <button type="submit" class="btn btn-block signin-btn comment-submit">Submit</button>
     </form>
-
-    <div class="delete-comment">
-        {% for comment in comments %}
-        <div class="comment">
-            <p>{{ comment.comment_text }}</p>
-            {% if comment.userID == userID %}
-            <form action="/foodInfo/{{ food.foodid }}/delete/{{ comment.comment_id }}" method="post">
-                <button type="submit" class="btn btn-danger">Delete</button>
-            </form>
-            {% endif %}
-        </div>
-        {% endfor %}
-    </div>
 </div>
 <script>
     document.getElementById('calendar').value = "{{ selected_date }}";
