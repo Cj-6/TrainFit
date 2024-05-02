@@ -894,6 +894,21 @@ a.food-link {
     padding: 0 10px;
 }
 
+.input-container input[type="number"] {
+    margin: 10px auto;
+    background-color: #39393b;
+    width: 300px;
+    height: 30px;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    padding: 0;
+    border-radius: 2px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    color: #fff;
+    padding: 0 10px;
+}
+
 /* alert Styles */
 .danger-alert {
     margin: 10px auto;
