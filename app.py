@@ -22,13 +22,6 @@ def index():
     userID = session.get('userID')
     return render_template('index.html', active_page='home')
 
-
-#chat
-@app.get("/chat")
-def chat():
-    return render_template("chat.html", active_page='chat')
-
-
 #workout get
 @app.get('/workout')
 def workout():
