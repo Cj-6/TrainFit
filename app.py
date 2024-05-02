@@ -391,11 +391,16 @@ def update_profile():
 #comments
 @app.post('/foodInfo/<food_id>')
 def add_comment(food_id):
+    if 'userID' not in session:
+        flash('You must be logged in to add a comment.', 'danger')
+        return redirect(url_for('food_info_by_id', food_id=food_id))
+    
     userID = session.get('userID')
     comment_text = request.form.get('comment')
     if not comment_text:
         flash('Comment cannot be empty.', 'danger')
         return redirect(url_for('food_info_by_id', food_id=food_id))
+    
     comment = {
         'foodid': food_id,
         'userID': userID,

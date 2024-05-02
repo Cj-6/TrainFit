@@ -1014,3 +1014,8 @@ a.food-link {
     margin-left: 610px;
     margin-bottom: 10px;
 }
+
+.comment-username{
+    font-size: 20px;
+    color: #3b3b3b;
+}
