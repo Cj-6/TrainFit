@@ -1,10 +1,8 @@
 // ---------------------- add workout page -----------------------------------
 
-var calendarElemenet = document.getElementById('calendar');
-if(calendarElemenet){
-  document.getElementById('calendar').addEventListener('change', function() {
-    document.getElementById('dateForm').submit();
-  });
+
+function submitForm() {
+  document.getElementById('dateForm').submit();
 }
 
 function submitForm() {
