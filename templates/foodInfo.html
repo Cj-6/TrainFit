@@ -9,6 +9,10 @@
     <div class="top-container">
         <div class="nutrition-label">
             <h1>{{ food.name }}</h1>
+            {% if food and creator %}
+            <span class="nutrition-label">Created by:</span>
+            <span class="nutrition-value">{{ creator.name }}</span>
+            {% endif %}
             <h4>Nutrition Values</h4>
             <div class="nutrition-facts">
                 <div class="nutrition-item">
