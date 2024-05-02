@@ -951,3 +951,15 @@ a.food-link {
 .comment .comment-content {
     margin-top: 5px;
 }
+
+.comment-submit {
+    max-width: 190px;
+    max-height: 75px;
+}
+
+.edit-btn {
+    font-size: 18px; /* Decreased font size */
+    padding: 6px 12px; /* Decreased padding */
+}
+
+
