@@ -261,7 +261,8 @@ button.delete-workout{
 }
 
 .preview-set > .addInput:hover{
-    display: none;
+    background-color: initial;  /* Reset to default */
+    border: initial; 
 }
 
 
