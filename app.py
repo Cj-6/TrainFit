@@ -399,15 +399,43 @@ def add_comment(food_id):
     flash('Comment added successfully!', 'success')
     return redirect(url_for('food_info', food_id=food_id))
 
-@app.post('/foodInfo/<food_id>/delete/<comment_id>')
-def delete_comment(food_id, comment_id):
+@app.post('/foodInfo/<food_id>/<id>')
+def delete_comment(food_id, id):
     userID = session.get('userID')
-    comment = get_comments(food_id)  # Assuming you fetch comments by food_id
-    if comment['userID'] != userID:
-        flash('You can only delete your own comments.', 'danger')
-        return redirect(url_for('food_info', food_id=food_id))
-    delete_comments(food_id, comment_id)
+    comments = get_comments(food_id)  # Assuming you fetch comments by food_id
+    print(str(len(comments)))
+    for comment in comments:
+        if comment['id'] == id and comment['userID'] != userID:
+            flash('You can only delete your own comments.', 'danger')
+            return redirect(url_for('food_info', food_id=food_id))
+        elif comment['id'] == id:
+            break
+    delete_comments(food_id, id)
     flash('Comment deleted successfully!', 'success')
+    return redirect(url_for('food_info', food_id=food_id))
+
+
+@app.post('/foodInfo/<food_id>/<id>/update')
+def edit_comment(food_id, id):
+    userID = session.get('userID')
+    comments = get_comments(food_id)
+    for comment in comments:
+        if comment['id'] == id and comment['userID'] != userID:
+            flash('You can only edit your own comments.', 'danger')
+            return redirect(url_for('food_info', food_id=food_id))
+        elif comment['id'] == id:
+            break
+    comment_text = request.form.get('update')
+    if not comment_text:
+        flash('Comment cannot be empty.', 'danger')
+        return redirect(url_for('food_info', food_id=food_id))
+    comment = {
+        'food_id': food_id,
+        'userID': userID,
+        'comment_text': comment_text
+    }
+    update_comments(comment, id)
+    flash('Comment updated successfully!', 'success')
     return redirect(url_for('food_info', food_id=food_id))
 
 
