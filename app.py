@@ -95,6 +95,12 @@ def workout():
     }]
     return render_template('workout.html', active_page='workout', workouts=workouts, date=date)
 
+@app.post('/delete-workout')
+def delete_workout_by_id():
+    workoutID = request.form.get('workout_id')
+    workout_repo.delete_workout_by_id(workoutID)
+    return redirect(url_for('workout'))
+
 @app.post('/workout')
 def adddate():
     date = request.form.get('calendar')
@@ -383,11 +389,16 @@ def update_profile():
 #comments
 @app.post('/foodInfo/<food_id>')
 def add_comment(food_id):
+    if 'userID' not in session:
+        flash('You must be logged in to add a comment.', 'danger')
+        return redirect(url_for('food_info_by_id', food_id=food_id))
+    
     userID = session.get('userID')
     comment_text = request.form.get('comment')
     if not comment_text:
         flash('Comment cannot be empty.', 'danger')
         return redirect(url_for('food_info_by_id', food_id=food_id))
+    
     comment = {
         'foodid': food_id,
         'userID': userID,

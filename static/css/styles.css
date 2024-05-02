@@ -156,10 +156,33 @@ input[type="date"]:hover::-webkit-calendar-picker-indicator {
 
 /* Workout Title Container */
 div.container.info-container.workout-title-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 800px;
     margin: 0 auto;
     padding-top: 12px;
     padding-bottom: 5px;
+    position: relative;
+    box-shadow: none;
+    border-radius: 0;
+    margin-bottom: -5px;
+
 }
+
+.delete-workout{
+    position: absolute;
+    right: 10px;
+    bottom: 5px;
+
+}
+
+button.delete-workout{
+    background: transparent;
+    border: none;
+}
+
+
 
 .container.info-container.workout{
     padding-bottom: 30px;
@@ -170,6 +193,7 @@ div.container.info-container.workout-title-container {
     align-items: center;
     justify-content: center;
     height: 5vh;
+    font-size: 35px;
 }
 
 /* Form Styles */
@@ -254,6 +278,7 @@ div.container.info-container.workout-title-container {
 .set-span{
     margin-right: 15px;
 }
+
 
 /* Add Workout Styles */
 .addworkout {
@@ -368,7 +393,10 @@ div.container.info-container.workout-title-container {
 /* Info Container Title Styles */
 .info-container-title {
     padding: 10px 0 0 0;
+    font-size: 27px;
 }
+
+
 
 /* Servings and Calories Styles */
 #servings,
@@ -985,4 +1013,9 @@ a.food-link {
     cursor: pointer;
     margin-left: 610px;
     margin-bottom: 10px;
+}
+
+.comment-username{
+    font-size: 20px;
+    color: #3b3b3b;
 }

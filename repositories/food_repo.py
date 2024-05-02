@@ -108,7 +108,12 @@ def get_comments(food_id):
     pool = get_pool()
     with pool.connection() as conn:
         with conn.cursor(row_factory=dict_row) as cursor:
-            cursor.execute('SELECT * FROM comments WHERE foodid = %s', (food_id,))
+            cursor.execute('''
+                SELECT comments.*, Users.name 
+                FROM comments 
+                INNER JOIN Users ON comments.userid = Users.userid 
+                WHERE comments.FoodID = %s
+            ''', (food_id,))
             return cursor.fetchall()
         
 def get_comment_by_id(comment_id):

@@ -41,6 +41,14 @@ def get_workout_details_by_user_and_date(userID, date):
     print(f"Returning workouts: {workouts}")
     return workouts
 
+def delete_workout_by_id(workoutID):
+    pool = get_pool()
+    with pool.connection() as conn:
+        with conn.cursor() as cursor:
+            cursor.execute('DELETE FROM exercise WHERE workoutID = %s', [workoutID])
+            cursor.execute('DELETE FROM workout WHERE workoutID = %s', [workoutID])
+        conn.commit()
+
 def create_workout(workout):
     pool = get_pool()
     with pool.connection() as conn:
