@@ -75,19 +75,19 @@ def workout():
                         'weight': '225',
                         'reps': '8',
                         'rpe': '6',
-                        'note': 'Lightweight babbbbayyyyy!',
+                        'note': 'Back = Broken',
                     },
                     {
                         'weight': '315',
                         'reps': '4',
                         'rpe': '9',
-                        'note': 'Elbow was hurting on this set!',
+                        'note': 'Good set',
                     },
                     {
                         'weight': '405',
                         'reps': '1',
                         'rpe': '10',
-                        'note': 'Just hit a PR!!!',
+                        'note': 'Too ez',
                     }
                 ]
             }
@@ -99,7 +99,15 @@ def workout():
 def delete_workout_by_id():
     workoutID = request.form.get('workout_id')
     workout_repo.delete_workout_by_id(workoutID)
+    flash('Workout deleted successfully!', 'success')
     return redirect(url_for('workout'))
+
+@app.post('/edit-workout')
+def edit_workout():
+    workoutID = request.form.get('workout_id')
+
+    return redirect(url_for('addWorkout'))
+
 
 @app.post('/workout')
 def adddate():
@@ -158,7 +166,8 @@ def submit_workout():
             for set in sets:
                 set['exerciseID'] = exerciseID
                 workout_repo.create_set(set)
-            
+    
+    flash('Workout created successfully!', 'success')         
     return redirect(url_for('workout'))
 
 

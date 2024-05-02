@@ -29,10 +29,17 @@
 <div class="parent-container workout">
     <div class="container info-container workout-title-container">
         <h3 class="workout-name">{{ workout.name }}</h3>
+        {% if workout.name != "Template Workout" %}
         <form action="/delete-workout" method="POST">
             <input type="hidden" name="workout_id" value="{{ workout.workoutid }}">
             <button type="submit" class="delete-workout"><i class="bi bi-x-square-fill"></i></button>
         </form>
+        
+        <form action="/edit-workout" method="POST"></form>
+            <input type="hidden" name="workout_id" value="{{ workout.workoutid }}">
+            <button type="submit" class="edit-workout"><i class="bi bi-pencil-square"></i></button>
+        </form>
+        {% endif %}
     </div>
     {% for exercise in workout.exercises %}
     <div class="container info-container workout">
