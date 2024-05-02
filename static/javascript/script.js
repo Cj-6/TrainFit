@@ -1,20 +1,23 @@
 
 // ---------------------- add workout page -----------------------------------
 
+var calendarElemenet = document.getElementById('calendar');
+if(calendarElemenet){
   document.getElementById('calendar').addEventListener('change', function() {
     document.getElementById('dateForm').submit();
   });
+}
 
 
 // adds a new container for an exercise
-const addExerciseBtn = document.querySelector(
-  ".d-flex.justify-content-center.align-items-center"
-);
+const addExerciseBtn = document.querySelector(".d-flex.justify-content-center.align-items-center");
+
+const allExercisesContainer = document.querySelector(".all-exercises-container");
 
 // event listener added to the addExercise button
-addExerciseBtn.addEventListener("click", function () {
-  const exerciseNumber =
-      currentExerciseContainer.querySelectorAll(".exercise-container").length + 1;
+addExerciseBtn.addEventListener("click", function (e) {
+
+  const exerciseNumber = allExercisesContainer.querySelectorAll(".exercise-container").length + 1;
   // variable pointing to the html that is going to be added everytime the addExercise button is clicked, the code is just copy and pasted from the addWorkout page
   const html = `<div class="exercise-container">
         
@@ -23,7 +26,7 @@ addExerciseBtn.addEventListener("click", function () {
 
     <div class="exercise-title">
         <h2 class="info-container-title">
-            <input class="addInput exercise" type="text" name="exercise-${exerciseNumber}-Name"  placeholder="Exercise Name">
+            <input class="addInput exercise" type="text" name="exercise-${exerciseNumber}-name"  placeholder="Exercise Name">
         </h2>
 
         <span class="delete-exercise"><i class="bi bi-x-square-fill"></i></span>
@@ -36,11 +39,11 @@ addExerciseBtn.addEventListener("click", function () {
             <input class="addInput set" type="number" name="exercise-${exerciseNumber}-set-1-weight"  placeholder="Weight">LBS
         </span>
         <span>
-            <input class="addInput set" type="number" name="exercise-${exerciseNumber}set-1-reps"  placeholder="Repetitions">Reps</span>
+            <input class="addInput set" type="number" name="exercise-${exerciseNumber}-set-1-reps"  placeholder="Repetitions">Reps</span>
         <span>
-            <input class="addInput set" type="number" name="exercise-${exerciseNumber}set-1-rpe"  placeholder="Rate Of Percieved Exertion">RPE</span>
+            <input class="addInput set" type="number" name="exercise-${exerciseNumber}-set-1-rpe"  placeholder="Rate Of Percieved Exertion">RPE</span>
         <span>
-            <textarea class="addInput set" type="textarea" name="exercise-${exerciseNumber}set-1-text"  placeholder="Notes..." rows="1"></textarea>
+            <textarea class="addInput set" type="textarea" name="exercise-${exerciseNumber}-set-1-text"  placeholder="Notes..." rows="1"></textarea>
         </span>
 
         <span><button class="w-minus hidden" type="button"><i class="bi bi-dash-circle-dotted"></i></button></span>
@@ -49,14 +52,14 @@ addExerciseBtn.addEventListener("click", function () {
 
     <div class="set-container">
         <span>Set 2:
-            <input class="addInput set" type="number" name="exercise-${exerciseNumber}set-2-weight" placeholder="Weight">LBS
+            <input class="addInput set" type="number" name="exercise-${exerciseNumber}-set-2-weight" placeholder="Weight">LBS
         </span>
         <span>
-            <input class="addInput set" type="number" name="exercise-${exerciseNumber}set-2-reps"  placeholder="Repetitions">Reps</span>
+            <input class="addInput set" type="number" name="exercise-${exerciseNumber}-set-2-reps"  placeholder="Repetitions">Reps</span>
         <span>
-            <input class="addInput set" type="number" name="exercise-${exerciseNumber}set-2-rpe"  placeholder="Rate Of Percieved Exertion">RPE</span>
+            <input class="addInput set" type="number" name="exercise-${exerciseNumber}-set-2-rpe"  placeholder="Rate Of Percieved Exertion">RPE</span>
             <span>
-            <textarea class="addInput set" type="textarea" name="exercise-${exerciseNumber}set-1-text"  placeholder="Notes..." rows="1"></textarea>
+            <textarea class="addInput set" type="textarea" name="exercise-${exerciseNumber}-set-1-text"  placeholder="Notes..." rows="1"></textarea>
         </span>
 
         <span><button class="w-minus hidden" type="button"><i class="bi bi-dash-circle-dotted"></i></button></span>
@@ -65,14 +68,14 @@ addExerciseBtn.addEventListener("click", function () {
 
     <div class="set-container">
         <span>Set 3:
-            <input class="addInput set" type="number" name="exercise-${exerciseNumber}set-3-weight"  placeholder="Weight">LBS
+            <input class="addInput set" type="number" name="exercise-${exerciseNumber}-set-3-weight"  placeholder="Weight">LBS
         </span>
         <span>
-            <input class="addInput set" type="number" name="exercise-${exerciseNumber}set-3-reps" placeholder="Repetitions">Reps</span>
+            <input class="addInput set" type="number" name="exercise-${exerciseNumber}-set-3-reps" placeholder="Repetitions">Reps</span>
         <span>
-            <input class="addInput set" type="number" name="exercise-${exerciseNumber}set-3-rpe"  placeholder="Rate Of Percieved Exertion">RPE</span>
+            <input class="addInput set" type="number" name="exercise-${exerciseNumber}-set-3-rpe"  placeholder="Rate Of Percieved Exertion">RPE</span>
             <span>
-            <textarea class="addInput set" type="textarea" name="exercise-${exerciseNumber}set-1-text"  placeholder="Notes..." rows="1"></textarea>
+            <textarea class="addInput set" type="textarea" name="exercise-${exerciseNumber}-set-1-text"  placeholder="Notes..." rows="1"></textarea>
         </span>
 
             <span><button class="w-minus" type="button"><i class="bi bi-dash-circle-dotted"></i></button></span>
@@ -124,29 +127,35 @@ document.addEventListener("click", function (event) {
 document.addEventListener("click", function (event) {
   // checking if click matches the addSet button, again for a more dynamic approach with the add buttons
   if (event.target.matches(".bi.bi-plus-circle-dotted")) {
-    const currentExerciseContainer = event.target.closest(
-      ".exercise-container"
-    );
+    const currentExerciseContainer = event.target.closest(".exercise-container");
     const repDivElement = event.target.closest("div");
+    const allExerciseContainers = document.querySelectorAll(".exercise-container");
+
+    let exerciseNumber = 0;
+    for (let i = 0; i < allExerciseContainers.length; i++) {
+      if (allExerciseContainers[i] === currentExerciseContainer) {
+        exerciseNumber = i + 1;
+        break;
+      }
+    }
 
     // counting the number of set containers including the one that is about to be added so we can use it to dynamically name the set numbers when displaying them
-    const setNumber =
-      currentExerciseContainer.querySelectorAll(".set-container").length + 1;
-      const exerciseName = currentExerciseContainer.querySelector('input[name^="exercise-"]').name;
-      const exerciseNumber = exerciseName.match(/exercise-(\d+)-name/)[1];
+    const setNumber = currentExerciseContainer.querySelectorAll(".set-container").length + 1;
+      
+    const exerciseName = currentExerciseContainer.querySelector('input[name^="exercise-"]').name;
 
     // variable with html code to be used to add to the document, pertaining to a new set
     const newSetHTML = `
     <div class="set-container">
     <span>Set ${setNumber}:
-        <input class="addInput set" type="number" name="exercise-${exerciseNumber}set-${setNumber}-weight"  placeholder="Weight">LBS
+        <input class="addInput set" type="number" name="exercise-${exerciseNumber}-set-${setNumber}-weight"  placeholder="Weight">LBS
     </span>
     <span>
-        <input class="addInput set" type="number" name="exercise-${exerciseNumber}set-${setNumber}-reps"  placeholder="Repetitions">Reps</span>
+        <input class="addInput set" type="number" name="exercise-${exerciseNumber}-set-${setNumber}-reps"  placeholder="Repetitions">Reps</span>
     <span>
-        <input class="addInput set" type="number" name="exercise-${exerciseNumber}set-${setNumber}-rpe"  placeholder="Rate Of Percieved Exertion">RPE</span>
+        <input class="addInput set" type="number" name="exercise-${exerciseNumber}-set-${setNumber}-rpe"  placeholder="Rate Of Percieved Exertion">RPE</span>
         <span>
-            <textarea class="addInput set" type="textarea" name="exercise-${exerciseNumber}set-${setNumber}-text"  placeholder="Notes..." rows="1"></textarea>
+            <textarea class="addInput set" type="textarea" name="exercise-${exerciseNumber}-set-${setNumber}-text"  placeholder="Notes..." rows="1"></textarea>
         </span>
 
         <span><button class="w-minus" type="button"><i class="bi bi-dash-circle-dotted"></i></button></span>
@@ -184,6 +193,7 @@ document.addEventListener("click", function (event) {
     }
   }
 });
+
 
 // ------------------------- add workout page -----------------------------
 

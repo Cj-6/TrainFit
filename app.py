@@ -39,7 +39,60 @@ def workout():
         return redirect(url_for('workout', date=date))
     workouts= None
     if userID is not None:
-        workouts = workout_repo.get_workout_by_userID_and_date(userID, date)
+        if date is not None:
+            workouts = workout_repo.get_workout_details_by_user_and_date(userID, date)
+    if not workouts:
+        workouts = [{
+            'name': 'Template Workout',
+            'exercises': [
+                {
+                    'exercisename': 'Template Press',
+                    'sets': [
+                        {
+                            'weight': '225',
+                            'reps': '8',
+                            'rpe': '6',
+                            'note': 'Lightweight babbbbayyyyy!',
+                        },
+                        {
+                            'weight': '315',
+                            'reps': '4',
+                            'rpe': '9',
+                            'note': 'Elbow was hurting on this set!',
+                        },
+                        {
+                            'weight': '405',
+                            'reps': '1',
+                            'rpe': '10',
+                            'note': 'Just hit a PR!!!',
+                        }   
+                    ]
+                },
+                {
+                    'exercisename': 'Template Row',
+                    'sets': [
+                        {
+                        'weight': '225',
+                        'reps': '8',
+                        'rpe': '6',
+                        'note': 'Lightweight babbbbayyyyy!',
+                    },
+                    {
+                        'weight': '315',
+                        'reps': '4',
+                        'rpe': '9',
+                        'note': 'Elbow was hurting on this set!',
+                    },
+                    {
+                        'weight': '405',
+                        'reps': '1',
+                        'rpe': '10',
+                        'note': 'Just hit a PR!!!',
+                    }
+                ]
+            }
+        ]
+    }]
     return render_template('workout.html', active_page='workout', workouts=workouts, date=date)
 
 @app.post('/workout')
@@ -87,18 +140,14 @@ def submit_workout():
                 })
         if sets:
             exercise_name = request.form.get(f'exercise-{i}-name')
-            if 'name' in exercise:
-                print(f"exercise name : {exercise['name']}")
-            else:
-                print("exercise does not have a name")
-                exercise = {
-                    'name': exercise_name,
-                    'workoutID': workoutID,
-                }
-                exerciseID = workout_repo.create_exercise(exercise)
-                for set in sets:
-                    set['exerciseID'] = exerciseID
-                    workout_repo.create_set(set)
+            exercise = {
+                'name': exercise_name,
+                'workoutID': workoutID,
+            }
+            exerciseID = workout_repo.create_exercise(exercise)
+            for set in sets:
+                set['exerciseID'] = exerciseID
+                workout_repo.create_set(set)
             
     return redirect(url_for('workout'))
 
