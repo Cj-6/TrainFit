@@ -54,7 +54,7 @@
             </div>
         </div>
         <div class="servings-box">
-                            <a href="/userFoods" class="btn create-food-btn">Your Foods</a>
+            <a href="/userFoods" class="btn create-food-btn">Your Foods</a>
             <form action="/createFood" method="get" class="create-food-form mt-5">
                 <button type="submit" class="btn create-food-btn mb-5">Create Food</button>
             </form>
@@ -69,22 +69,25 @@
         </div>
     </div>
     <input type="hidden" name="food_id" value="{{ food.foodid }}">
-                <button type="submit" class="btn btn-block signin-btn comment-submit">Add Food</button>
-            </form>
+    <button type="submit" class="btn btn-block signin-btn comment-submit">Add Food</button>
+    </form>
     <div class="comments-section mt-5">
         <h4>Comments</h4>
         <div id="comments-container">
             {% for comment in comments %}
             <div class="comment">
-                <form class="comments-form" action="/foodInfo/{{ food.foodid }}/{{ comment.commentid }}/update" method="post">
+                
+                <p class="comment-username"> <span>User: </span> {{ comment.name }}</p>
+                <form class="comments-form" action="/foodInfo/{{ food.foodid }}/{{ comment.commentid }}/update"
+                    method="post">
                     <textarea class="form-control" id="update" name="update">{{ comment.comment_text }}</textarea>
                     {% if comment.userID == userID %}
-                        <button class="edit-button" type="submit" class="btn btn-primary">Edit</button>
-                    </form>
-                    <form class="comments-form" action="/foodInfo/{{ food.foodid }}/{{ comment.commentid }}" method="post">
-                        <button class="delete-button" type="submit" class="btn btn-primary">Delete</button>
-                    </form>
-                    {% endif %}
+                    <button class="edit-button" type="submit" class="btn btn-primary">Edit</button>
+                </form>
+                <form class="comments-form" action="/foodInfo/{{ food.foodid }}/{{ comment.commentid }}" method="post">
+                    <button class="delete-button" type="submit" class="btn btn-primary">Delete</button>
+                </form>
+                {% endif %}
             </div>
             {% endfor %}
         </div>
