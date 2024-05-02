@@ -41,6 +41,7 @@ def workout():
     if userID is not None:
         if date is not None:
             workouts = workout_repo.get_workout_details_by_user_and_date(userID, date)
+            print(workouts)
     if not workouts:
         workouts = [{
             'name': 'Template Workout',
@@ -102,11 +103,6 @@ def delete_workout_by_id():
     flash('Workout deleted successfully!', 'success')
     return redirect(url_for('workout'))
 
-@app.post('/edit-workout')
-def edit_workout():
-    workoutID = request.form.get('workout_id')
-
-    return redirect(url_for('addWorkout'))
 
 
 @app.post('/workout')

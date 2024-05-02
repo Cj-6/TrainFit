@@ -34,11 +34,6 @@
             <input type="hidden" name="workout_id" value="{{ workout.workoutid }}">
             <button type="submit" class="delete-workout"><i class="bi bi-x-square-fill"></i></button>
         </form>
-        
-        <form action="/edit-workout" method="POST"></form>
-            <input type="hidden" name="workout_id" value="{{ workout.workoutid }}">
-            <button type="submit" class="edit-workout"><i class="bi bi-pencil-square"></i></button>
-        </form>
         {% endif %}
     </div>
     {% for exercise in workout.exercises %}
