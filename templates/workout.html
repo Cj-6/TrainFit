@@ -16,9 +16,6 @@
     </div>
 </div>
 
-
-
-
 <form method="GET" action="/addWorkout">
     <div class="d-flex justify-content-center align-items-center">
         <button class="btn create-workout-btn" type="submit">
@@ -27,68 +24,31 @@
     </div>
 </form>
 
-
-<div class="parent-container workout">
-
-    <div class="container info-container workout-title-container">
-        <h3 class="workout-name">Workout Name</h3>
-    </div>
-
-    <div class="container info-container">
-        <h2 class="info-container-title">Exercise 1</h2>
-        <hr>
-        <!-- items will be dynamically added here -->
-        <div>
-            <span>Set 1:</span>
-            <span>225 Lbs /</span>
-            <span>9 Reps /</span>
-            <span>RPE 10 </span>
-            <span></span>
-        </div>
-        <div>Set 2</div>
-        <div>Set 3</div>
-    </div>
-
-    <div class="container info-container">
-        <h2 class="info-container-title">Exercise 2</h2>
-        <hr>
-        <!-- items will be dynamically added here -->
-        <div>
-            <span>Set 1:</span>
-            <span>225 Lbs /</span>
-            <span>9 Reps /</span>
-            <span>RPE 10 </span>
-            <span></span>
-        </div>
-        <div>Set 2</div>
-        <div>Set 3</div>
-    </div>
-</div>
-
 {% if workouts %}
 {% for workout in workouts %}
 <div class="parent-container workout">
     <div class="container info-container workout-title-container">
         <h3 class="workout-name">{{ workout.name }}</h3>
     </div>
-    <div class="container info-container">
-        <h2 class="info-container-title">{{ workout.exercisename }}</h2>
+    {% for exercise in workout.exercises %}
+    <div class="container info-container workout">
+        <h2 class="info-container-title">{{ exercise.exercisename }}</h2>
         <hr>
         <!-- items will be dynamically added here -->
-        {% for set in workout.set %}
+        {% for set in exercise.sets %}
         <div>
-            <span>Set {{ loop.index }}:</span>
-            <span>{{ set.weight }} Lbs /</span>
-            <span>{{ set.reps }} Reps /</span>
-            <span>RPE {{ set.rpe }}</span>
-            <span>{{ set.note }}</span>
+            <span class="set-span">Set {{ loop.index }}:</span>
+            <span class="set-span">{{ set.weight }} Lbs </span>
+            <span class="set-span">{{ set.reps }} Reps </span>
+            <span class="set-span">RPE {{ set.rpe }}</span>
+            <span class="set-span">{{ set.note }}</span>
         </div>
         {% endfor %}
     </div>
+    {% endfor %}
 </div>
 {% endfor %}
 {% endif %}
-
 
 
 
