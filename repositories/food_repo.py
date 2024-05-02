@@ -110,6 +110,13 @@ def get_comments(food_id):
         with conn.cursor(row_factory=dict_row) as cursor:
             cursor.execute('SELECT * FROM comments WHERE food_id = %s', (food_id,))
             return cursor.fetchall()
+        
+def get_comment_by_id(comment_id):
+    pool = get_pool()
+    with pool.connection() as conn:
+        with conn.cursor(row_factory=dict_row) as cursor:
+            cursor.execute('SELECT * FROM comments WHERE commentid = %s', (comment_id,))
+            return cursor.fetchone()
 
 def update_comments(comment, id):
     pool = get_pool()
