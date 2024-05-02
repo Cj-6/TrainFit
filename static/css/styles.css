@@ -559,7 +559,7 @@ a.food-link {
 }
 
 .logout-nav:hover {
-    background-color: #d10404f8;
+    background-color: #d10404d8;
     color: white;
     opacity: 100%;
 }
@@ -674,11 +674,10 @@ form#chatInput {
     margin-top: 100px;
 }
 
-.add-food-btn {}
-
 /* Nutrition Value Styles */
 .nutrition-value {
     text-align: right;
+    width: 100px;
 }
 
 /* Serving Size Styles */
@@ -978,4 +977,40 @@ a.food-link {
 
 .comment .comment-content {
     margin-top: 5px;
+}
+
+.comment-submit {
+    max-width: 190px;
+    max-height: 75px;
+}
+
+.edit-btn {
+    font-size: 18px; /* Decreased font size */
+    padding: 6px 12px; /* Decreased padding */
+}
+
+
+
+.comments-form > p {
+    margin: 0;
+    color: black;
+}
+
+.delete-button{
+    background-color: #FF7B00;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 600px;
+}
+
+.edit-button{
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 610px;
+    margin-bottom: 10px;
 }

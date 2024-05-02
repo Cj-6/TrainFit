@@ -13,70 +13,78 @@
             <span class="nutrition-label">Created by:</span>
             <span class="nutrition-value">{{ creator.name }}</span>
             {% endif %}
-            <h4>Nutrition Values</h4>
+            <h4 class="mt-3">Nutrition Values</h4>
             <div class="nutrition-facts">
                 <div class="nutrition-item">
                     <span class="nutrition-label">Calories:</span>
-                    <span class="nutrition-value">{{ food.calories }}</span>
+                    <span class="nutrition-value">{{ food.calories }} Kcal</span>
                 </div>
                 <div class="nutrition-item">
                     <span class="nutrition-label">Total Fat:</span>
-                    <span class="nutrition-value">{{ food.total_fat }}</span>
+                    <span class="nutrition-value">{{ food.total_fat }} g</span>
                 </div>
                 <div class="nutrition-item">
                     <span class="nutrition-label">Saturated Fat:</span>
-                    <span class="nutrition-value">{{ food.saturated_fat }}</span>
+                    <span class="nutrition-value">{{ food.saturated_fat }} g</span>
                 </div>
                 <div class="nutrition-item">
                     <span class="nutrition-label">Trans Fat:</span>
-                    <span class="nutrition-value">{{ food.trans_fat }}</span>
+                    <span class="nutrition-value">{{ food.trans_fat }} g</span>
                 </div>
                 <div class="nutrition-item">
                     <span class="nutrition-label">Cholesterol:</span>
-                    <span class="nutrition-value">{{ food.cholesterol }}</span>
+                    <span class="nutrition-value">{{ food.cholesterol }} mg</span>
                 </div>
                 <div class="nutrition-item">
                     <span class="nutrition-label">Sodium:</span>
-                    <span class="nutrition-value">{{ food.sodium }}</span>
+                    <span class="nutrition-value">{{ food.sodium }} mg</span>
                 </div>
                 <div class="nutrition-item">
                     <span class="nutrition-label">Total Carbohydrates:</span>
-                    <span class="nutrition-value">{{ food.carbohydrates }}</span>
+                    <span class="nutrition-value">{{ food.carbohydrates }} g</span>
                 </div>
                 <div class="nutrition-item">
                     <span class="nutrition-label">Sugars:</span>
-                    <span class="nutrition-value">{{ food.sugars }}</span>
+                    <span class="nutrition-value">{{ food.sugars }} g</span>
                 </div>
                 <div class="nutrition-item">
                     <span class="nutrition-label">Protein:</span>
-                    <span class="nutrition-value">{{ food.protein }}</span>
+                    <span class="nutrition-value">{{ food.protein }} g</span>
                 </div>
             </div>
         </div>
         <div class="servings-box">
-
-            <form action="/createFood" method="get" class="create-food-form">
-                <button type="submit" class="btn create-food-btn">Create Food</button>
+                            <a href="/userFoods" class="btn create-food-btn">Your Foods</a>
+            <form action="/createFood" method="get" class="create-food-form mt-5">
+                <button type="submit" class="btn create-food-btn mb-5">Create Food</button>
             </form>
             <form action="/nutrition" method="post" class="add-food-form">
-                <div class="calendar-container">
+                <div class="calendar-container mb-4">
                     <div class="calendar-sub-container">
                         <div class="date">
                             <input type="date" id="date" name="date" value="{{ date }}">
                         </div>
                     </div>
                 </div>
-                <input type="hidden" name="food_id" value="{{ food.foodid }}">
-                <button type="submit" class="btn add-food-btn">Add Food</button>
-            </form>
         </div>
     </div>
-    <div class="comments-section">
-        <h2>Comments</h2>
+    <input type="hidden" name="food_id" value="{{ food.foodid }}">
+                <button type="submit" class="btn btn-block signin-btn comment-submit">Add Food</button>
+            </form>
+    <div class="comments-section mt-5">
+        <h4>Comments</h4>
         <div id="comments-container">
             {% for comment in comments %}
             <div class="comment">
-                <p>{{ comment.comment_text }}</p>
+                <form class="comments-form" action="/foodInfo/{{ food.foodid }}/{{ comment.commentid }}/update" method="post">
+                    <textarea class="form-control" id="update" name="update">{{ comment.comment_text }}</textarea>
+                    {% if comment.userID == userID %}
+                        <button class="edit-button" type="submit" class="btn btn-primary">Edit</button>
+                    </form>
+                    <form class="comments-form" action="/foodInfo/{{ food.foodid }}/{{ comment.commentid }}" method="post">
+                        <button class="delete-button" type="submit" class="btn btn-primary">Delete</button>
+                    </form>
+                    {% endif %}
             </div>
             {% endfor %}
         </div>
@@ -86,21 +94,8 @@
             <label for="comment">Add a comment:</label>
             <textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-block signin-btn comment-submit">Submit</button>
     </form>
-
-    <div class="delete-comment">
-        {% for comment in comments %}
-        <div class="comment">
-            <p>{{ comment.comment_text }}</p>
-            {% if comment.userID == userID %}
-            <form action="/foodInfo/{{ food.foodid }}/delete/{{ comment.comment_id }}" method="post">
-                <button type="submit" class="btn btn-danger">Delete</button>
-            </form>
-            {% endif %}
-        </div>
-        {% endfor %}
-    </div>
 </div>
 <script>
     document.getElementById('calendar').value = "{{ selected_date }}";
