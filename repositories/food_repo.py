@@ -140,14 +140,13 @@ def get_user_foods(userID):
     with pool.connection() as conn:
         with conn.cursor(row_factory=dict_row) as cursor:
             cursor.execute('''
-                SELECT f.foodid, f.name, f.calories, f.total_fat, f.saturated_fat, f.trans_fat,
-                       f.cholesterol, f.sodium, f.carbohydrates, f.sugars, f.protein
-                FROM food f
-                JOIN meal m ON f.foodid = m.foodid
-                WHERE m.userID = %s
+                SELECT f.FoodID, f.Name, f.Calories, f.Total_Fat, f.saturated_fat, f.trans_fat,
+                f.cholesterol, f.sodium, f.carbohydrates, f.sugars, f.protein
+                FROM Food f
+                WHERE f.createdByID = %s
             ''', (userID,))
             return cursor.fetchall()
-
+        
 def update_food(food):
     pool = get_pool()
     with pool.connection() as conn:
@@ -167,5 +166,8 @@ def delete_food_by_id(food_id):
     pool = get_pool()
     with pool.connection() as conn:
         with conn.cursor() as cursor:
+            # Delete associated comments first
+            cursor.execute('DELETE FROM comments WHERE foodid = %s', (food_id,))
+            # Then delete the food item
             cursor.execute('DELETE FROM food WHERE foodid = %s', (food_id,))
             conn.commit()
