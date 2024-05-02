@@ -391,7 +391,7 @@ def add_comment(food_id):
         flash('Comment cannot be empty.', 'danger')
         return redirect(url_for('food_info', food_id=food_id))
     comment = {
-        'food_id': food_id,
+        'foodid': food_id,
         'userID': userID,
         'comment_text': comment_text
     }
@@ -405,10 +405,10 @@ def delete_comment(food_id, id):
     comments = get_comments(food_id)  # Assuming you fetch comments by food_id
     print(str(len(comments)))
     for comment in comments:
-        if comment['id'] == id and comment['userID'] != userID:
+        if comment['commentid'] == id and comment['userID'] != userID:
             flash('You can only delete your own comments.', 'danger')
             return redirect(url_for('food_info', food_id=food_id))
-        elif comment['id'] == id:
+        elif comment['commentid'] == id:
             break
     delete_comments(food_id, id)
     flash('Comment deleted successfully!', 'success')
@@ -420,17 +420,17 @@ def edit_comment(food_id, id):
     userID = session.get('userID')
     comments = get_comments(food_id)
     for comment in comments:
-        if comment['id'] == id and comment['userID'] != userID:
+        if comment['commentid'] == id and comment['userID'] != userID:
             flash('You can only edit your own comments.', 'danger')
             return redirect(url_for('food_info', food_id=food_id))
-        elif comment['id'] == id:
+        elif comment['commentid'] == id:
             break
     comment_text = request.form.get('update')
     if not comment_text:
         flash('Comment cannot be empty.', 'danger')
         return redirect(url_for('food_info', food_id=food_id))
     comment = {
-        'food_id': food_id,
+        'foodid': food_id,
         'userID': userID,
         'comment_text': comment_text
     }

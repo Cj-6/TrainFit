@@ -91,24 +91,24 @@ def create_comment(comment):
         with conn.cursor() as cursor:
             cursor.execute('''
                             INSERT INTO comments 
-                                (comment_text, userID, food_id) 
+                                (comment_text, userID, foodid) 
                             VALUES 
                                 (%s, %s, %s)''', 
-                            (comment['comment_text'], comment['userID'], comment['food_id']))
+                            (comment['comment_text'], comment['userID'], comment['foodid']))
             conn.commit()
 
 def delete_comments(food_id, id):
     pool = get_pool()
     with pool.connection() as conn:
         with conn.cursor() as cursor:
-            cursor.execute('DELETE FROM comments WHERE food_id = %s AND id = %s', (food_id, id))
+            cursor.execute('DELETE FROM comments WHERE foodid = %s AND commentid = %s', (food_id, id))
             conn.commit()
 
 def get_comments(food_id):
     pool = get_pool()
     with pool.connection() as conn:
         with conn.cursor(row_factory=dict_row) as cursor:
-            cursor.execute('SELECT * FROM comments WHERE food_id = %s', (food_id,))
+            cursor.execute('SELECT * FROM comments WHERE foodid = %s', (food_id,))
             return cursor.fetchall()
 
 def update_comments(comment, id):
@@ -118,7 +118,7 @@ def update_comments(comment, id):
             cursor.execute('''
                             UPDATE comments 
                             SET comment_text = %s
-                            WHERE id = %s
+                            WHERE commentid = %s
                             ''', 
                             (comment['comment_text'], id))
             conn.commit()

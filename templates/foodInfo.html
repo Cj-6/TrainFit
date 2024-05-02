@@ -76,12 +76,12 @@
         <div id="comments-container">
             {% for comment in comments %}
             <div class="comment">
-                <form class="comments-form" action="/foodInfo/{{ food.foodid }}/{{ comment.id }}/update" method="post">
+                <form class="comments-form" action="/foodInfo/{{ food.foodid }}/{{ comment.commentid }}/update" method="post">
                     <textarea class="form-control" id="update" name="update">{{ comment.comment_text }}</textarea>
                     {% if comment.userID == userID %}
                         <button class="edit-button" type="submit" class="btn btn-primary">Edit</button>
                     </form>
-                    <form class="comments-form" action="/foodInfo/{{ food.foodid }}/{{ comment.id }}" method="post">
+                    <form class="comments-form" action="/foodInfo/{{ food.foodid }}/{{ comment.commentid }}" method="post">
                         <button class="delete-button" type="submit" class="btn btn-primary">Delete</button>
                     </form>
                     {% endif %}
