@@ -531,7 +531,7 @@ a.food-link {
 }
 
 .logout-nav:hover {
-    background-color: #d10404f8;
+    background-color: #d10404d8;
     color: white;
     opacity: 100%;
 }
@@ -651,6 +651,7 @@ form#chatInput {
 /* Nutrition Value Styles */
 .nutrition-value {
     text-align: right;
+    width: 100px;
 }
 
 /* Serving Size Styles */
