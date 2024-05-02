@@ -391,7 +391,7 @@ def add_comment(food_id):
         flash('Comment cannot be empty.', 'danger')
         return redirect(url_for('food_info_by_id', food_id=food_id))
     comment = {
-        'food_id': food_id,
+        'foodid': food_id,
         'userID': userID,
         'comment_text': comment_text
     }
@@ -409,6 +409,7 @@ def delete_comment(food_id, id):
     if comment['userid'] != userID:
         flash('You can only delete your own comments.', 'danger')
         return redirect(url_for('food_info_by_id', food_id=food_id))
+
     delete_comments(food_id, id)
     flash('Comment deleted successfully!', 'success')
     return redirect(url_for('food_info_by_id', food_id=food_id))
@@ -429,7 +430,7 @@ def edit_comment(food_id, id):
         flash('Comment cannot be empty.', 'danger')
         return redirect(url_for('food_info_by_id', food_id=food_id))
     comment = {
-        'food_id': food_id,
+        'foodid': food_id,
         'userID': userID,
         'comment_text': comment_text
     }
